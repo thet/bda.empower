@@ -21,21 +21,19 @@ class BdaEmpowerLayer(PloneSandboxLayer):
         self.loadZCML(package=bda.empower)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'bda.empower:default')
+        applyProfile(portal, "bda.empower:default")
 
 
 BDA_EMPOWER_FIXTURE = BdaEmpowerLayer()
 
 
 BDA_EMPOWER_INTEGRATION_TESTING = IntegrationTesting(
-    bases=(BDA_EMPOWER_FIXTURE,),
-    name='BdaEmpowerLayer:IntegrationTesting',
+    bases=(BDA_EMPOWER_FIXTURE,), name="BdaEmpowerLayer:IntegrationTesting"
 )
 
 
 BDA_EMPOWER_FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(BDA_EMPOWER_FIXTURE,),
-    name='BdaEmpowerLayer:FunctionalTesting',
+    bases=(BDA_EMPOWER_FIXTURE,), name="BdaEmpowerLayer:FunctionalTesting"
 )
 
 
@@ -45,5 +43,5 @@ BDA_EMPOWER_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='BdaEmpowerLayer:AcceptanceTesting',
+    name="BdaEmpowerLayer:AcceptanceTesting",
 )
