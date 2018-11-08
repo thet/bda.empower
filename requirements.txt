@@ -1,2 +1,2 @@
-setuptools==38.2.4
-zc.buildout==2.11.4
+-r http://dist.plone.org/release/5.1.4/requirements.txt
+pdbpp

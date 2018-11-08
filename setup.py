@@ -29,8 +29,8 @@ setup(
         "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
     ],
     keywords='Python Plone',
-    author='b'Jens W. Klein'',
-    author_email='b'jk@kleinundpartner.at'',
+    author='Jens W. Klein',
+    author_email='jk@kleinundpartner.at',
     url='https://pypi.python.org/pypi/bda.empower',
     license='GPL version 2',
     packages=find_packages('src', exclude=['ez_setup']),
@@ -39,9 +39,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        # -*- Extra requirements: -*-
+        'Products.CMFPlone',
         'plone.api>=1.8.4',
-        'Products.GenericSetup>=1.8.2',
         'setuptools',
         'z3c.jbot',
     ],
@@ -51,7 +50,6 @@ setup(
             # Plone KGS does not use this version, because it would break
             # Remove if your package shall be part of coredev.
             # plone_coredev tests as of 2016-04-01.
-            'plone.testing>=5.0.0',
             'plone.app.contenttypes',
             'plone.app.robotframework[debug]',
         ],
