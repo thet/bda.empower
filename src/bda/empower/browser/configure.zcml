@@ -17,5 +17,11 @@
       type="plone"
       directory="static"
       />
-
+  <browser:page
+      class=".workspace.workspace"
+      for="bda.empower.behaviors.workspace"
+      name="workspace"
+      permission="zope2.View"
+      template="person.pt"
+  />
 </configure>

@@ -1,38 +1,38 @@
 <?xml version="1.0"?>
 <object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    name="Contribution"
+    name="Case"
     meta_type="Dexterity FTI"
     i18n:domain="bda.empower">
 
   <!-- Basic properties -->
   <property
       i18n:translate=""
-      name="title">Contribution</property>
+      name="title">Case</property>
   <property
       i18n:translate=""
-      name="description">A generic contribution</property>
+      name="description">A generic Case</property>
 
   <property name="allow_discussion">False</property>
-  <property name="factory">Contribution</property>
+  <property name="factory">Case</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
 
   <!-- Hierarchy control -->
-  <property name="global_allow">False</property>
+  <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="File" />
+    <element value="Contribution" />
   </property>
+
   <!-- Schema, class and security -->
-  <property name="add_permission">bda.empower.AddContribution</property>
+  <property name="add_permission">bda.empower.AddCase</property>
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file"></property>
   <property name="model_source"></property>
-  <property name="schema">bda.empower.content.contribution.IContribution</property>
+  <property name="schema">bda.empower.content.Case.ICase</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
-    <element value="bda.empower.content.contribution.IContribution"/>
     <element value="plone.app.content.interfaces.INameFromTitle"/>
     <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
     <element value="plone.app.dexterity.behaviors.id.IShortName"/>
@@ -47,7 +47,7 @@
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++add++Contribution</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Case</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>
