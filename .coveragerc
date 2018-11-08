@@ -1,0 +1,6 @@
+[report]
+include =
+    src/bda/*
+omit =
+    */test*
+    */upgrades/*
