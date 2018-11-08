@@ -21,6 +21,7 @@ var/
 # files
 .installed.cfg
 .mr.developer.cfg
+.python-version
 Gruntfile.js
 lib64
 log.html
