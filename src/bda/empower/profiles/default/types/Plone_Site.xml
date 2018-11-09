@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<object
+    i18n:domain="plone"
+    meta_type="Factory-based Type Information with dynamic views"
+    name="Plone Site"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+    <element value="Cases" />
+  </property>
+  <property name="view_methods">
+    <element value="aki_redirect" />
+  </property>
+</object>

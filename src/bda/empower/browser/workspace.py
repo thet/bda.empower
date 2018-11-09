@@ -3,6 +3,5 @@ from Products.Five.browser import BrowserView
 
 
 class WorkspaceView(BrowserView):
-
     def workspace_title(self):
-        return ''.join(self.request['TraversalRequestNameStack'])
+        return "".join(self.request["TraversalRequestNameStack"])

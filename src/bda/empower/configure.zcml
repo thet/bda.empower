@@ -22,7 +22,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="bda.empower"
+      title="A: Empower statt Diffamierung"
       directory="profiles/default"
       description="Installs the bda.empower add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -31,7 +31,7 @@
 
   <genericsetup:registerProfile
       name="uninstall"
-      title="bda.empower (uninstall)"
+      title="Empower statt Diffamierung (uninstall)"
       directory="profiles/uninstall"
       description="Uninstalls the bda.empower add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
@@ -43,6 +43,12 @@
       name="bda.empower-hiddenprofiles"
       />
 
-  <!-- -*- extra stuff goes here -*- -->
+  <!--
+    Name Chooser
+  -->
+  <adapter
+      for=".behaviors.contribution.IContributionBehavior"
+      factory=".namechooser.NameByRandomNumber"
+      />
 
 </configure>

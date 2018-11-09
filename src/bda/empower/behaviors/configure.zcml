@@ -2,6 +2,11 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone">
 
+  <!-- Contribution related -->
+  <utility
+      component=".contribution.workspace_next_vocabulary_factory"
+      name="empower.next_workspaces"
+  />
     <plone:behavior
       name="empower.contribution"
       provides=".contribution.IContributionBehavior"

@@ -41,8 +41,8 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
+        "collective.immediatecreate",
         "Products.CMFPlone",
-        "plone.api>=1.8.4",
         "setuptools",
         "z3c.jbot",
     ],
