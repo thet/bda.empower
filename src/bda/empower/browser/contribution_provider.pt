@@ -1,7 +1,4 @@
-<article class="contribution"
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:tal="http://xml.zope.org/namespaces/tal"
-    tal:define="data view/data">
+<article class="contribution" tal:define="data view/data">
 
   <header>
     <h1 tal:condition="data/title">${data/title}</h1>
@@ -10,4 +7,5 @@
   <footer>
     haaahhh
   </footer>
+
 </article>

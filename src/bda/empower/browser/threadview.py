@@ -20,7 +20,7 @@ class ThreadView(BrowserView):
     def start_recurse(self):
         return self.recurse(
             children=self.itemtree().get('children', []),
-            level=1,
+            level=0,
             bottomLevel=self.bottomlevel
         )
 
