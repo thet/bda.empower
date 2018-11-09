@@ -1,6 +1,62 @@
 <?xml version="1.0"?>
 <registry>
 
+  <records prefix="plone.resources/bda.empower.pattern"
+            interface='Products.CMFPlone.interfaces.IResourceRegistry'>
+      <value key="js">++plone++bda.empower/pattern.js</value>
+      <value key="css">
+        <element>++plone++bda.empower/pattern.less</element>
+      </value>
+  </records>
 
+  <records
+      prefix="plone.resources/bda.empower.bundleresource"
+      interface="Products.CMFPlone.interfaces.IResourceRegistry">
+    <value key="js">++plone++bda.empower/bundleresource.js</value>
+    <value key="css">
+      <element>++plone++bda.empower/bundleresource.less</element>
+    </value>
+  </records>
+
+  <records prefix="plone.bundles/bda.empower.bundle" interface="Products.CMFPlone.interfaces.IBundleRegistry">
+    <value key="last_compilation">2018-11-09 22:12:00</value>
+    <value key="jscompilation">++plone++bda.empower/bundle-compiled.min.js</value>
+    <value key="csscompilation">++plone++bda.empower/bundle-compiled.min.css</value>
+    <value key="develop_javascript">False</value>
+    <value key="develop_css">False</value>
+    <value key="merge_with">default</value>
+    <value key="depends">plone</value>
+    <value key="resources">
+      <element>bda.empower.bundleresource</element>
+    </value>
+    <value key="enabled">True</value>
+    <value key="expression"></value>
+    <value key="stub_js_modules">
+      <element>mockup-patterns-tooltip</element>
+      <element>backbone</element>
+      <element>bootstrap-dropdown</element>
+      <element>bootstrap-tooltip</element>
+      <element>jquery.event.drag</element>
+      <element>jquery.event.drop</element>
+      <element>jquery.form</element>
+      <element>jquery</element>
+      <element>mockup-i18n</element>
+      <element>mockup-patterns-backdrop</element>
+      <element>mockup-patterns-base</element>
+      <element>mockup-patterns-modal</element>
+      <element>mockup-patterns-moment</element>
+      <element>mockup-router</element>
+      <element>mockup-utils</element>
+      <element>pat-base</element>
+      <element>pat-compat</element>
+      <element>pat-logger</element>
+      <element>pat-mockup-parser</element>
+      <element>pat-registry</element>
+      <element>pat-utils</element>
+      <element>translate</element>
+      <element>underscore</element>
+      <element>moment</element>
+    </value>
+  </records>
 
 </registry>
