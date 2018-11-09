@@ -1,0 +1,31 @@
+<tal:master define="level options/level|python:0;
+                    children options/children | nothing;
+                    bottomLevel options/bottomLevel | nothing;"
+            i18n:domain="bda.empower">
+
+<metal:main define-macro="threadview_main">
+<ul class="threadview"
+    tal:condition="python:children and
+                          (bottomLevel <= 0 or level <= bottomLevel)">
+  <tal:navitem repeat="node children">
+    <tal:item define="children node/children;
+                      item node/item;
+                      obj item/getObject;
+                      heading_level python:level + 1">
+
+  <li class="" tal:attributes="class string:threadview-level-${level}">
+
+    <tal:article replace="structure python:view.contribution_provider(obj)"/>
+
+    <tal:subthread
+        define="subthread python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)"
+        condition="children"
+        replace="structure subthread" />
+
+  </li>
+
+    </tal:item>
+  </tal:navitem>
+</ul>
+</metal:main>
+</tal:master>

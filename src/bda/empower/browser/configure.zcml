@@ -25,4 +25,30 @@
       permission="zope2.View"
       template="workspace.pt"
   />
+
+  <!-- Contribution views -->
+  <adapter
+      name="contribution_provider"
+      provides="zope.contentprovider.interfaces.IContentProvider"
+      factory=".contribution_provider.ContributionProvider"
+      />
+
+  <browser:page
+      for="*"
+      name="stream"
+      class=".streamview.StreamView"
+      template="streamview.pt"
+      permission="zope2.View"
+      layer="bda.empower.interfaces.IBdaEmpowerLayer"
+      />
+
+  <browser:page
+      for="*"
+      name="thread"
+      class=".threadview.ThreadView"
+      template="threadview.pt"
+      permission="zope2.View"
+      layer="bda.empower.interfaces.IBdaEmpowerLayer"
+      />
+
 </configure>
