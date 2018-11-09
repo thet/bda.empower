@@ -1,27 +1,28 @@
 <configure
+    i18n_domain="bda.empower"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="bda.empower">
-
+    xmlns:plone="http://namespaces.plone.org/plone">
   <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
-  <include package="z3c.jbot" file="meta.zcml" />
+  <include
+      file="meta.zcml"
+      package="z3c.jbot"
+  />
   <browser:jbot
       directory="overrides"
       layer="bda.empower.interfaces.IBdaEmpowerLayer"
-      />
-
+  />
   <!-- Publish static files -->
   <plone:static
+      directory="static"
       name="bda.empower"
       type="plone"
-      directory="static"
-      />
+  />
   <browser:page
-      class=".workspace.workspace"
-      for="bda.empower.behaviors.workspace"
+      class=".workspace.WorkspaceView"
+      for="*"
       name="workspace"
       permission="zope2.View"
-      template="person.pt"
+      template="workspace.pt"
   />
 </configure>

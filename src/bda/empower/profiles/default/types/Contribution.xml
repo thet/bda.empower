@@ -21,29 +21,22 @@
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
+    <element value="Contribution" />
     <element value="File" />
   </property>
   <!-- Schema, class and security -->
   <property name="add_permission">bda.empower.AddContribution</property>
   <property name="klass">plone.dexterity.content.Container</property>
-  <property name="model_file"></property>
+  <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
   <property name="model_source"></property>
-  <property name="schema">bda.empower.content.contribution.IContribution</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
-    <element value="bda.empower.content.contribution.IContribution"/>
-    <element value="plone.app.content.interfaces.INameFromTitle"/>
-    <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
-    <element value="plone.app.dexterity.behaviors.id.IShortName"/>
-    <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-    <!--<element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />-->
-    <element value="plone.app.lockingbehavior.behaviors.ILocking" />
-    <!--<element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>-->
-    <!--<element value="plone.app.relationfield.behavior.IRelatedItems"/>-->
-    <!--<element value="plone.app.versioningbehavior.behaviors.IVersionable" />-->
-    <!--<element value="plone.app.contenttypes.behaviors.tableofcontents.ITableOfContents"/>-->
-    <!--<element value="plone.app.contenttypes.behaviors.richtext.IRichText"/>-->
+    <element value="plone.namefromtitle"/>
+    <element value="plone.basic"/>
+    <element value="empower.contribution"/>
+    <element value="plone.referenceable" />
+    <element value="plone.locking" />
   </property>
 
   <!-- View information -->

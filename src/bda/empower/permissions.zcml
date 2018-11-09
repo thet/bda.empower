@@ -10,8 +10,12 @@
         id="bda.empower.AddContribution"
         title="bda.empower: Add Contribution"
     />
+    <permission
+        id="bda.empower.AddCase"
+        title="bda.empower: Add Case"
+    />
 
-        
+
 
   </configure>
 

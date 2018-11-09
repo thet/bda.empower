@@ -1,0 +1,13 @@
+<configure
+    i18n_domain="kup.akivdb"
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+    <plone:behavior
+      name="empower.contribution"
+      provides=".contribution.IContributionBehavior"
+      title="Contribution Fields (Empower)"
+  />
+
+</configure>

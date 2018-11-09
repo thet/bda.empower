@@ -27,9 +27,9 @@
   <!-- Schema, class and security -->
   <property name="add_permission">bda.empower.AddCase</property>
   <property name="klass">plone.dexterity.content.Container</property>
-  <property name="model_file"></property>
+  <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
   <property name="model_source"></property>
-  <property name="schema">bda.empower.content.Case.ICase</property>
+  <property name="schema"></property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
