@@ -21,8 +21,7 @@ def int2str(value):
 
 @implementer(INameFromTitle)
 class NameByRandomNumber(object):
-    """Name Chooser with confusing class name, in fact it generates the name
-    from the UID.
+    """Name Chooser for 3-byte Base62 ID
 
     """
 

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
 from zope.interface import implementer
 
@@ -12,7 +13,11 @@ class HiddenProfiles(object):
 
 def post_install(context):
     """Post install script"""
-    # Do something at the end of the installation of this package.
+    portal = api.portal.get()
+    if 'cases' not in portal.contentIds():
+        api.content.create(
+            type="Cases", id="cases", title=u"Fälle", container=portal
+        )
 
 
 def uninstall(context):
