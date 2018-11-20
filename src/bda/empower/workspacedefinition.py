@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from bda.empower import _
+from bda.empower.i18n import _
 from collections import OrderedDict
 
 

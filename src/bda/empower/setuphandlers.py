@@ -11,7 +11,7 @@ class HiddenProfiles(object):
         return ["bda.empower:uninstall"]
 
 
-REMOVE_INITIAL = ['news', 'front-page', 'events']
+REMOVE_INITIAL = ["news", "front-page", "events"]
 
 
 def post_install(context):

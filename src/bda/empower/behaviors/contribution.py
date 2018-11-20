@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from bda.empower import _
 from bda.empower import discourse
+from bda.empower.i18n import _
+from bda.empower.interfaces import IWorkspaceAware
 from plone.app.textfield import RichText
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
@@ -27,7 +28,7 @@ def workspace_next_vocabulary_factory(context):
 
 
 @provider(IFormFieldProvider)
-class IContributionBehavior(model.Schema):
+class IContributionBehavior(IWorkspaceAware, model.Schema):
     """ Schema Only Behavior Contribution
     """
 

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_parent
+from bda.empower.interfaces import IWorkspaceAware
 from bda.empower.workspacedefinition import WORKSPACE_DEFINITION
 from plone import api
+from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 
 ROOT_TYPES = ["Case"]
@@ -84,26 +86,33 @@ def get_root_of_workspace(current):
       workspace.
     """
     while True:
+        if IPloneSiteRoot.providedBy(current):
+            return None
         parent = aq_parent(current)
+        if not IWorkspaceAware.providedBy(current):
+            current = parent
+            continue
         current_ws = getattr(current, WORKSPACE_ATTRIBUTE)
         parent_ws = getattr(parent, WORKSPACE_ATTRIBUTE, None)
         if current_ws != parent_ws:
-            break
+            return current
         current = parent
-    return current
 
 
-def get_workspace_path(node):
+def get_workspace_path(current):
     """a list of workspace root UIDs starting with the initial root.
 
     all none-workspace roots are omitted
     """
-    ws_root = get_root_of_workspace(node)
-    path = [api.content.get_uuid(ws_root)]
-    while not is_initial_root(ws_root):
-        ws_root = get_root_of_workspace(aq_parent(ws_root))
+    path = []
+    while True:
+        ws_root = get_root_of_workspace(current)
+        if ws_root is None:
+            break
         path.insert(0, api.content.get_uuid(ws_root))
-    return path
+        current = aq_parent(ws_root)
+    path.insert(0, 'BASE')
+    return tuple(path)
 
 
 def get_next_workspace_nodes(node):
@@ -114,10 +123,6 @@ def get_next_workspace_nodes(node):
         "workspace_path": {
             "query": "/".join(get_workspace_path(node)),
             "depth": 1,
-            "level": 1,
         }
     }
     brains = cat(**query)
-    import pdb
-
-    pdb.set_trace()
