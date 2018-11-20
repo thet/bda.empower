@@ -1,4 +1,15 @@
 <?xml version="1.0"?>
-<object name="portal_catalog">
-  <!--<column value="my_meta_column"/>-->
+<object
+    meta_type="Plone Catalog Tool"
+    name="portal_catalog">
+  <index
+      meta_type="ExtendedPathIndex"
+      name="workspace_path">
+    <indexed_attr value="workspace_path" />
+  </index>
+  <index
+      meta_type="FieldIndex"
+      name="workspace">
+    <indexed_attr value="workspace" />
+  </index>
 </object>

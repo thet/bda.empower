@@ -19,9 +19,7 @@ class ContributionIntegrationTest(unittest.TestCase):
         """Custom shared utility setup for tests."""
         self.portal = self.layer["portal"]
         setRoles(self.portal, TEST_USER_ID, ["Manager"])
-        self.case = api.content.create(
-            container=self.portal['cases'], id="case", type="Case"
-        )
+        self.cases = self.portal["cases"]
 
     def test_ct_contribution_fti(self):
         fti = queryUtility(IDexterityFTI, name="Contribution")
@@ -51,12 +49,16 @@ class ContributionIntegrationTest(unittest.TestCase):
             )
 
     def test_ct_contribution_namechooser(self):
-        contribution = api.content.create(
-            container=self.case,
-            id="foobarbaz",
-            type="Contribution",
+        case = api.content.create(
+            container=self.cases, id="foobarbaz", type="Case"
         )
-        chooser = INameChooser(self.case)
+        chooser = INameChooser(self.cases)
+        new_id = chooser.chooseName(None, case)
+        self.assertTrue(len(new_id) == 3)
+
+        contribution = api.content.create(
+            container=self.cases["foobarbaaz"], id="foobarbaz", type="Case"
+        )
+        chooser = INameChooser(self.cases["foobarbaz"])
         new_id = chooser.chooseName(None, contribution)
-        import pdb; pdb.set_trace()
         self.assertTrue(len(new_id) == 3)

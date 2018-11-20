@@ -11,7 +11,7 @@ from zope.publisher.interfaces.browser import IBrowserView
 @implementer(IContentProvider)
 @adapter(Interface, IBrowserRequest, IBrowserView)
 class ContributionProvider(BrowserView):
-    template = ViewPageTemplateFile(u'contribution_provider.pt')
+    template = ViewPageTemplateFile(u"contribution_provider.pt")
 
     def __init__(self, context, request, view):
         self.view = view
@@ -20,9 +20,7 @@ class ContributionProvider(BrowserView):
 
     @property
     def data(self):
-        return {
-            'title': self.context.title
-        }
+        return {"title": self.context.title}
 
     def render(self):
         return self.template(self)

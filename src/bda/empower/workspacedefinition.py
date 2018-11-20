@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-
 from bda.empower import _
 from collections import OrderedDict
+
 
 WORKSPACE_DEFINITION = OrderedDict()
 WORKSPACE_DEFINITION["analysis"] = {
@@ -27,7 +27,3 @@ WORKSPACE_DEFINITION["evaluation"] = {
     "next": ["strategy", "action"],
     "no-parent": False,
 }
-
-
-def get_workspace_definition():
-    return WORKSPACE_DEFINITION

@@ -5,6 +5,7 @@ from zope.interface import implementer
 import os
 import random
 
+
 random.seed(int(os.urandom(10).encode("hex"), 16))
 
 _REF = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

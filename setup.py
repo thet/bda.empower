@@ -43,6 +43,7 @@ setup(
     install_requires=[
         "collective.immediatecreate",
         "Products.CMFPlone",
+        "PyYAML",
         "setuptools",
         "z3c.jbot",
     ],

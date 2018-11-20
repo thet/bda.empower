@@ -46,5 +46,9 @@
       for=".behaviors.contribution.IContributionBehavior"
       factory=".namechooser.NameByRandomNumber"
       />
+  <adapter
+      factory=".indexer.workspace_path_indexer"
+      name="workspace_path"
+/>
 
 </configure>

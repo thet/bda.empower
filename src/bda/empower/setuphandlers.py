@@ -14,7 +14,7 @@ class HiddenProfiles(object):
 def post_install(context):
     """Post install script"""
     portal = api.portal.get()
-    if 'cases' not in portal.contentIds():
+    if "cases" not in portal.contentIds():
         api.content.create(
             type="Cases", id="cases", title=u"Fälle", container=portal
         )
