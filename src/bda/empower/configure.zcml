@@ -1,54 +1,56 @@
 <configure
+    i18n_domain="bda.empower"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    xmlns:plone="http://namespaces.plone.org/plone"
-    i18n_domain="bda.empower">
-
+    xmlns:plone="http://namespaces.plone.org/plone">
+  <!--
+    l10n
+  -->
   <i18n:registerTranslations directory="locales" />
-
+  <!--
+    Includes
+  -->
   <include package="collective.immediatecreate" />
-
   <include package=".behaviors" />
   <include package=".browser" />
-
   <include file="permissions.zcml" />
-
   <include file="upgrades.zcml" />
-
+  <!--
+    Setup
+  -->
   <genericsetup:registerProfile
-      name="default"
-      title="A: Empower statt Diffamierung"
-      directory="profiles/default"
       description="Installs the bda.empower add-on."
-      provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
+      name="default"
       post_handler=".setuphandlers.post_install"
-      />
-
-  <genericsetup:registerProfile
-      name="uninstall"
-      title="Empower statt Diffamierung (uninstall)"
-      directory="profiles/uninstall"
-      description="Uninstalls the bda.empower add-on."
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      title="A: Empower statt Diffamierung"
+  />
+  <genericsetup:registerProfile
+      description="Uninstalls the bda.empower add-on."
+      directory="profiles/uninstall"
+      name="uninstall"
       post_handler=".setuphandlers.uninstall"
-      />
-
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      title="Empower statt Diffamierung (uninstall)"
+  />
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="bda.empower-hiddenprofiles"
-      />
-
+  />
   <!--
     Name Chooser
   -->
   <adapter
-      for=".behaviors.contribution.IContributionBehavior"
       factory=".namechooser.NameByRandomNumber"
-      />
+      for=".behaviors.contribution.IContributionBehavior"
+  />
+  <!--
+    Indexer
+  -->
   <adapter
       factory=".indexer.workspace_path_indexer"
       name="workspace_path"
-/>
-
+  />
 </configure>

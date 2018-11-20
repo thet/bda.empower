@@ -11,9 +11,17 @@ class HiddenProfiles(object):
         return ["bda.empower:uninstall"]
 
 
+REMOVE_INITIAL = ['news', 'front-page', 'events']
+
+
 def post_install(context):
     """Post install script"""
     portal = api.portal.get()
+    # remove existing
+    for cid in REMOVE_INITIAL:
+        if cid in portal.contentIds():
+            api.content.delete(portal[cid])
+
     if "cases" not in portal.contentIds():
         api.content.create(
             type="Cases", id="cases", title=u"Fälle", container=portal

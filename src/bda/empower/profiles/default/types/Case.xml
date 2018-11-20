@@ -36,6 +36,7 @@
     <element value="plone.namefromtitle"/>
     <element value="plone.basic"/>
     <element value="plone.locking" />
+    <element value="plone.excludefromnav" />
     <element value="empower.contribution"/>
     <element value="collective.immediatecreate" />
   </property>

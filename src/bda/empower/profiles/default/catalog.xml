@@ -5,11 +5,14 @@
   <index
       meta_type="ExtendedPathIndex"
       name="workspace_path">
-    <indexed_attr value="workspace_path" />
+    <extra
+        name="indexed_attrs"
+        value="workspace_path"
+    />
   </index>
   <index
       meta_type="FieldIndex"
       name="workspace">
-    <indexed_attr value="workspace" />
+      <indexed_attr value="workspace"/>
   </index>
 </object>

@@ -67,6 +67,16 @@ def is_initial_root(node):
     return node.portal_type in ROOT_TYPES
 
 
+def get_initial_root(node):
+    """wether node is the initial root or not"""
+    if node.portal_type not in NODE_TYPES:
+        return None
+    while True:
+        if is_initial_root(node):
+            return node
+        node = aq_parent(node)
+
+
 def get_root_of_workspace(current):
     """the next root with a different previous workspace
 
@@ -99,4 +109,15 @@ def get_workspace_path(node):
 def get_next_workspace_nodes(node):
     """the next nodes in the tree with a different workspace.different
     """
-    brains = api.content.find()
+    cat = api.portal.get_tool("portal_catalog")
+    query = {
+        "workspace_path": {
+            "query": "/".join(get_workspace_path(node)),
+            "depth": 1,
+            "level": 1,
+        }
+    }
+    brains = cat(**query)
+    import pdb
+
+    pdb.set_trace()

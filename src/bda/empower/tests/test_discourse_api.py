@@ -77,3 +77,17 @@ class DiscourseAPIIntegrationTest(unittest.TestCase):
         self.assertEqual(path[0], api.content.get_uuid(self.case))
         self.assertEqual(path[1], api.content.get_uuid(s1))
         self.assertEqual(path[2], api.content.get_uuid(c1))
+
+    def test_get_next_workspace_nodes(self):
+        a1 = self._create(self.case, "a1", "analysis")
+        a2 = self._create(a1, "a2", "analysis")
+        s11 = self._create(a2, "s12", "strategy")
+        s12 = self._create(s11, "s12", "strategy")
+        s21 = self._create(a2, "s21", "strategy")
+        s22 = self._create(s21, "s22", "strategy")
+        c1 = self._create(s11, "c1", "action")
+        c2 = self._create(s12, "c2", "action")
+        c3 = self._create(s21, "c3", "action")
+        from bda.empower.discourse import get_next_workspace_nodes
+
+        nodes = get_next_workspace_nodes(self.case)
