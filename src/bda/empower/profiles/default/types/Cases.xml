@@ -33,6 +33,7 @@
     <element value="plone.basic" />
     <element value="plone.shortname" />
     <element value="plone.locking" />
+    <element value="plone.excludefromnavigation" />
   </property>
   <!-- View and aliases -->
   <property name="immediate_view">view</property>

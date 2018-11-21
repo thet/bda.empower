@@ -118,11 +118,10 @@ def get_workspace_path(current):
 def get_next_workspace_nodes(node):
     """the next nodes in the tree with a different workspace.different
     """
+    current_path = "/".join(get_workspace_path(node))
     cat = api.portal.get_tool("portal_catalog")
-    query = {
-        "workspace_path": {
-            "query": "/".join(get_workspace_path(node)),
-            "depth": 1,
-        }
-    }
+    query = dict(workspace_path={})
+    query["workspace_path"]["query"] = current_path
+    query["workspace_path"]["depth"] = 1
     brains = cat(**query)
+    import pdb; pdb.set_trace()

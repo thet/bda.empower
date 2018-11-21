@@ -15,4 +15,9 @@
       name="workspace">
       <indexed_attr value="workspace"/>
   </index>
+  <index
+      meta_type="FieldIndex"
+      name="workspace_depth">
+      <indexed_attr value="workspace_depth"/>
+  </index>
 </object>
