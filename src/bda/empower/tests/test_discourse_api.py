@@ -161,5 +161,5 @@ class DiscourseAPIIntegrationTest(unittest.TestCase):
         from bda.empower.discourse import get_current_workspace_tree
 
         nodes = get_current_workspace_tree(self.case)
-        import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
         self.assertEqual(len(nodes), 4)
