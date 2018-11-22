@@ -121,7 +121,7 @@ def get_workspace_path(current):
         ws_root = get_root_of_workspace(current)
         if ws_root is None:
             break
-        path.insert(0, api.content.get_uuid(ws_root))
+        path.insert(0, ws_root.getId())
         last_ws = ws_root
         current = aq_parent(ws_root)
     # last ws_root before leaving workspace tree is used to create a path
