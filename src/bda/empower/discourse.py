@@ -206,3 +206,25 @@ def get_all_workspace_roots(node, workspace):
     query["sort_on"] = "created"
     brains = cat(**query)
     return brains
+
+
+def build_tree(brains):
+    """Efficiently build a tree structure.
+    Taken from collective.navigation.
+    """
+    ret = {}
+    for it in brains:
+        pathkey = '/'.join(it.getPath().split('/')[:-1])
+        entry = {
+            'id': it.id,
+            'uid': it.UID,
+            'url': it.getURL(),
+            'title': it.Title,
+            'review_state': it.review_state,
+        }
+        if pathkey in ret:
+            ret[pathkey].append(entry)
+        else:
+            ret[pathkey] = [entry]
+    return ret
+

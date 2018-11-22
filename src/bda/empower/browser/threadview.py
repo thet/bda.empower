@@ -9,13 +9,23 @@ BOTTOMLEVEL = 6
 
 
 class ThreadView(BrowserView):
+
     def itemtree(self):
         context = self.context
         query = {}
         query["portal_type"] = "Contribution"
         query["path"] = {"query": "/".join(context.getPhysicalPath())}
         query["sort_on"] = "created"
-        return buildFolderTree(context, obj=context, query=query)
+        tree = buildFolderTree(context, obj=context, query=query)
+
+
+        from bda.empower.discourse import get_current_workspace_tree
+        li = get_current_workspace_tree(self.context)
+        from pprint import pprint
+        pprint([
+            it.getURL() for it in li
+        ])
+        return tree
 
     def start_recurse(self):
         return self.recurse(
