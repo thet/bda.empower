@@ -48,6 +48,8 @@
   <property name="immediate_view">view</property>
   <property name="view_methods">
     <element value="view"/>
+    <element value="thread"/>
+    <element value="stream"/>
   </property>
 
   <!-- Method aliases -->
