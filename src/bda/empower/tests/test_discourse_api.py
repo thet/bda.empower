@@ -130,3 +130,36 @@ class DiscourseAPIIntegrationTest(unittest.TestCase):
         # passed in:
         nodes = get_next_workspaces(a1, context_aware=True)
         self.assertEqual(len(nodes), 1)
+
+    def test_get_current_workspace_tree(self):
+        # a1
+        #  a12
+        #   s11
+        #    s12
+        #     c2
+        #    c1
+        # a2
+        #  s21
+        #   s22
+        #   c31
+        #    c32
+        #     c321
+        #    sb1
+        a1 = self._create(self.case, "a1", "analysis")
+        a12 = self._create(a1, "a12", "analysis")
+        a2 = self._create(self.case, "a2", "analysis")
+        s11 = self._create(a12, "s11", "strategy")
+        s12 = self._create(s11, "s12", "strategy")
+        s21 = self._create(a2, "s21", "strategy")
+        self._create(s21, "s22", "strategy")
+        self._create(s11, "c1", "action")
+        self._create(s12, "c2", "action")
+        c31 = self._create(s21, "c31", "action")
+        c32 = self._create(c31, "c32", "action")
+        self._create(c32, "c321", "action")
+        self._create(c32, "sb1", "strategy")
+        from bda.empower.discourse import get_current_workspace_tree
+
+        nodes = get_current_workspace_tree(self.case)
+        import pdb; pdb.set_trace()
+        self.assertEqual(len(nodes), 4)

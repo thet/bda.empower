@@ -146,6 +146,7 @@ def get_next_workspaces(
     - context_aware (bool): normal all next workspace of the root of the given
       workspace are returned. filter them to show only under given context
       physical path
+    - portal_type - usually nothing one wants to overide
     - sort_on (like catalog)
     - sort_order (like catalog)
     """
@@ -167,15 +168,25 @@ def get_next_workspaces(
 
 def get_current_workspace_tree(current, context_aware=False):
     """a tree of brains of the current workspace
+
+    - current is the context to work on
+    - context_aware (bool):
+      False: full tree workspace,
+      True: partial workspace from current
     """
+    # XXX hack: since EPI is optimized to return exactly onne item for a depth
+    # of 0, we use depth of 1 and query the parent path
     base_node = get_root_of_workspace(current)
-    current_path = "/".join(get_workspace_path(base_node))
+    current_path = "/".join(get_workspace_path(aq_parent(base_node)))
     cat = api.portal.get_tool("portal_catalog")
     query = dict(workspace_path={})
     query["workspace_path"]["query"] = current_path
-    query["workspace_path"]["depth"] = 0
+    query["workspace_path"]["depth"] = 1
     if context_aware:
         query["path"] = '/'.join(current.getPhysicalPath())
+    else:
+        query["path"] = '/'.join(base_node.getPhysicalPath())
+    query["sort_on"] = 'path'
     brains = cat(**query)
     return brains
 
