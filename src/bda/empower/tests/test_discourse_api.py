@@ -77,9 +77,9 @@ class DiscourseAPIIntegrationTest(unittest.TestCase):
         self.assertEqual(path[0], "")
         self.assertEqual(path[1], self.portal.getId())
         self.assertEqual(path[2], self.portal["cases"].getId())
-        self.assertEqual(path[3], api.content.get_uuid(self.case))
-        self.assertEqual(path[4], api.content.get_uuid(s1))
-        self.assertEqual(path[5], api.content.get_uuid(c1))
+        self.assertEqual(path[3], self.case.getId())
+        self.assertEqual(path[4], s1.getId())
+        self.assertEqual(path[5], c1.getId())
 
     def test_get_next_workspace_nodes(self):
         # a1
