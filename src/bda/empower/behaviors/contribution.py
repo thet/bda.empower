@@ -28,7 +28,7 @@ def workspace_next_vocabulary_factory(context):
 
 
 @provider(IFormFieldProvider)
-class IContributionBehavior(IWorkspaceAware, model.Schema):
+class IContributionBehavior(model.Schema, IWorkspaceAware):
     """ Schema Only Behavior Contribution
     """
 

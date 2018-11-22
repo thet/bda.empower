@@ -69,6 +69,14 @@ def is_initial_root(node):
     return node.portal_type in ROOT_TYPES
 
 
+def is_workspace_root(node):
+    """wether node is a workspace root or not"""
+    return is_initial_root(node) or (
+        node.portal_type in CHILD_TYPES
+        and node.workspace != aq_parent(node).workspace
+    )
+
+
 def get_initial_root(node):
     """wether node is the initial root or not"""
     if node.portal_type not in NODE_TYPES:
@@ -102,26 +110,54 @@ def get_root_of_workspace(current):
 def get_workspace_path(current):
     """a list of workspace root UIDs starting with the initial root.
 
-    all none-workspace roots are omitted
+    - all none-workspace roots in between are omitted
+    - all nodes
+    - at the end we get something like:
+      "/Plone/cases/9c92a34469086440a841d5a532e/c53d93aa4f68442296482f7fa46"
     """
+    last_ws = None
     path = []
     while True:
         ws_root = get_root_of_workspace(current)
         if ws_root is None:
             break
         path.insert(0, api.content.get_uuid(ws_root))
+        last_ws = ws_root
         current = aq_parent(ws_root)
-    path.insert(0, 'BASE')
-    return tuple(path)
+    # last ws_root before leaving workspace tree is used to create a path
+    # to the workspace
+    if last_ws is None:
+        return current.getPhysicalPath()
+    return tuple(list(last_ws.getPhysicalPath()[:-1]) + path)
 
 
-def get_next_workspace_nodes(node):
-    """the next nodes in the tree with a different workspace.different
+def get_next_workspaces(
+    node,
+    root=True,
+    context_aware=False,
+    sort_on="workspace_depth",
+    sort_order="ascending",
+):
+    """catalog brains of next nodes in the tree with a different workspace.
+
+    - node is the context to work on
+    - root (bool) defined is only workspace roots are to be returned
+    - context_aware (bool): normal all next workspace of the root of the given
+      workspace are returned. filter them to show only under given context
+      physical path
+    - sort_on (like catalog)
+    - sort_order (like catalog)
     """
     current_path = "/".join(get_workspace_path(node))
     cat = api.portal.get_tool("portal_catalog")
     query = dict(workspace_path={})
     query["workspace_path"]["query"] = current_path
     query["workspace_path"]["depth"] = 1
+    if root:
+        query["workspace_root"] = True
+    query["sort_on"] = sort_on
+    query["sort_order"] = sort_order
+    if context_aware:
+        query["path"] = '/'.join(node.getPhysicalPath())
     brains = cat(**query)
-    import pdb; pdb.set_trace()
+    return brains

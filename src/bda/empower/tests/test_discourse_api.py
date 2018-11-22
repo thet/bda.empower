@@ -73,22 +73,60 @@ class DiscourseAPIIntegrationTest(unittest.TestCase):
         from bda.empower.discourse import get_workspace_path
 
         path = get_workspace_path(c3)
-        self.assertEqual(len(path), 4)
-        self.assertEqual(path[0], "BASE")
-        self.assertEqual(path[1], api.content.get_uuid(self.case))
-        self.assertEqual(path[2], api.content.get_uuid(s1))
-        self.assertEqual(path[3], api.content.get_uuid(c1))
+        self.assertEqual(len(path), 6)
+        self.assertEqual(path[0], "")
+        self.assertEqual(path[1], self.portal.getId())
+        self.assertEqual(path[2], self.portal["cases"].getId())
+        self.assertEqual(path[3], api.content.get_uuid(self.case))
+        self.assertEqual(path[4], api.content.get_uuid(s1))
+        self.assertEqual(path[5], api.content.get_uuid(c1))
 
     def test_get_next_workspace_nodes(self):
+        # a1
+        #  a12
+        #   s11
+        #    s12
+        #     c2
+        #    c1
+        # a2
+        #  s21
+        #   s22
+        #   c31
+        #    c32
+        #     c321
+        #    sb1
         a1 = self._create(self.case, "a1", "analysis")
-        a2 = self._create(a1, "a2", "analysis")
-        s11 = self._create(a2, "s12", "strategy")
+        a12 = self._create(a1, "a12", "analysis")
+        a2 = self._create(self.case, "a2", "analysis")
+        s11 = self._create(a12, "s11", "strategy")
         s12 = self._create(s11, "s12", "strategy")
         s21 = self._create(a2, "s21", "strategy")
-        s22 = self._create(s21, "s22", "strategy")
-        c1 = self._create(s11, "c1", "action")
-        c2 = self._create(s12, "c2", "action")
-        c3 = self._create(s21, "c3", "action")
-        from bda.empower.discourse import get_next_workspace_nodes
+        self._create(s21, "s22", "strategy")
+        self._create(s11, "c1", "action")
+        self._create(s12, "c2", "action")
+        c31 = self._create(s21, "c31", "action")
+        c32 = self._create(c31, "c32", "action")
+        self._create(c32, "c321", "action")
+        self._create(c32, "sb1", "strategy")
+        from bda.empower.discourse import get_next_workspaces
 
-        nodes = get_next_workspace_nodes(self.case)
+        # get all strategy roots under first analysis
+        nodes = get_next_workspaces(self.case)
+        self.assertEqual(len(nodes), 2)
+
+        # get strategy group under first analysis
+        nodes = get_next_workspaces(self.case, root=False)
+        self.assertEqual(len(nodes), 4)
+
+        # get strategy group under c31
+        nodes = get_next_workspaces(c31)
+        self.assertEqual(len(nodes), 1)
+
+        # normally all is relative to workspace root
+        nodes = get_next_workspaces(a1)
+        self.assertEqual(len(nodes), 2)
+
+        # but to get stuff only under a12 directly, context_aware can be
+        # passed in:
+        nodes = get_next_workspaces(a1, context_aware=True)
+        self.assertEqual(len(nodes), 1)
