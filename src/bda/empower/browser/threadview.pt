@@ -12,8 +12,10 @@
 
 <metal:content-core fill-slot="content-core"><metal:block define-macro="content-core">
 
-<div class="threadview">
-  <tal:threadrunner replace="structure view/start_recurse" />
+<div class="thread"
+    tal:define="tree python:view.recurse(path=view.start_path)"
+    tal:condition="tree">
+  <tal:threadrunner replace="structure tree" />
 </div>
 
 </metal:block></metal:content-core>

@@ -1,26 +1,19 @@
-<tal:master
-    define="level options/level|python:0;
-            children options/children | nothing;
-            bottomLevel options/bottomLevel | nothing;"
+<tal:def
+    define="path options/path;
+            items python:view.itemtree.get(path, []);
+            level options/level|python:0"
+    condition="items"
     i18n:domain="bda.empower">
-<metal:main define-macro="threadview_main">
 
-<div class="thread level-${level}" tal:condition="python:children and (bottomLevel <= 0 or level <= bottomLevel)">
+<div class="threaditem level-${level}" tal:repeat="item items">
 
-  <tal:navitem repeat="node children">
-    <tal:item define="children node/children; obj node/item/getObject">
+  <tal:article replace="structure python:view.contribution_provider(item['ob'])"/>
 
-      <tal:article replace="structure python:view.contribution_provider(obj)"/>
-
-      <tal:subthread
-          define="subthread python:view.recurse(children=children, level=level+1, bottomLevel=bottomLevel)"
-          replace="structure subthread"
-          condition="children"/>
-
-    </tal:item>
-  </tal:navitem>
+  <tal:subthread
+      define="subthread python:view.recurse(path=path + '/' + item['id'], level=level+1)"
+      replace="structure subthread"
+      condition="subthread"/>
 
 </div>
 
-</metal:main>
-</tal:master>
+</tal:def>

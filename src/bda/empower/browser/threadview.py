@@ -3,6 +3,7 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.contentprovider.interfaces import IContentProvider
+from bda.empower import discourse
 
 
 BOTTOMLEVEL = 6
@@ -10,29 +11,23 @@ BOTTOMLEVEL = 6
 
 class ThreadView(BrowserView):
 
+    _itemtree = None
+
+    @property
     def itemtree(self):
-        context = self.context
-        query = {}
-        query["portal_type"] = "Contribution"
-        query["path"] = {"query": "/".join(context.getPhysicalPath())}
-        query["sort_on"] = "created"
-        tree = buildFolderTree(context, obj=context, query=query)
-
-
-        from bda.empower.discourse import get_current_workspace_tree
-        li = get_current_workspace_tree(self.context)
-        from pprint import pprint
-        pprint([
-            it.getURL() for it in li
-        ])
+        if self._itemtree is not None:
+            return self._itemtree
+        items = discourse.get_current_workspace_tree(self.context)
+        tree = discourse.build_tree(items)
+        self._itemtree = tree
         return tree
 
-    def start_recurse(self):
-        return self.recurse(
-            children=self.itemtree().get("children", []),
-            level=0,
-            bottomLevel=self.bottomlevel,
+    @property
+    def start_path(self):
+        start_path = '/'.join(
+                discourse.get_root_of_workspace(self.context).getPhysicalPath()[:-1]  # noqa start a level above the start context. itemtree structure works that way.
         )
+        return start_path
 
     def contribution_provider(self, context):
         provider = getMultiAdapter(

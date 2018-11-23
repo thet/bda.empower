@@ -217,6 +217,7 @@ def build_tree(brains):
         pathkey = '/'.join(it.getPath().split('/')[:-1])
         entry = {
             'id': it.id,
+            'ob': it.getObject(),
             'uid': it.UID,
             'url': it.getURL(),
             'title': it.Title,
