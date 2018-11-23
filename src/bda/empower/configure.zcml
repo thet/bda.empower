@@ -61,4 +61,25 @@
       factory=".indexer.workspace_root_indexer"
       name="workspace_root"
   />
+  <!--
+    Finger Pointing
+  -->
+  <subscriber
+    for="plone.dexterity.interfaces.IDexterityContent
+         .fingerpointing.IConfidentialObjectViewedEvent"
+    handler=".fingerpointing.confidentialobjectviewed_logger"
+    />
+  <!--
+    IContribution changed, set local roles
+  -->
+  <subscriber
+      for=".behaviors.contribution.IContributionBehavior
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".rolesetter.update_expert_assigned_local_roles"
+      />
+  <subscriber
+      for=".behaviors.contribution.IContributionBehavior
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".rolesetter.update_expert_assigned_local_roles"
+      />
 </configure>

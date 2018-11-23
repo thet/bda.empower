@@ -3,5 +3,6 @@
   <version>1000</version>
   <dependencies>
     <dependency>collective.immediatecreate:default</dependency>
+    <dependency>collective.fingerpointing:default</dependency>
   </dependencies>
 </metadata>

@@ -161,7 +161,7 @@ def get_next_workspaces(
     query["sort_on"] = sort_on
     query["sort_order"] = sort_order
     if context_aware:
-        query["path"] = '/'.join(node.getPhysicalPath())
+        query["path"] = "/".join(node.getPhysicalPath())
     brains = cat(**query)
     return brains
 
@@ -183,10 +183,10 @@ def get_current_workspace_tree(current, context_aware=False):
     query["workspace_path"]["query"] = current_path
     query["workspace_path"]["depth"] = 1
     if context_aware:
-        query["path"] = '/'.join(current.getPhysicalPath())
+        query["path"] = "/".join(current.getPhysicalPath())
     else:
-        query["path"] = '/'.join(base_node.getPhysicalPath())
-    query["sort_on"] = 'path'
+        query["path"] = "/".join(base_node.getPhysicalPath())
+    query["sort_on"] = "path"
     brains = cat(**query)
     return brains
 
@@ -199,10 +199,10 @@ def get_all_workspace_roots(node, workspace):
     root_node = get_initial_root(node)
     cat = api.portal.get_tool("portal_catalog")
     query = dict()
-    query['workspace_root'] = True
-    query['workspace'] = workspace
-    query["path"] = '/'.join(root_node.getPhysicalPath())
-    query['portal_type'] = NODE_TYPES
-    query['sort_on'] = 'created'
+    query["workspace_root"] = True
+    query["workspace"] = workspace
+    query["path"] = "/".join(root_node.getPhysicalPath())
+    query["portal_type"] = NODE_TYPES
+    query["sort_on"] = "created"
     brains = cat(**query)
     return brains
