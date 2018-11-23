@@ -2,9 +2,26 @@
 
   <header>
     <h1 tal:condition="data/title">${data/title}</h1>
+    <p tal:condition="data/description">${data/description}</p>
+    <aside>
+      <div><label i18n:translate="created">Created</label>: ${data/created}</div>
+      <div><label i18n:translate="modified">Modified</label>: ${data/modified}</div>
+    </aside>
   </header>
 
+  <tal:txt replace="structure data/text | nothing" />
+      <label i18n:translate="shared_with">Shared With</label>
+      <ul>
+        <li>a</li>
+        <li>b</li>
+      </ul>
+
+      <button>Create Action</button>
+      <button>Confirm Read</button>
+      <a href="${context/absolute_url}/@@edit">Edit</a>
+      <button>Reply</button>
   <footer>
+
     haaahhh
   </footer>
 
