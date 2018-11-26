@@ -1,13 +1,7 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_parent
 from bda.empower import discourse
 from plone.indexer import indexer
 from zope.interface import Interface
-
-import logging
-
-
-logger = logging.getLogger(__name__)
 
 
 @indexer(Interface)
@@ -18,14 +12,6 @@ def workspace_path_indexer(obj, **kw):
       this is needed, because otherwise EPI falls back to physical path
     """
     return discourse.get_workspace_path(obj)
-
-
-@indexer(Interface)
-def workspace_depth_indexer(obj, **kw):
-    ws_depth = len(discourse.get_workspace_path(obj)) - 1
-    if not ws_depth:
-        raise AttributeError("n/a")
-    return ws_depth
 
 
 @indexer(Interface)

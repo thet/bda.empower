@@ -54,10 +54,6 @@
       name="workspace_path"
   />
   <adapter
-      factory=".indexer.workspace_depth_indexer"
-      name="workspace_depth"
-  />
-  <adapter
       factory=".indexer.workspace_root_indexer"
       name="workspace_root"
   />
