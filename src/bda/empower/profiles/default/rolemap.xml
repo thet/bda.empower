@@ -23,5 +23,29 @@
       <role name="Manager"/>
     </permission>
 
+    <permission name="bda.empower: Modify Client" acquire="True">
+      <role name="Coordinator"/>
+      <role name="Manager"/>
+    </permission>
+
+    <permission name="bda.empower: Modify Expert Pool" acquire="True">
+      <role name="Coordinator"/>
+      <role name="Client"/>
+      <role name="Manager"/>
+    </permission>
+
+    <permission name="bda.empower: Modify Experts Assigned" acquire="True">
+      <role name="Coordinator"/>
+      <role name="Client"/>
+      <role name="Owner"/>
+      <role name="Manager"/>
+    </permission>
+
+    <permission name="bda.empower: Modify Workspace Type" acquire="True">
+      <role name="Coordinator"/>
+      <role name="Client"/>
+      <role name="Manager"/>
+    </permission>
+
   </permissions>
 </rolemap>
