@@ -38,6 +38,7 @@
     <element value="plone.locking" />
     <element value="plone.excludefromnavigation" />
     <element value="empower.contribution"/>
+    <element value="empower.clientandexpertpoolassignment"/>
     <element value="collective.immediatecreate" />
   </property>
 

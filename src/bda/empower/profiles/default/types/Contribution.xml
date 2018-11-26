@@ -36,6 +36,7 @@
     <element value="plone.basic"/>
     <element value="plone.locking" />
     <element value="empower.contribution"/>
+    <element value="empower.expertassignment"/>
     <element value="collective.immediatecreate" />
   </property>
 
