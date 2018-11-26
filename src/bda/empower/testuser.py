@@ -3,9 +3,9 @@ from plone import api
 
 import os
 
-INSTALL_TEST_USERS = os.environ.get('TESTUSER', False)
+INSTALL_TEST_USERS = os.environ.get("TESTUSER", False)
 
-TEST_PW = os.environ.get('TESTPASSWORD', "empower!me")
+TEST_PW = os.environ.get("TESTPASSWORD", "empower!me")
 
 INIT_USERS = [
     {

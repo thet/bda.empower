@@ -23,8 +23,10 @@ class ContributionProvider(BrowserView):
         ctx = self.context
         return {
             "title": ctx.title,
-            "description": getattr(ctx, 'description', None),
-            "text": ctx.text.output_relative_to(ctx) if getattr(ctx, 'text', None) and ctx.text.raw else None,
+            "description": getattr(ctx, "description", None),
+            "text": ctx.text.output_relative_to(ctx)
+            if getattr(ctx, "text", None) and ctx.text.raw
+            else None,
             "modified": ctx.modification_date.ISO(),
             "created": ctx.creation_date.ISO(),
         }

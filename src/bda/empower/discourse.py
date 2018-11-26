@@ -214,18 +214,17 @@ def build_tree(brains):
     """
     ret = {}
     for it in brains:
-        pathkey = '/'.join(it.getPath().split('/')[:-1])
+        pathkey = "/".join(it.getPath().split("/")[:-1])
         entry = {
-            'id': it.id,
-            'ob': it.getObject(),
-            'uid': it.UID,
-            'url': it.getURL(),
-            'title': it.Title,
-            'review_state': it.review_state,
+            "id": it.id,
+            "ob": it.getObject(),
+            "uid": it.UID,
+            "url": it.getURL(),
+            "title": it.Title,
+            "review_state": it.review_state,
         }
         if pathkey in ret:
             ret[pathkey].append(entry)
         else:
             ret[pathkey] = [entry]
     return ret
-

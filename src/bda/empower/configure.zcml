@@ -69,12 +69,12 @@
     IContribution changed, set local roles
   -->
   <subscriber
-      for=".behaviors.contribution.IContributionBehavior
+      for=".behaviors.users.IExpertAssignmentBehavior
            zope.lifecycleevent.IObjectAddedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
       />
   <subscriber
-      for=".behaviors.contribution.IContributionBehavior
+      for=".behaviors.users.IExpertAssignmentBehavior
            zope.lifecycleevent.IObjectModifiedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
       />
