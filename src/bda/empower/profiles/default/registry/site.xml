@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<registry>
+<!--
+  ==================
+  Site Configuration
+  ==================
+  -->
+  <records
+      interface="Products.CMFPlone.interfaces.controlpanel.ISiteSchema"
+      prefix="plone">
+    <value key="default_page"></value>
+    <value key="display_publication_date_in_byline">False</value>
+    <value key="enable_sitemap">False</value>
+    <value key="exposeDCMetaTags">False</value>
+    <value key="icon_visibility">enabled</value>
+    <value key="roles_allowed_to_add_keywords">
+      <element>Manager</element>
+      <element>Site Administrator</element>
+    </value>
+    <value key="site_title">Empowerment statt Diskriminierung</value>
+    <value key="thumb_visibility">false</value>
+    <value key="toolbar_position">side</value>
+    <value key="webstats_js" />
+  </records>
+  <records
+      interface="Products.CMFPlone.interfaces.controlpanel.ILinkSchema"
+      prefix="plone">
+    <value key="mark_special_links">False</value>
+  </records>
+</registry>

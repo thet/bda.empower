@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<registry>
+  <!--
+  ======================
+  Security Configuration
+  ======================
+  -->
+  <records
+      interface="Products.CMFPlone.interfaces.controlpanel.ISecuritySchema"
+      prefix="plone">
+    <value key="allow_anon_views_about">False</value>
+    <value key="enable_self_reg">False</value>
+    <value key="enable_user_folders">True</value>
+    <value key="enable_user_pwd_choice">False</value>
+    <value key="use_email_as_login">True</value>
+    <value key="use_uuid_as_userid">True</value>
+  </records>
+</registry>

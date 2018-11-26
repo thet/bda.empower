@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<registry>
+  <!--
+  ========
+  Language
+  ========
+  -->
+  <records
+      interface="Products.CMFPlone.interfaces.controlpanel.ILanguageSchema"
+      prefix="plone">
+    <value key="available_languages">
+      <element>de-at</element>
+    </value>
+    <value key="default_language">de-at</value>
+    <value key="display_flags">False</value>
+    <value key="set_cookie_always">False</value>
+    <value key="use_cctld_negotiation">False</value>
+    <value key="use_combined_language_codes">True</value>
+    <value key="use_content_negotiation">False</value>
+    <value key="use_cookie_negotiation">False</value>
+    <value key="use_path_negotiation">False</value>
+    <value key="use_request_negotiation">False</value>
+    <value key="use_subdomain_negotiation">False</value>
+  </records>
+</registry>
