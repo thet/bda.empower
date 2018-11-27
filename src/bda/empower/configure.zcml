@@ -28,7 +28,7 @@
       name="default"
       post_handler=".setuphandlers.post_install"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="A: Empower statt Diffamierung"
+      title="A: Empowerment statt Diffamierung"
   />
   <genericsetup:registerProfile
       description="Uninstalls the bda.empower add-on."
@@ -36,7 +36,7 @@
       name="uninstall"
       post_handler=".setuphandlers.uninstall"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="Empower statt Diffamierung (uninstall)"
+      title="Empowerment statt Diffamierung (uninstall)"
   />
   <utility
       factory=".setuphandlers.HiddenProfiles"
