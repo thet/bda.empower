@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-11-27 09:15+0000\n"
+"POT-Creation-Date: 2018-11-27 15:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,88 +14,106 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: ../profiles/default/types/Case.xml
+#: bda/empower/profiles/default/types/Case.xml
 msgid "A generic Case"
 msgstr ""
 
-#: ../profiles/default/types/Contribution.xml
+#: bda/empower/profiles/default/types/Contribution.xml
 msgid "A generic contribution"
 msgstr ""
 
-#: ../configure.zcml:32
+#: bda/empower/configure.zcml:31
 msgid "A: Empowerment statt Diffamierung"
 msgstr ""
 
-#: ../profiles/default/types/Case.xml
+#: bda/empower/profiles/default/types/Case.xml
 msgid "Case"
 msgstr ""
 
-#: ../behaviors/users.py:45
+#: bda/empower/behaviors/users.py:45
+#: bda/empower/profiles/default/sharing.xml
 msgid "Client"
 msgstr ""
 
-#: ../profiles/default/types/Contribution.xml
+#: bda/empower/profiles/default/types/Contribution.xml
 msgid "Contribution"
 msgstr ""
 
-#: ../profiles/default/types/Case.xml
-#: ../profiles/default/types/Contribution.xml
+#: bda/empower/profiles/default/sharing.xml
+msgid "Coordinator"
+msgstr ""
+
+#: bda/empower/behaviors/users.py:54
+msgid "Coordinators"
+msgstr ""
+
+#: bda/empower/profiles/default/actions.xml
+msgid "Dashboard"
+msgstr ""
+
+#: bda/empower/profiles/default/types/Case.xml
+#: bda/empower/profiles/default/types/Contribution.xml
 msgid "Edit"
 msgstr ""
 
-#: ../configure.zcml:40
+#: bda/empower/configure.zcml:39
 msgid "Empowerment statt Diffamierung (uninstall)"
 msgstr ""
 
-#: ../behaviors/users.py:54
+#: bda/empower/behaviors/users.py:63
 msgid "Expert Pool"
 msgstr ""
 
-#: ../behaviors/users.py:67
+#: bda/empower/behaviors/users.py:76
+#: bda/empower/profiles/default/sharing.xml
 msgid "Experts"
 msgstr ""
 
-#: ../configure.zcml:32
+#: bda/empower/configure.zcml:31
 msgid "Installs the bda.empower add-on."
 msgstr ""
 
-#: ../behaviors/contribution.py:37
+#: bda/empower/behaviors/contribution.py:36
 msgid "Text"
 msgstr ""
 
-#: ../behaviors/users.py:50
+#: bda/empower/behaviors/users.py:50
 msgid "Type and select client."
 msgstr ""
 
-#: ../behaviors/users.py:59
+#: bda/empower/behaviors/users.py:59
+msgid "Type and select coordinator."
+msgstr ""
+
+#: bda/empower/behaviors/users.py:68
 msgid "Type and select expert."
 msgstr ""
 
-#: ../configure.zcml:40
+#: bda/empower/configure.zcml:39
 msgid "Uninstalls the bda.empower add-on."
 msgstr ""
 
-#: ../profiles/default/types/Case.xml
-#: ../profiles/default/types/Contribution.xml
+#: bda/empower/profiles/default/types/Case.xml
+#: bda/empower/profiles/default/types/Contribution.xml
 msgid "View"
 msgstr ""
 
 #. Default: "Action"
-#: ../workspacedefinition.py:20
+#: bda/empower/workspacedefinition.py:20
 msgid "action"
 msgstr ""
 
 #. Default: "Analysis"
-#: ../workspacedefinition.py:8
+#: bda/empower/workspacedefinition.py:8
 msgid "analysis"
 msgstr ""
 
 #. Default: "Evaluation"
-#: ../workspacedefinition.py:26
+#: bda/empower/workspacedefinition.py:26
 msgid "evaluation"
 msgstr ""
 
 #. Default: "Strategy"
-#: ../workspacedefinition.py:14
+#: bda/empower/workspacedefinition.py:14
 msgid "strategy"
 msgstr ""

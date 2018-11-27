@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-11-27 09:17+0000\n"
+"POT-Creation-Date: 2018-11-27 15:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "A generic contribution"
 msgstr ""
 
-#: bda/empower/configure.zcml:32
+#: bda/empower/configure.zcml:31
 msgid "A: Empowerment statt Diffamierung"
 msgstr ""
 
@@ -34,6 +34,7 @@ msgid "Case"
 msgstr ""
 
 #: bda/empower/behaviors/users.py:45
+#: bda/empower/profiles/default/sharing.xml
 msgid "Client"
 msgstr ""
 
@@ -41,28 +42,41 @@ msgstr ""
 msgid "Contribution"
 msgstr ""
 
+#: bda/empower/profiles/default/sharing.xml
+msgid "Coordinator"
+msgstr ""
+
+#: bda/empower/behaviors/users.py:54
+msgid "Coordinators"
+msgstr ""
+
+#: bda/empower/profiles/default/actions.xml
+msgid "Dashboard"
+msgstr ""
+
 #: bda/empower/profiles/default/types/Case.xml
 #: bda/empower/profiles/default/types/Contribution.xml
 msgid "Edit"
 msgstr ""
 
-#: bda/empower/configure.zcml:40
+#: bda/empower/configure.zcml:39
 msgid "Empowerment statt Diffamierung (uninstall)"
 msgstr ""
 
-#: bda/empower/behaviors/users.py:54
+#: bda/empower/behaviors/users.py:63
 msgid "Expert Pool"
 msgstr ""
 
-#: bda/empower/behaviors/users.py:67
+#: bda/empower/behaviors/users.py:76
+#: bda/empower/profiles/default/sharing.xml
 msgid "Experts"
 msgstr ""
 
-#: bda/empower/configure.zcml:32
+#: bda/empower/configure.zcml:31
 msgid "Installs the bda.empower add-on."
 msgstr ""
 
-#: bda/empower/behaviors/contribution.py:37
+#: bda/empower/behaviors/contribution.py:36
 msgid "Text"
 msgstr ""
 
@@ -71,10 +85,14 @@ msgid "Type and select client."
 msgstr ""
 
 #: bda/empower/behaviors/users.py:59
+msgid "Type and select coordinator."
+msgstr ""
+
+#: bda/empower/behaviors/users.py:68
 msgid "Type and select expert."
 msgstr ""
 
-#: bda/empower/configure.zcml:40
+#: bda/empower/configure.zcml:39
 msgid "Uninstalls the bda.empower add-on."
 msgstr ""
 
