@@ -9,18 +9,18 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
-"Language-Name: English\n"
+"Language-Code: de\n"
+"Language-Name: German\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
 #: ../profiles/default/types/Case.xml
 msgid "A generic Case"
-msgstr ""
+msgstr "Ein Fall"
 
 #: ../profiles/default/types/Contribution.xml
 msgid "A generic contribution"
-msgstr ""
+msgstr "Ein Beitrag"
 
 #: ../configure.zcml:32
 msgid "A: Empowerment statt Diffamierung"
@@ -28,20 +28,20 @@ msgstr ""
 
 #: ../profiles/default/types/Case.xml
 msgid "Case"
-msgstr ""
+msgstr "Fall"
 
 #: ../behaviors/users.py:45
 msgid "Client"
-msgstr ""
+msgstr "Klient"
 
 #: ../profiles/default/types/Contribution.xml
 msgid "Contribution"
-msgstr ""
+msgstr "Beitrag"
 
 #: ../profiles/default/types/Case.xml
 #: ../profiles/default/types/Contribution.xml
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: ../configure.zcml:40
 msgid "Empowerment statt Diffamierung (uninstall)"
@@ -49,11 +49,11 @@ msgstr ""
 
 #: ../behaviors/users.py:54
 msgid "Expert Pool"
-msgstr ""
+msgstr "ExpertInnen Pool"
 
 #: ../behaviors/users.py:67
 msgid "Experts"
-msgstr ""
+msgstr "ExpertInnen"
 
 #: ../configure.zcml:32
 msgid "Installs the bda.empower add-on."
@@ -65,11 +65,11 @@ msgstr ""
 
 #: ../behaviors/users.py:50
 msgid "Type and select client."
-msgstr ""
+msgstr "Tippen und Klienten auswählen"
 
 #: ../behaviors/users.py:59
 msgid "Type and select expert."
-msgstr ""
+msgstr "Tippen und ExpertInnen auswählen"
 
 #: ../configure.zcml:40
 msgid "Uninstalls the bda.empower add-on."
@@ -78,24 +78,24 @@ msgstr ""
 #: ../profiles/default/types/Case.xml
 #: ../profiles/default/types/Contribution.xml
 msgid "View"
-msgstr ""
+msgstr "Ansicht"
 
 #. Default: "Action"
 #: ../workspacedefinition.py:20
 msgid "action"
-msgstr ""
+msgstr "Aktion"
 
 #. Default: "Analysis"
 #: ../workspacedefinition.py:8
 msgid "analysis"
-msgstr ""
+msgstr "Analyse"
 
 #. Default: "Evaluation"
 #: ../workspacedefinition.py:26
 msgid "evaluation"
-msgstr ""
+msgstr "Evaluierung"
 
 #. Default: "Strategy"
 #: ../workspacedefinition.py:14
 msgid "strategy"
-msgstr ""
+msgstr "Strategie"
