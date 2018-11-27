@@ -7,8 +7,12 @@
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Cases" />
+    <element value="Folder" />
   </property>
+
+<!--
   <property name="view_methods">
-    <element value="aki_redirect" />
+    <element value="empower_redirect" />
   </property>
+ -->
 </object>

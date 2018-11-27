@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<object
+    meta_type="Plone Actions Tool"
+    name="portal_actions"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+  <object
+      meta_type="CMF Action Category"
+      name="portal_tabs"
+      purge="False">
+    <object
+        i18n:domain="bda.empower"
+        meta_type="CMF Action"
+        name="index_html"
+        purge="False">
+      <property
+          i18n:translate=""
+          name="title">Dashboard</property>
+      <property name="available_expr">python:member is not None</property>
+    </object>
+  </object>
+  <object
+      meta_type="CMF Action Category"
+      name="object"
+      purge="False">
+    <object
+        i18n:domain="plone"
+        meta_type="CMF Action"
+        name="folderContents"
+        purge="False">
+      <property name="permissions">
+        <element value="Manage portal" />
+      </property>
+    </object>
+    <object
+        i18n:domain="plone"
+        meta_type="CMF Action"
+        name="history"
+        purge="False">
+      <property name="permissions">
+        <element value="Manage portal" />
+      </property>
+    </object>
+    <object
+        i18n:domain="plone"
+        meta_type="CMF Action"
+        name="local_roles"
+        purge="False">
+      <property name="permissions">
+        <element value="Manage portal" />
+      </property>
+    </object>
+  </object>
+</object>

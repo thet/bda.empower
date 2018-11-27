@@ -12,7 +12,7 @@ INIT_USERS = [
         "email": "admin@empower-help.net",
         "username": "empower_admin",
         "password": TEST_PW,
-        "roles": ("Member", "Manager"),
+        "roles": ("Member", "Site Administrator", "Editor", "Contributor"),
         "properties": {
             "fullname": "Adele Ming",
             "description": "Administratorin",
@@ -22,7 +22,7 @@ INIT_USERS = [
         "email": "coord1@empower-help.net",
         "username": "empower_coordinator_1",
         "password": TEST_PW,
-        "roles": ("Member", "Coordinator"),
+        "roles": ("Member", "Editor", "Contributor"),
         "properties": {
             "fullname": "Cordula Nator",
             "description": "Koordinatiorin 1",
@@ -32,7 +32,7 @@ INIT_USERS = [
         "email": "coord2@empower-help.net",
         "username": "empower_coordinator_2",
         "password": TEST_PW,
-        "roles": ("Member", "Coordinator"),
+        "roles": ("Member", "Editor", "Contributor"),
         "properties": {
             "fullname": "Cornelius Radiator",
             "description": "Koordinatior 2",

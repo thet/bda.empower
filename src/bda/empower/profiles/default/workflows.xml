@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<object
+    meta_type="Plone Workflow Tool"
+    name="portal_workflow">
+  <property name="title">Contains workflow definitions for bda.empower</property>
+  <object
+      meta_type="Workflow"
+      name="empower_case"
+  />
+  <object
+      meta_type="Workflow"
+      name="empower_contribution"
+  />
+  <object
+      meta_type="Workflow"
+      name="empower_default"
+  />
+  <bindings>
+    <!--
+      Default workflow
+    -->
+    <default>
+      <bound-workflow workflow_id="empower_default" />
+    </default>
+    <!--
+      Custom workflows
+    -->
+    <type type_id="Case">
+      <bound-workflow workflow_id="empower_case" />
+    </type>
+    <type type_id="Contribution">
+      <bound-workflow workflow_id="empower_contribution" />
+    </type>
+    <!--
+      No workflow (inherit from parent)
+    -->
+    <type type_id="Folder" />
+    <type type_id="Document" />
+    <type type_id="Link" />
+  </bindings>
+</object>

@@ -21,7 +21,7 @@ def _revoke_roles(obj, rolename):
     for username in obj.users_with_local_role(rolename):
         api.user.revoke_roles(username=username, obj=obj, roles=[rolename])
         fingerpointing_log(
-            "revoke_role_expert_assigned", username=username, id=obj.UID()
+            "revoke_role", username=username, rolename=rolename, id=obj.UID()
         )
 
 
@@ -30,7 +30,7 @@ def _set_role_for_users(obj, users, rolename):
     for username in users:
         api.user.grant_roles(username=username, obj=obj, roles=[rolename])
         fingerpointing_log(
-            "grant_role_experts_assigned", username=username, id=obj.UID()
+            "grant_role", username=username, rolename=rolename, id=obj.UID()
         )
 
 
@@ -56,5 +56,7 @@ def update_initial_local_roles(obj, event):
     - to be configured to be called on ObjectCreated and ObjectModified
     """
     _update_role_on_obj_using_users_from_field(obj, "client", "Client")
-    _update_role_on_obj_using_users_from_field(obj, "coordinators", "Expert")
+    _update_role_on_obj_using_users_from_field(
+        obj, "coordinators", "Coordinator"
+    )
     _update_role_on_obj_using_users_from_field(obj, "expert_pool", "Expert")
