@@ -8,6 +8,14 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _get_users_from_field(obj, fieldname):
+    value = getattr(obj, fieldname, "")
+    if not value:
+        return []
+    if value:
+        return value.split(";")
+
+
 def _revoke_roles(obj, rolename):
     """Remove all users with given local role"""
     for username in obj.users_with_local_role(rolename):
@@ -29,8 +37,7 @@ def _set_role_for_users(obj, users, rolename):
 def _update_role_on_obj_using_users_from_field(obj, fieldname, rolename):
     logger.info("run subscriber update_expert_assigned_local_roles")
     _revoke_roles(obj, rolename)
-    users = getattr(obj, fieldname, "") or ""
-    users = users.split(";")
+    users = _get_users_from_field(obj, fieldname)
     _set_role_for_users(obj, users, rolename)
     obj.reindexObjectSecurity()
 
@@ -42,3 +49,12 @@ def update_expert_assigned_local_roles(obj, event):
     _update_role_on_obj_using_users_from_field(
         obj, "experts_assigned", "Expert"
     )
+
+
+def update_initial_local_roles(obj, event):
+    """ subcriber
+    - to be configured to be called on ObjectCreated and ObjectModified
+    """
+    _update_role_on_obj_using_users_from_field(obj, "client", "Client")
+    _update_role_on_obj_using_users_from_field(obj, "coordinators", "Expert")
+    _update_role_on_obj_using_users_from_field(obj, "expert_pool", "Expert")

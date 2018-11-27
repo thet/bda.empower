@@ -42,7 +42,7 @@ INIT_USERS = [
         "email": "client1@empower-help.net",
         "username": "empower_client_1",
         "password": TEST_PW,
-        "roles": ("Member", "Client"),
+        "roles": ("Member",),
         "properties": {
             "fullname": "Clint Westlawn",
             "description": "Klient 1",
@@ -52,7 +52,7 @@ INIT_USERS = [
         "email": "client2@empower-help.net",
         "username": "empower_client_2",
         "password": TEST_PW,
-        "roles": ("Member", "Client"),
+        "roles": ("Member",),
         "properties": {
             "fullname": "Clinisha Betro",
             "description": "Klientin 2",
@@ -62,7 +62,7 @@ INIT_USERS = [
         "email": "expert1@empower-help.net",
         "username": "empower_expert_1",
         "password": TEST_PW,
-        "roles": ("Member", "Expert"),
+        "roles": ("Member",),
         "properties": {
             "fullname": "Experina Artel",
             "description": "Expertin 1",
@@ -72,7 +72,7 @@ INIT_USERS = [
         "email": "expert2@empower-help.net",
         "username": "empower_expert_2",
         "password": TEST_PW,
-        "roles": ("Member", "Expert"),
+        "roles": ("Member",),
         "properties": {
             "fullname": "Exander Pertl",
             "description": "Experte 2",
@@ -82,7 +82,7 @@ INIT_USERS = [
         "email": "expert3@empower-help.net",
         "username": "empower_expert_3",
         "password": TEST_PW,
-        "roles": ("Member", "Expert"),
+        "roles": ("Member",),
         "properties": {
             "fullname": "Expeditus Mayr",
             "description": "Experte 3",

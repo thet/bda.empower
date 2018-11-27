@@ -14,7 +14,6 @@
   <include package="collective.immediatecreate" />
   <include package="collective.fingerpointing" />
   <include package="plone.restapi" />
-
   <include package=".behaviors" />
   <include package=".browser" />
   <include file="permissions.zcml" />
@@ -64,10 +63,23 @@
     Finger Pointing
   -->
   <subscriber
-    for="plone.dexterity.interfaces.IDexterityContent
+      for="plone.dexterity.interfaces.IDexterityContent
          .fingerpointing.IConfidentialObjectViewedEvent"
-    handler=".fingerpointing.confidentialobjectviewed_logger"
-    />
+      handler=".fingerpointing.confidentialobjectviewed_logger"
+  />
+  <!--
+    ICase changed, set local roles
+  -->
+  <subscriber
+      for=".behaviors.users.IClientAndExpertpoolAssignmentBehavior
+           zope.lifecycleevent.IObjectAddedEvent"
+      handler=".rolesetter.update_initial_local_roles"
+  />
+  <subscriber
+      for=".behaviors.users.IClientAndExpertpoolAssignmentBehavior
+           zope.lifecycleevent.IObjectModifiedEvent"
+      handler=".rolesetter.update_initial_local_roles"
+  />
   <!--
     IContribution changed, set local roles
   -->
@@ -75,20 +87,21 @@
       for=".behaviors.users.IExpertAssignmentBehavior
            zope.lifecycleevent.IObjectAddedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
-      />
+  />
   <subscriber
       for=".behaviors.users.IExpertAssignmentBehavior
            zope.lifecycleevent.IObjectModifiedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
-      />
-
+  />
+  <!--
+    restapi settings
+  -->
   <plone:CORSPolicy
-      allow_origin="*"
-      allow_methods="DELETE,GET,OPTIONS,PATCH,POST,PUT"
       allow_credentials="true"
-      expose_headers="Content-Length,X-My-Header"
       allow_headers="Accept,Authorization,Content-Type,X-Custom-Header"
+      allow_methods="DELETE,GET,OPTIONS,PATCH,POST,PUT"
+      allow_origin="*"
+      expose_headers="Content-Length,X-My-Header"
       max_age="3600"
-      />
-
+  />
 </configure>

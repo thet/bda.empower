@@ -6,46 +6,58 @@
     <role name="Expert" />
   </roles>
   <permissions>
-
-    <permission name="Show Toolbar" acquire="False">
+    <permission
+        acquire="False"
+        name="Show Toolbar">
       <role name="Manager" />
       <role name="Site Administrator" />
     </permission>
-
-    <permission name="bda.empower: Add Contribution" acquire="True">
-      <role name="Client"/>
-      <role name="Coordinator"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Add Contribution">
+      <role name="Client" />
+      <role name="Coordinator" />
+      <role name="Manager" />
     </permission>
-
-    <permission name="bda.empower: Add Case" acquire="True">
-      <role name="Coordinator"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Add Case">
+      <role name="Coordinator" />
+      <role name="Manager" />
     </permission>
-
-    <permission name="bda.empower: Modify Client" acquire="True">
-      <role name="Coordinator"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Modify Client">
+      <role name="Coordinator" />
+      <role name="Manager" />
     </permission>
-
-    <permission name="bda.empower: Modify Expert Pool" acquire="True">
-      <role name="Coordinator"/>
-      <role name="Client"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Modify Expert Pool">
+      <role name="Coordinator" />
+      <role name="Client" />
+      <role name="Manager" />
     </permission>
-
-    <permission name="bda.empower: Modify Experts Assigned" acquire="True">
-      <role name="Coordinator"/>
-      <role name="Client"/>
-      <role name="Owner"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Modify Coordinators">
+      <role name="Coordinator" />
+      <role name="Owner" />
     </permission>
-
-    <permission name="bda.empower: Modify Workspace Type" acquire="True">
-      <role name="Coordinator"/>
-      <role name="Client"/>
-      <role name="Manager"/>
+    <permission
+        acquire="True"
+        name="bda.empower: Modify Experts Assigned">
+      <role name="Coordinator" />
+      <role name="Client" />
+      <role name="Owner" />
+      <role name="Manager" />
     </permission>
-
+    <permission
+        acquire="True"
+        name="bda.empower: Modify Workspace Type">
+      <role name="Coordinator" />
+      <role name="Client" />
+      <role name="Manager" />
+    </permission>
   </permissions>
 </rolemap>
