@@ -6,12 +6,30 @@
     <role name="Expert" />
   </roles>
   <permissions>
+    <!--
+    Override permissions
+    -->
     <permission
         acquire="False"
         name="Show Toolbar">
       <role name="Manager" />
       <role name="Site Administrator" />
     </permission>
+    <permission
+        acquire="False"
+        name="Sharing page: Delegate Reader role">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+    </permission>
+    <permission
+        acquire="False"
+        name="Sharing page: Delegate Editor role">
+      <role name="Manager" />
+      <role name="Site Administrator" />
+    </permission>
+    <!--
+    New permissions
+    -->
     <permission
         acquire="True"
         name="bda.empower: Add Contribution">
