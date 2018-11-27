@@ -50,4 +50,14 @@
       </property>
     </object>
   </object>
+  <object
+      meta_type="CMF Action Category"
+      name="user"
+      purge="False">>
+  <object
+        i18n:domain="plone"
+        meta_type="CMF Action"
+        name="dashboard"
+        purge="False">>
+   <property name="visible">False</property></object></object>
 </object>
