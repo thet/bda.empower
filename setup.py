@@ -45,7 +45,8 @@ setup(
     install_requires=[
         "collective.immediatecreate",
         "collective.fingerpointing",
-        "plone.restapi",
+        "plone.restapi>=3.5.0",
+        "plone.restapi>=1.4.0",
         "Products.CMFPlone",
         "setuptools",
         "z3c.jbot",
