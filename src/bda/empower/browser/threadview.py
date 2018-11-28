@@ -1,4 +1,3 @@
-from plone.app.layout.navigation.navtree import buildFolderTree
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
