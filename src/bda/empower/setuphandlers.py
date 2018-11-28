@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
+from .setupdevusers import create_dev_users
 from plone import api
 from Products.CMFPlone.interfaces import INonInstallable
-from .testuser import install_test_users
 from zope.interface import implementer
 
 
@@ -19,7 +19,7 @@ def post_install(context):
     """Post install script"""
 
     # install test users if TESTUSER environ variable exists.
-    install_test_users()
+    create_dev_users()
 
     portal = api.portal.get()
     # remove existing

@@ -1,0 +1,5 @@
+<div class="thread"
+    tal:define="tree python:view.recurse(path=view.start_path)"
+    tal:condition="tree">
+  <tal:threadrunner replace="structure tree" />
+</div>

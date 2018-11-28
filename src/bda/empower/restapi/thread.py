@@ -8,7 +8,6 @@ from zope.publisher.interfaces import IPublishTraverse
 
 @implementer(IPublishTraverse)
 class ThreadGet(Service):
-
     @property
     def itemtree(self):
         items = discourse.get_current_workspace_tree(self.context)
@@ -16,12 +15,12 @@ class ThreadGet(Service):
         for key, items in tree.items():
             tree[key] = map(
                 lambda item: {
-                    '@id': item['url'],
-                    'uid': item['uid'],
-                    'title': item['title'],
-                    'review_state': item['review_state'],
+                    "@id": item["url"],
+                    "uid": item["uid"],
+                    "title": item["title"],
+                    "review_state": item["review_state"],
                 },
-                items
+                items,
             )
         return tree
 
@@ -37,7 +36,4 @@ class ThreadGet(Service):
     def reply(self):
         """Reply to REST/JSON requests.
         """
-        return {
-            'itemtree': self.itemtree,
-            'start_path': self.start_path
-        }
+        return {"itemtree": self.itemtree, "start_path": self.start_path}

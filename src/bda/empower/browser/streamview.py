@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone.batching import Batch
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView

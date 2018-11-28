@@ -78,7 +78,7 @@ def is_workspace_root(node):
 
 
 def get_initial_root(node):
-    """wether node is the initial root or not"""
+    """get the workspace root"""
     if node.portal_type not in NODE_TYPES:
         return None
     while True:

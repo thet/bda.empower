@@ -1,27 +1,29 @@
-from Products.Five.browser import BrowserView
+# -*- coding: utf-8 -*-
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from zope.component import adapter
-from zope.contentprovider.interfaces import IContentProvider
+from zope.contentprovider.interfaces import ITALNamespaceData
+from zope.contentprovider.provider import ContentProviderBase
 from zope.interface import implementer
 from zope.interface import Interface
-from zope.publisher.interfaces.browser import IBrowserRequest
-from zope.publisher.interfaces.browser import IBrowserView
+from zope.interface import provider
+
+import zope.schema
 
 
-@implementer(IContentProvider)
-@adapter(Interface, IBrowserRequest, IBrowserView)
-class ContributionProvider(BrowserView):
-    template = ViewPageTemplateFile(u"contribution_provider.pt")
+@provider(ITALNamespaceData)
+class ITALContributionValue(Interface):
 
-    def __init__(self, context, request, view):
-        self.view = view
-        self.context = context
-        self.request = request
+    contribution = zope.schema.Dict(
+        title=u"contribution item dict data"
+    )
 
-    @property
-    def data(self):
-        ctx = self.context
-        return {
+
+@implementer(ITALContributionValue)
+class ContributionProvider(ContentProviderBase):
+    template = ViewPageTemplateFile("contribution_provider.pt")
+
+    def update(self):
+        ctx = self.contribution['ob']
+        self.record = {
             "title": ctx.title,
             "description": getattr(ctx, "description", None),
             "text": ctx.text.output_relative_to(ctx)
@@ -32,4 +34,4 @@ class ContributionProvider(BrowserView):
         }
 
     def render(self):
-        return self.template(self)
+        return self.template()

@@ -3,15 +3,16 @@ from plone import api
 
 import os
 
-INSTALL_TEST_USERS = os.environ.get("TESTUSER", False)
 
-TEST_PW = os.environ.get("TESTPASSWORD", "empower!me")
+INSTALL_DEV_USERS = os.environ.get("DEVUSER", False)
 
-INIT_USERS = [
+DEV_PW = os.environ.get("DEVPASSWORD", "empower!me")
+
+DEV_USERS = [
     {
         "email": "admin@empower-help.net",
         "username": "empower_admin",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member", "Site Administrator", "Editor", "Contributor"),
         "properties": {
             "fullname": "Adele Ming",
@@ -21,7 +22,7 @@ INIT_USERS = [
     {
         "email": "coord1@empower-help.net",
         "username": "empower_coordinator_1",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member", "Editor", "Contributor"),
         "properties": {
             "fullname": "Cordula Nator",
@@ -31,7 +32,7 @@ INIT_USERS = [
     {
         "email": "coord2@empower-help.net",
         "username": "empower_coordinator_2",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member", "Editor", "Contributor"),
         "properties": {
             "fullname": "Cornelius Radiator",
@@ -41,7 +42,7 @@ INIT_USERS = [
     {
         "email": "client1@empower-help.net",
         "username": "empower_client_1",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member",),
         "properties": {
             "fullname": "Clint Westlawn",
@@ -51,7 +52,7 @@ INIT_USERS = [
     {
         "email": "client2@empower-help.net",
         "username": "empower_client_2",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member",),
         "properties": {
             "fullname": "Clinisha Betro",
@@ -61,7 +62,7 @@ INIT_USERS = [
     {
         "email": "expert1@empower-help.net",
         "username": "empower_expert_1",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member",),
         "properties": {
             "fullname": "Experina Artel",
@@ -71,7 +72,7 @@ INIT_USERS = [
     {
         "email": "expert2@empower-help.net",
         "username": "empower_expert_2",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member",),
         "properties": {
             "fullname": "Exander Pertl",
@@ -81,7 +82,7 @@ INIT_USERS = [
     {
         "email": "expert3@empower-help.net",
         "username": "empower_expert_3",
-        "password": TEST_PW,
+        "password": DEV_PW,
         "roles": ("Member",),
         "properties": {
             "fullname": "Expeditus Mayr",
@@ -91,10 +92,10 @@ INIT_USERS = [
 ]
 
 
-def install_test_users():
-    if not INSTALL_TEST_USERS:
+def create_dev_users():
+    if not INSTALL_DEV_USERS:
         return
-    for record in INIT_USERS:
+    for record in DEV_USERS:
         try:
             api.user.create(**record)
         except ValueError:
@@ -102,11 +103,11 @@ def install_test_users():
             pass
 
 
-if INSTALL_TEST_USERS:
+if INSTALL_DEV_USERS:
     print("=" * 80)
-    print("Activating Potential Test Users With Password \n")
-    print("    {0}\n".format(TEST_PW))
-    for record in INIT_USERS:
+    print("Activating Potential DEV Users With Password \n")
+    print("    {0}\n".format(DEV_PW))
+    for record in DEV_USERS:
         print(
             " - {0} ({1})".format(
                 record["email"], record["properties"]["description"]

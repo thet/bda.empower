@@ -3,7 +3,9 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone">
-  <!-- Set overrides folder for Just-a-Bunch-Of-Templates product -->
+  <!--
+  Set overrides folder for Just-a-Bunch-Of-Templates product
+  -->
   <include
       file="meta.zcml"
       package="z3c.jbot"
@@ -12,26 +14,54 @@
       directory="overrides"
       layer="bda.empower.interfaces.IBdaEmpowerLayer"
   />
-  <!-- Publish static files -->
+  <!--
+  Publish static files
+  -->
   <plone:static
       directory="static"
       name="bda.empower"
       type="plone"
   />
+  <!--
+  main workspace view
+  -->
   <browser:page
       class=".workspace.WorkspaceView"
-      for="*"
-      name="workspace"
+      for="bda.empower.behaviors.users.IClientAndExpertpoolAssignmentBehavior"
+      name="ws"
       permission="zope2.View"
       template="workspace.pt"
   />
-  <!-- Contribution views -->
+  <!--
+  redirector, if someone tries to access the contribution or case directly guide
+  to correct place
+  -->
+  <browser:page
+      class=".redirect.RedirectCaseToFirstWorkspaceView"
+      for="bda.empower.behaviors.users.IClientAndExpertpoolAssignmentBehavior"
+      name="view"
+      permission="zope2.View"
+  />
+  <browser:page
+      class=".redirect.RedirectToCurrentWorkspaceRootView"
+      for="bda.empower.behaviors.contribution.IContributionBehavior"
+      name="view"
+      permission="zope2.View"
+  />
+  <!-- content provider -->
+  <adapter
+      factory=".thread_provider.ThreadProvider"
+      for="* bda.empower.interfaces.IBdaEmpowerLayer *"
+      name="thread_provider"
+      provides="zope.contentprovider.interfaces.IContentProvider"
+  />
   <adapter
       factory=".contribution_provider.ContributionProvider"
+      for="* bda.empower.interfaces.IBdaEmpowerLayer *"
       name="contribution_provider"
       provides="zope.contentprovider.interfaces.IContentProvider"
   />
-  <browser:page
+<!--   <browser:page
       class=".streamview.StreamView"
       for="*"
       layer="bda.empower.interfaces.IBdaEmpowerLayer"
@@ -45,6 +75,6 @@
       layer="bda.empower.interfaces.IBdaEmpowerLayer"
       name="thread"
       permission="zope2.View"
-      template="threadview.pt"
+      template="threadview.pt" -->
   />
 </configure>
