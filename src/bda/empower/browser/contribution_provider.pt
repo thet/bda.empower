@@ -10,19 +10,17 @@
   </header>
 
   <tal:txt replace="structure data/text | nothing" />
-      <label i18n:translate="shared_with">Shared With</label>
-      <ul>
-        <li>a</li>
-        <li>b</li>
-      </ul>
 
-      <button>Create Action</button>
-      <button>Confirm Read</button>
-      <a href="${context/absolute_url}/@@edit">Edit</a>
-      <button>Reply</button>
   <footer>
-
-    haaahhh
+    <label i18n:translate="shared_with">Shared With</label>
+    <ul>
+      <li>a</li>
+      <li>b</li>
+    </ul>
+    <button>Create Action</button>
+    <button>Confirm Read</button>
+    <a href="${context/absolute_url}//++addimmediate++Contribution" class="pat-plone-modal">Reply</a>
+    <a href="${context/absolute_url}/@@edit" class="pat-plone-modal">Edit</a>
   </footer>
 
 </article>

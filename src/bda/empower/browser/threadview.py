@@ -23,10 +23,12 @@ class ThreadView(BrowserView):
 
     @property
     def start_path(self):
-        start_path = "/".join(
-            discourse.get_root_of_workspace(self.context).getPhysicalPath()[
-                :-1
-            ]  # noqa start a level above the start context. itemtree structure works that way.
+        start_path = None
+        ctx = discourse.get_root_of_workspace(self.context)
+        if ctx:
+            # start a level above the start context.
+            # itemtree structure works that way.
+            start_path = "/".join(ctx.getPhysicalPath()[:-1]
         )
         return start_path
 
