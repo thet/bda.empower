@@ -27,9 +27,9 @@
     </div>
     <div class="empower_workspace_overview"
          tal:condition="python:not view.thread_root">
-         OVERVIEW
+         <div tal:replace="structure provider:listing_provider" />
     </div>
-    <div class="empower_workspace_thread"
+    <div class="empower_workspace_thread thread"
          tal:condition="python:view.thread_root">
          THREAD ${python:view.thread_root.title}
          <div tal:replace="structure provider:thread_provider" />

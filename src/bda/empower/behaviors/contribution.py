@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
+from Acquisition import aq_parent
 from bda.empower import discourse
 from bda.empower.i18n import _
 from bda.empower.interfaces import IWorkspaceAware
@@ -8,6 +10,7 @@ from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from zope import schema
 from zope.interface import provider
+from zope.schema.interfaces import IContextAwareDefaultFactory
 from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
@@ -28,6 +31,17 @@ def workspace_next_vocabulary_factory(context):
     )
 
 
+@provider(IContextAwareDefaultFactory)
+def default_workspace(context):
+    """Provide default workspace
+    """
+    return getattr(
+        aq_base(aq_parent(context)),
+        "workspace",
+        discourse.get_workspace_definitions()[0][0],
+    )
+
+
 @provider(IFormFieldProvider)
 class IContributionBehavior(model.Schema, IWorkspaceAware):
     """ Schema Only Behavior Contribution
@@ -36,6 +50,9 @@ class IContributionBehavior(model.Schema, IWorkspaceAware):
     text = RichText(title=_(u"Text"), required=False)
 
     workspace = schema.Choice(
-        title=u"Workspace", required=True, vocabulary="empower.next_workspaces"
+        title=u"Workspace",
+        required=False,
+        vocabulary="empower.next_workspaces",
+        defaultFactory=default_workspace,
     )
     write_permission(workspace="bda.empower.ModifyWorkspaceType")

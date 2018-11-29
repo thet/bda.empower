@@ -176,6 +176,7 @@ def get_current_workspace_tree(current, context_aware=False):
     """
     # XXX hack: since EPI is optimized to return exactly onne item for a depth
     # of 0, we use depth of 1 and query the parent path
+    # and also the whole physical path
     base_node = get_root_of_workspace(current)
     current_path = "/".join(get_workspace_path(aq_parent(base_node)))
     cat = api.portal.get_tool("portal_catalog")
@@ -213,18 +214,10 @@ def build_tree(brains):
     Taken from collective.navigation.
     """
     ret = {}
-    for it in brains:
-        pathkey = "/".join(it.getPath().split("/")[:-1])
-        entry = {
-            "id": it.id,
-            "ob": it.getObject(),
-            "uid": it.UID,
-            "url": it.getURL(),
-            "title": it.Title,
-            "review_state": it.review_state,
-        }
+    for brain in brains:
+        pathkey = "/".join(brain.getPath().split("/")[:-1])
         if pathkey in ret:
-            ret[pathkey].append(entry)
+            ret[pathkey].append(brain.getObject())
         else:
-            ret[pathkey] = [entry]
+            ret[pathkey] = [brain.getObject()]
     return ret

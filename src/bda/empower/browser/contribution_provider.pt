@@ -1,7 +1,7 @@
 <article class="contribution" tal:define="data python:view.record">
-
   <header>
-    <h1 tal:condition="data/title">${data/title}</h1>
+    <a name="${data/id}" />
+    <h1 tal:condition="data/title">${data/title} (id=${data/id})</h1>
     <p tal:condition="data/description">${data/description}</p>
     <aside>
       <div><label i18n:translate="created">Created</label>: ${data/created}</div>
@@ -17,10 +17,18 @@
       <li>a</li>
       <li>b</li>
     </ul>
-    <button>Create Action</button>
-    <button>Confirm Read</button>
-    <a href="${context/absolute_url}//++addimmediate++Contribution" class="pat-plone-modal">Reply</a>
-    <a href="${context/absolute_url}/@@edit" class="pat-plone-modal">Edit</a>
+    <a href="#"
+       tal:condition="python: True"
+       class="plone-btn plone-btn-success plone-btn-sm pat-plone-modal"
+       data-pat-plone-modal='{"actionOptions": {"timeout": 30000}}'><span class="glyphicon glyphicon-ok"></span> confirm read</a>
+    <a href="${data/reply_url}"
+       tal:condition="python: True"
+       class="plone-btn plone-btn-success plone-btn-sm pat-plone-modal"
+       data-pat-plone-modal='{"actionOptions": {"timeout": 30000}}'><span class="glyphicon glyphicon-plus-sign"></span> Reply</a>
+    <a href="${data/edit_url}"
+       tal:condition="python: True"
+       class="plone-btn plone-btn-success plone-btn-sm pat-plone-modal"
+       data-pat-plone-modal='{"actionOptions": {"timeout": 30000}}'><span class="glyphicon glyphicon-pencil"></span> Edit</a>
   </footer>
 
 </article>
