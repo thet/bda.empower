@@ -35,11 +35,7 @@ def workspace_next_vocabulary_factory(context):
 def default_workspace(context):
     """Provide default workspace
     """
-    workspace = getattr(
-        aq_base(aq_parent(context)),
-        "workspace",
-        None,
-    )
+    workspace = getattr(aq_base(aq_parent(context)), "workspace", None)
     if workspace is None:
         wdefs = discourse.get_workspace_definitions()
         return wdefs.keys()[0]

@@ -12,6 +12,11 @@
   />
   <!-- behaviors -->
   <plone:behavior
+      name="empower.basic"
+      provides=".basic.IBasicwWithoutDescription"
+      title="Basic (Empower)"
+  />
+  <plone:behavior
       name="empower.contribution"
       provides=".contribution.IContributionBehavior"
       title="Contribution (Empower)"
