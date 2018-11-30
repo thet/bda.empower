@@ -20,29 +20,6 @@
   <include file="permissions.zcml" />
   <include file="upgrades.zcml" />
   <!--
-    Setup
-  -->
-  <genericsetup:registerProfile
-      description="Installs the bda.empower add-on."
-      directory="profiles/default"
-      name="default"
-      post_handler=".setuphandlers.post_install"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="A: Empowerment statt Diffamierung"
-  />
-  <genericsetup:registerProfile
-      description="Uninstalls the bda.empower add-on."
-      directory="profiles/uninstall"
-      name="uninstall"
-      post_handler=".setuphandlers.uninstall"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="Empowerment statt Diffamierung (uninstall)"
-  />
-  <utility
-      factory=".setuphandlers.HiddenProfiles"
-      name="bda.empower-hiddenprofiles"
-  />
-  <!--
     Name Chooser
   -->
   <adapter
