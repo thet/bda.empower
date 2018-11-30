@@ -35,11 +35,15 @@ def workspace_next_vocabulary_factory(context):
 def default_workspace(context):
     """Provide default workspace
     """
-    return getattr(
+    workspace = getattr(
         aq_base(aq_parent(context)),
         "workspace",
-        discourse.get_workspace_definitions()[0][0],
+        None,
     )
+    if workspace is None:
+        wdefs = discourse.get_workspace_definitions()
+        return wdefs.keys()[0]
+    return workspace
 
 
 @provider(IFormFieldProvider)
