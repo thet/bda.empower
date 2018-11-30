@@ -9,6 +9,4 @@ from zope.interface import provider
 class IBasicwWithoutDescription(model.Schema):
 
     # default fieldset
-    title = schema.TextLine(
-        title=_(u"Subject"), required=True
-    )
+    title = schema.TextLine(title=_(u"Subject"), required=True)

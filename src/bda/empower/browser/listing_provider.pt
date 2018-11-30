@@ -1,3 +1,12 @@
 <div class="listing">
-  Listing
+  <ul>
+    <li tal:repeat="item python:view.workspace_roots">
+        from <a href="${python:view.workspace_url(item['previous']}">${python:item['previous'].title}</a><br />
+        <strong><a href="${python:view.workspace_url(item['previous']}">${python:item['current'].title}</a></strong>
+        <ul>
+            <li tal:repeat="next python:item['following']">
+                <a href="${python:view.workspace_url(next}">${python:next.title}</a>
+        </ul>
+    </li>
+  </ul>
 </div>

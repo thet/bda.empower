@@ -136,7 +136,7 @@ def get_next_workspaces(
     root=True,
     context_aware=False,
     portal_type=NODE_TYPES,
-    sort_on="workspace_depth",
+    sort_on="created",
     sort_order="ascending",
 ):
     """catalog brains of next nodes in the tree with a different workspace.
