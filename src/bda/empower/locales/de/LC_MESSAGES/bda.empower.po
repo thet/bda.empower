@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-11-27 15:17+0000\n"
+"POT-Creation-Date: 2018-11-30 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr "Ein Fall"
 msgid "A generic contribution"
 msgstr "Ein Beitrag"
 
-#: bda/empower/configure.zcml:31
+#: bda/empower/configure.zcml:32
 msgid "A: Empowerment statt Diffamierung"
 msgstr ""
 
@@ -56,7 +56,7 @@ msgstr "Dashboard"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: bda/empower/configure.zcml:39
+#: bda/empower/configure.zcml:40
 msgid "Empowerment statt Diffamierung (uninstall)"
 msgstr ""
 
@@ -69,11 +69,15 @@ msgstr "ExpertInnen Pool"
 msgid "Experts"
 msgstr "ExpertInnen"
 
-#: bda/empower/configure.zcml:31
+#: bda/empower/configure.zcml:32
 msgid "Installs the bda.empower add-on."
 msgstr ""
 
-#: bda/empower/behaviors/contribution.py:36
+#: bda/empower/behaviors/basic.py:13
+msgid "Subject"
+msgstr "Betreff"
+
+#: bda/empower/behaviors/contribution.py:50
 msgid "Text"
 msgstr ""
 
@@ -89,7 +93,7 @@ msgstr "Tippen und KoordinatorInnen auswählen"
 msgid "Type and select expert."
 msgstr "Tippen und ExpertInnen auswählen"
 
-#: bda/empower/configure.zcml:39
+#: bda/empower/configure.zcml:40
 msgid "Uninstalls the bda.empower add-on."
 msgstr ""
 
@@ -97,6 +101,10 @@ msgstr ""
 #: bda/empower/profiles/default/types/Contribution.xml
 msgid "View"
 msgstr "Ansicht"
+
+#: bda/empower/browser/workspace.pt:19
+msgid "Workspace"
+msgstr ""
 
 #. Default: "Action"
 #: bda/empower/workspacedefinition.py:20

@@ -47,7 +47,7 @@ class IContributionBehavior(model.Schema, IWorkspaceAware):
     """ Schema Only Behavior Contribution
     """
 
-    text = RichText(title=_(u"Text"), required=False)
+    text = RichText(title=_(u"Contribution"), required=False)
 
     workspace = schema.Choice(
         title=u"Workspace",
