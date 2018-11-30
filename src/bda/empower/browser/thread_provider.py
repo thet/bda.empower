@@ -41,9 +41,7 @@ class ThreadProvider(ContentProviderBase):
             return "/".join(
                 aq_parent(self.__parent__.thread_root).getPhysicalPath()
             )
-        return "{0}/{1}".format(
-            self.__parent__._parent_path, self.thread_id
-        )
+        return "{0}/{1}".format(self.__parent__._parent_path, self.thread_id)
 
     @property
     def tree(self):
