@@ -2,17 +2,11 @@
     define="contributions python:view.contributions"
     i18n:domain="bda.empower">
 
-    <pre>
-        ${python:len(contributions)}
-    </pre>
   <div class="threaditem level-${view/level}"
        tal:repeat="contribution contributions">
 
     <div tal:replace="structure provider: contribution_provider"/>
 
-    <pre>
-        ${python:contribution.absolute_url()}
-    </pre>
     <hr />
     <tal:set tal:define="thread_id python:contribution.getId()">
         <div tal:replace="structure provider: thread_provider"/>
