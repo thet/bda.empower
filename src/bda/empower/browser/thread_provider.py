@@ -34,9 +34,6 @@ class ThreadProvider(ContentProviderBase):
                 self.__parent__.thread_root
             )
             self._tree = discourse.build_tree(items)
-            from pprint import pprint
-
-            pprint(self._tree)
 
     @property
     def _parent_path(self):
@@ -56,9 +53,7 @@ class ThreadProvider(ContentProviderBase):
     def contributions(self):
         if not isinstance(self.__parent__, self.__class__):
             # initial call
-            print "initial"
             return [self.__parent__.thread_root]
-        print self._parent_path
         return self.tree.get(self._parent_path, [])
 
     @property
