@@ -1,11 +1,11 @@
-<article class="contribution" tal:define="data python:view.record">
+<article class="contribution workspace-${data/workspace}" tal:define="data python:view.record">
   <header>
     <a name="${data/id}" />
     <h3 tal:condition="data/title">${data/title} (id=${data/id})</h3>
-    <p tal:condition="data/description">${data/description}</p>
     <aside>
       <div><label i18n:translate="created">Created</label>: ${data/created}</div>
       <div><label i18n:translate="modified">Modified</label>: ${data/modified}</div>
+      <div><label i18n:translate="workspace">Workspace</label>: ${data/workspace_title}</div>
     </aside>
   </header>
 

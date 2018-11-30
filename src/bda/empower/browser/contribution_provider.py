@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from bda.empower import discourse
 from plone.protect.utils import addTokenToUrl
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.contentprovider.interfaces import ITALNamespaceData
@@ -24,7 +25,10 @@ class ContributionProvider(ContentProviderBase):
         self.record = {
             "id": self.contribution.getId(),
             "title": self.contribution.title,
-            "description": getattr(self.contribution, "description", None),
+            "workspace": self.contribution.workspace,
+            "workspace_title": discourse.get_workspace_definition(
+                self.contribution.workspace
+            )["title"],
             "text": self.contribution.text.output_relative_to(
                 self.contribution
             )
