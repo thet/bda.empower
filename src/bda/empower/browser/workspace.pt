@@ -15,23 +15,23 @@
 <metal:content-core fill-slot="content-core">
 <metal:block define-macro="content-core">
 
-    <h1 tal:define="dummy python:view.update()">
-        <span i18n:translate="">Workspace</span> ${python:view.current_def[1]['title']}
-    </h1>
-
     <div class="empower_workspace_navigation">
         <ul>
             <li tal:repeat="workspace_def python:view.workspaces_defs()">
                 <a href="${python:view.workspace_url(workspace_def)}">${python:workspace_def[1]['title']}</a></li>
         </ul>
     </div>
+    <h1 tal:define="dummy python:view.update()">
+        <span i18n:translate="">Workspace</span> ${python:view.current_def[1]['title']}
+    </h1>
     <div class="empower_workspace_overview"
          tal:condition="python:not view.thread_root">
+         <h2>List of threads</h2>
          <div tal:replace="structure provider:listing_provider" />
     </div>
     <div class="empower_workspace_thread thread"
          tal:condition="python:view.thread_root">
-         THREAD ${python:view.thread_root.title}
+         <h2>Thread ${python:view.thread_root.title}</h2>
          <div tal:replace="structure provider:thread_provider" />
     </div>
 
