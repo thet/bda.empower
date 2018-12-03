@@ -1,0 +1,53 @@
+[
+    {
+        "@type": "Case",
+        "title": "Case 1",
+        "description": "Example case number 1.",
+        "text": "this is the first case's text",
+        "items": [
+            {
+                "@type": "Contribution",
+                "title": "Contribution 1",
+                "text": "Example contribution 1.",
+                "items": [
+                    {
+                        "@type": "Contribution",
+                        "title": "Contribution 1.1",
+                        "text": "Example contribution 1.1.",
+                        "items": [
+                            {
+                                "@type": "Contribution",
+                                "title": "Contribution 1.1.1",
+                                "text": "Example contribution 1.1.1.",
+                                "items": [
+                                    {
+                                        "@type": "Contribution",
+                                        "title": "Contribution 1.1.1.1",
+                                        "text": "Example contribution 1.1.1.1."
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "Contribution",
+                        "title": "Contribution 1.2",
+                        "text": "Example contribution 1.2.",
+                        "items": [
+                            {
+                                "@type": "Contribution",
+                                "title": "Contribution 1.2.1",
+                                "text": "Example contribution 1.2.1."
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "@type": "Contribution",
+                "title": "Contribution 2",
+                "text": "Example contribution 2."
+            }
+        ]
+    }
+]

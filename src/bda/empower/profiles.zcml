@@ -1,4 +1,5 @@
 <configure
+    xmlns:zcml="http://namespaces.zope.org/zope"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
@@ -17,8 +18,18 @@
       name="uninstall"
       post_handler=".setup.setuphandlers.uninstall"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="Empowerment statt Diffamierung (uninstall)"
+      title="A: Empowerment statt Diffamierung (uninstall)"
   />
+
+  <genericsetup:registerProfile
+      zcml:condition="installed collective.contentcreator"
+      description="Installs example content."
+      directory="profiles/example_content"
+      name="example_content"
+      post_handler=".setup.example_content.example_content"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      title="A: Empowerment statt Diffamierung (example content)"
+    />
 
   <utility
       factory=".setup.setuphandlers.HiddenProfiles"

@@ -18,6 +18,7 @@
   <include package=".behaviors" />
   <include package=".browser" />
   <include file="permissions.zcml" />
+  <include file="profiles.zcml" />
   <include file="upgrades.zcml" />
   <!--
     Name Chooser
