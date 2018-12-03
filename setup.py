@@ -62,6 +62,7 @@ setup(
         ],
         "dev": [
             "collective.contentcreator",
+            "loremipsum",
         ]
     },
     entry_points="""
