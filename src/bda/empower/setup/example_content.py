@@ -5,7 +5,6 @@ from random import choice
 from random import randint
 from zope.component.hooks import getSite
 
-
 import loremipsum
 
 
@@ -21,7 +20,6 @@ def create_thread():
     max_items = randint(1, 40)
     cnt_items = 0
 
-
     def _create(subtree, type_, depth=0):
         global cnt_items
         global max_depth
@@ -31,10 +29,10 @@ def create_thread():
             choices += [0, 0, 0]
         for cnt in range(choice(choices)):
 
-            if type_ == 'Case':
+            if type_ == "Case":
                 max_depth = randint(1, 6)
 
-            if depth>max_depth:
+            if depth > max_depth:
                 break
 
             depth += 1
@@ -48,30 +46,29 @@ def create_thread():
             for cnt in range(randint(1, 4)):
                 txt_ = loremipsum.get_paragraph()
                 if cnt == 0:
-                    txt_ = u'<p><strong>{0}</strong></p>'.format(txt_)
+                    txt_ = u"<p><strong>{0}</strong></p>".format(txt_)
                 elif cnt == 1:
-                    txt_ = '<p><em>{0}</em></p>'.format(txt_)
+                    txt_ = "<p><em>{0}</em></p>".format(txt_)
                 else:
-                    txt_ = '<p>{0}</p>'.format(txt_)
+                    txt_ = "<p>{0}</p>".format(txt_)
                 txt.append(txt_)
 
             item = {
-                '@type': type_,
-                'title': loremipsum.get_sentence(),
-                'text': '\n'.join(txt),
-                'items': [],
+                "@type": type_,
+                "title": loremipsum.get_sentence(),
+                "text": "\n".join(txt),
+                "items": [],
             }
 
             if cnt_items < max_items:
-                _create(item['items'], 'Contribution')
+                _create(item["items"], "Contribution")
 
             subtree.append(item)
 
     tree = []
-    _create(tree, 'Case')
+    _create(tree, "Case")
 
     return tree
-
 
 
 def example_content(context):
@@ -80,6 +77,6 @@ def example_content(context):
     create_item_runner(
         getSite().cases,  # "Cases" is aleady created.
         create_thread(),
-        default_lang='de',
-        default_wf_action='publish'
+        default_lang="de",
+        default_wf_action="publish",
     )
