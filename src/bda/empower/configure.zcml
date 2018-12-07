@@ -72,15 +72,4 @@
            zope.lifecycleevent.IObjectModifiedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
   />
-  <!--
-    restapi settings
-  -->
-  <plone:CORSPolicy
-      allow_credentials="true"
-      allow_headers="Accept,Authorization,Content-Type,X-Custom-Header"
-      allow_methods="DELETE,GET,OPTIONS,PATCH,POST,PUT"
-      allow_origin="*"
-      expose_headers="Content-Length,X-My-Header"
-      max_age="3600"
-  />
 </configure>

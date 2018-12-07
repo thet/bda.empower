@@ -43,10 +43,10 @@ setup(
     include_package_data=True,
     zip_safe=False,
     install_requires=[
-        "collective.immediatecreate",
         "collective.fingerpointing",
+        "collective.immediatecreate",
+        "plone.rest>=1.4.0",
         "plone.restapi>=3.5.0",
-        "plone.restapi>=1.4.0",
         "Products.CMFPlone",
         "setuptools",
         "z3c.jbot",
