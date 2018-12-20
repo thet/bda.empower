@@ -2,6 +2,8 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone">
 
+  <include package="plone.restapi" />
+
   <plone:service
       method="GET"
       accept="application/json,application/schema+json"
@@ -11,16 +13,17 @@
       permission="zope2.View"
       />
 
-
   <!--
     restapi settings
+    allow_origin="http://localhost:8888,http://127.0.0.1:8888"
+    allow_request_headers="Accept,Authorization,Content-Type"
   -->
   <plone:CORSPolicy
       allow_credentials="true"
-      allow_headers="Accept,Authorization,Content-Type,X-Custom-Header"
+      allow_headers="Accept,Authorization,Content-Type"
       allow_methods="DELETE,GET,OPTIONS,PATCH,POST,PUT"
       allow_origin="*"
-      expose_headers="Content-Length,X-My-Header"
+      expose_headers="Content-Length"
       max_age="3600"
       />
 
