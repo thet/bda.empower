@@ -4,14 +4,14 @@
 
   <include package="plone.restapi" />
 
-  <plone:service
+  <!--plone:service
       method="GET"
       accept="application/json,application/schema+json"
       for="*"
       factory=".thread.ThreadGet"
       name="@thread"
       permission="zope2.View"
-      />
+      /-->
 
   <!--
     restapi settings
