@@ -4,6 +4,7 @@
     meta_type="Dexterity FTI"
     name="Case"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
   <!-- Basic properties -->
   <property
       i18n:translate=""
@@ -15,18 +16,21 @@
   <property name="factory">Case</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
+
   <!-- Hierarchy control -->
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Contribution" />
   </property>
+
   <!-- Schema, class and security -->
   <property name="add_permission">bda.empower.AddCase</property>
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
   <property name="model_source"></property>
   <property name="schema"></property>
+
   <!-- Enabled behaviors -->
   <property
       name="behaviors"
@@ -39,6 +43,7 @@
     <element value="empower.clientandexpertpoolassignment" />
     <element value="collective.immediatecreate" />
   </property>
+
   <!-- View information -->
   <property name="add_view_expr">string:${folder_url}/++addimmediate++Case</property>
   <property name="default_view">view</property>
@@ -47,6 +52,7 @@
   <property name="view_methods">
     <element value="view" />
   </property>
+
   <!-- Method aliases -->
   <alias
       from="(Default)"
@@ -85,4 +91,5 @@
       visible="True">
     <permission value="Modify portal content" />
   </action>
+
 </object>

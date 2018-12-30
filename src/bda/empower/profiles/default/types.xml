@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<object
-    meta_type="Plone Types Tool"
-    name="portal_types">
-  <property name="title">Controls the available contenttypes in your portal</property>
-  <object
-      meta_type="Dexterity FTI"
-      name="Case"
-  />
-  <object
-      meta_type="Dexterity FTI"
-      name="Cases"
-  />
-  <object
-      meta_type="Dexterity FTI"
-      name="Contribution"
-  />
-  <!-- remove -->
-  <object
-      meta_type="Dexterity FTI"
-      name="News Item"
-      remove="True"
-  />
+<object meta_type="Plone Types Tool" name="portal_types">
+
+  <!-- Add -->
+  <object meta_type="Dexterity FTI" name="Case" />
+  <object meta_type="Dexterity FTI" name="Cases" />
+  <object meta_type="Dexterity FTI" name="Contribution" />
+
+  <!-- Remove -->
+  <object meta_type="Dexterity FTI" name="News Item" remove="True" />
+
 </object>

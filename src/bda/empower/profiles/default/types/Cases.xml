@@ -4,6 +4,7 @@
     meta_type="Dexterity FTI"
     name="Cases"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
   <!-- Basic properties -->
   <property
       i18n:translate=""
@@ -16,18 +17,21 @@
   <property name="factory">Cases</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
+
   <!-- Hierarchy control -->
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
     <element value="Case" />
   </property>
+
   <!-- Schema, class and security -->
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="add_permission">cmf.ManagePortal</property>
   <property name="schema"></property>
   <property name="model_source"></property>
   <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
+
   <!-- Enabled behaviors -->
   <property name="behaviors">
     <element value="plone.basic" />
@@ -35,6 +39,7 @@
     <element value="plone.locking" />
     <element value="plone.excludefromnavigation" />
   </property>
+
   <!-- View and aliases -->
   <property name="immediate_view">view</property>
   <property name="default_view">view</property>
@@ -58,6 +63,8 @@
       from="view"
       to="(selected layout)"
   />
+
+  <!-- Actions -->
   <action
       action_id="view"
       category="object"
@@ -78,4 +85,5 @@
       visible="True">
     <permission value="Modify portal content" />
   </action>
+
 </object>

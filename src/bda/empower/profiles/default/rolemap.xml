@@ -1,14 +1,15 @@
 <?xml version="1.0"?>
 <rolemap>
+
   <roles>
     <role name="Coordinator" />
     <role name="Client" />
     <role name="Expert" />
   </roles>
+
   <permissions>
-    <!--
-    Override permissions
-    -->
+
+    <!-- Override permissions -->
     <permission
         acquire="False"
         name="Show Toolbar">
@@ -27,9 +28,8 @@
       <role name="Manager" />
       <role name="Site Administrator" />
     </permission>
-    <!--
-    New permissions
-    -->
+
+    <!-- New permissions -->
     <permission
         acquire="True"
         name="bda.empower: Add Contribution">
@@ -77,5 +77,7 @@
       <role name="Client" />
       <role name="Manager" />
     </permission>
+
   </permissions>
+
 </rolemap>

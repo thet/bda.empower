@@ -1,6 +1,4 @@
-<sharing
-    i18n:domain="bda.empower"
-    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+<sharing i18n:domain="bda.empower" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
   <role
       i18n:attributes="title"
       id="Coordinator"

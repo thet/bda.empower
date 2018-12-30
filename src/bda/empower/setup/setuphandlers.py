@@ -9,7 +9,7 @@ from zope.interface import implementer
 class HiddenProfiles(object):
     def getNonInstallableProfiles(self):
         """Hide uninstall profile from site-creation and quickinstaller."""
-        return ["bda.empower:uninstall"]
+        return ["bda.empower:example_content"]
 
 
 REMOVE_INITIAL = ["news", "front-page", "events"]
@@ -31,8 +31,3 @@ def post_install(context):
         api.content.create(
             type="Cases", id="cases", title=u"Fälle", container=portal
         )
-
-
-def uninstall(context):
-    """Uninstall script"""
-    # Do something at the end of the uninstallation of this package.

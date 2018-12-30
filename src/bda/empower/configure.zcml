@@ -4,33 +4,28 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     xmlns:plone="http://namespaces.plone.org/plone">
-  <!--
-    l10n
-  -->
+
   <i18n:registerTranslations directory="locales" />
-  <!--
-    Includes
-  -->
+
   <include package="collective.immediatecreate" />
   <include package="collective.fingerpointing" />
+
   <include package=".behaviors" />
   <include package=".browser" />
-  <include file="permissions.zcml" />
-  <include file="profiles.zcml" />
-  <include file="upgrades.zcml" />
-
+  <include package=".setup" />
   <include package=".restapi" />
 
-  <!--
-    Name Chooser
-  -->
+  <include file="permissions.zcml" />
+  <include file="profiles.zcml" />
+
+
+  <!-- Name Chooser -->
   <adapter
       factory=".namechooser.NameByRandomNumber"
       for=".behaviors.contribution.IContributionBehavior"
   />
-  <!--
-    Indexer
-  -->
+
+  <!-- Indexer -->
   <adapter
       factory=".indexer.workspace_path_indexer"
       name="workspace_path"
@@ -39,17 +34,15 @@
       factory=".indexer.workspace_root_indexer"
       name="workspace_root"
   />
-  <!--
-    Finger Pointing
-  -->
+
+  <!-- Finger Pointing -->
   <subscriber
       for="plone.dexterity.interfaces.IDexterityContent
          .fingerpointing.IConfidentialObjectViewedEvent"
       handler=".fingerpointing.confidentialobjectviewed_logger"
   />
-  <!--
-    ICase changed, set local roles
-  -->
+
+  <!-- ICase changed, set local roles -->
   <subscriber
       for=".behaviors.users.IClientAndExpertpoolAssignmentBehavior
            zope.lifecycleevent.IObjectAddedEvent"
@@ -60,9 +53,8 @@
            zope.lifecycleevent.IObjectModifiedEvent"
       handler=".rolesetter.update_initial_local_roles"
   />
-  <!--
-    IContribution changed, set local roles
-  -->
+
+  <!-- IContribution changed, set local roles -->
   <subscriber
       for=".behaviors.users.IExpertAssignmentBehavior
            zope.lifecycleevent.IObjectAddedEvent"
@@ -73,4 +65,5 @@
            zope.lifecycleevent.IObjectModifiedEvent"
       handler=".rolesetter.update_expert_assigned_local_roles"
   />
+
 </configure>

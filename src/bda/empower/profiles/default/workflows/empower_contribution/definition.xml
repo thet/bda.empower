@@ -8,9 +8,8 @@
     title="bda.empower Contribution Workflow"
     workflow_id="empower_contribution"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-  <!--
-    Permissions
-  -->
+
+  <!-- Permissions -->
   <permission>Access contents information</permission>
   <permission>Add portal content</permission>
   <permission>Modify portal content</permission>
@@ -21,9 +20,7 @@
   <permission>bda.empower: Modify Expert Pool</permission>
   <permission>bda.empower: Modify Workspace Type</permission>
 
-  <!--
-    States
-  -->
+  <!-- States -->
   <state
       i18n:attributes="title"
       state_id="private"
@@ -95,9 +92,8 @@
       <permission-role>Manager</permission-role>
     </permission-map>
   </state>
-  <!--
-    Variables
-  -->
+
+  <!-- Variables -->
   <variable
       for_catalog="False"
       for_status="True"
@@ -164,4 +160,5 @@
     </default>
     <guard></guard>
   </variable>
+
 </dc-workflow>

@@ -10,16 +10,7 @@
       post_handler=".setup.setuphandlers.post_install"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       title="A: Empowerment statt Diffamierung"
-  />
-
-  <genericsetup:registerProfile
-      description="Uninstalls the bda.empower add-on."
-      directory="profiles/uninstall"
-      name="uninstall"
-      post_handler=".setup.setuphandlers.uninstall"
-      provides="Products.GenericSetup.interfaces.EXTENSION"
-      title="A: Empowerment statt Diffamierung (uninstall)"
-  />
+      />
 
   <genericsetup:registerProfile
       zcml:condition="installed collective.contentcreator"
@@ -29,11 +20,11 @@
       post_handler=".setup.example_content.example_content"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       title="A: Empowerment statt Diffamierung (example content)"
-    />
+      />
 
   <utility
       factory=".setup.setuphandlers.HiddenProfiles"
       name="bda.empower-hiddenprofiles"
-  />
+      />
 
 </configure>

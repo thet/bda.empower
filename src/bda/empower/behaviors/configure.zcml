@@ -1,34 +1,37 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:plone="http://namespaces.plone.org/plone">
+
   <!-- vocabularies -->
   <utility
       component=".contribution.workspace_next_vocabulary_factory"
       name="empower.next_workspaces"
-  />
+      />
   <utility
       component=".users.users_from_parent_vocabulary_factory"
       name="empower.parent_allowed_users"
-  />
+      />
+
   <!-- behaviors -->
   <plone:behavior
       name="empower.basic"
       provides=".basic.IBasicwWithoutDescription"
       title="Basic (Empower)"
-  />
+      />
   <plone:behavior
       name="empower.contribution"
       provides=".contribution.IContributionBehavior"
       title="Contribution (Empower)"
-  />
+      />
   <plone:behavior
       name="empower.clientandexpertpoolassignment"
       provides=".users.IClientAndExpertpoolAssignmentBehavior"
       title="Client and Expert-Pool Assignment (Empower)"
-  />
+      />
   <plone:behavior
       name="empower.expertassignment"
       provides=".users.IExpertAssignmentBehavior"
       title="Expert Assignment (Empower)"
-  />
+      />
+
 </configure>

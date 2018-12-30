@@ -2,34 +2,36 @@
     i18n_domain="plone"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:zcml="http://namespaces.zope.org/zcml">
+
   <configure zcml:condition="installed AccessControl.security">
     <permission
         id="bda.empower.AddContribution"
         title="bda.empower: Add Contribution"
-    />
+        />
     <permission
         id="bda.empower.AddCase"
         title="bda.empower: Add Case"
-    />
+        />
     <permission
         id="bda.empower.ModifyClient"
         title="bda.empower: Modify Client"
-    />
+        />
     <permission
         id="bda.empower.ModifyExpertPool"
         title="bda.empower: Modify Expert Pool"
-    />
+        />
     <permission
         id="bda.empower.ModifyCoordinators"
         title="bda.empower: Modify Coordinators"
-    />
+        />
     <permission
         id="bda.empower.ModifyExpertsAssigned"
         title="bda.empower: Modify Experts Assigned"
-    />
+        />
     <permission
         id="bda.empower.ModifyWorkspaceType"
         title="bda.empower: Modify Workspace Type"
-    />
+        />
   </configure>
+
 </configure>

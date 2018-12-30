@@ -1,23 +1,12 @@
 <?xml version="1.0"?>
-<object
-    meta_type="Plone Catalog Tool"
-    name="portal_catalog">
-  <index
-      meta_type="ExtendedPathIndex"
-      name="workspace_path">
-    <extra
-        name="indexed_attrs"
-        value="workspace_path"
-    />
+<object name="portal_catalog" meta_type="Plone Catalog Tool">
+  <index name="workspace_path" meta_type="ExtendedPathIndex">
+    <extra name="indexed_attrs" value="workspace_path" />
   </index>
-  <index
-      meta_type="FieldIndex"
-      name="workspace">
-      <indexed_attr value="workspace"/>
+  <index name="workspace" meta_type="FieldIndex">
+    <indexed_attr value="workspace"/>
   </index>
-  <index
-      meta_type="FieldIndex"
-      name="workspace_root">
-      <indexed_attr value="workspace_root"/>
+  <index name="workspace_root" meta_type="FieldIndex">
+    <indexed_attr value="workspace_root"/>
   </index>
 </object>

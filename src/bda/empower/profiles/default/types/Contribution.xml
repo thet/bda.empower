@@ -4,6 +4,7 @@
     meta_type="Dexterity FTI"
     name="Contribution"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
   <!-- Basic properties -->
   <property
       i18n:translate=""
@@ -15,6 +16,7 @@
   <property name="factory">Contribution</property>
   <property name="icon_expr"></property>
   <property name="link_target"></property>
+
   <!-- Hierarchy control -->
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
@@ -22,11 +24,13 @@
     <element value="Contribution" />
     <element value="File" />
   </property>
+
   <!-- Schema, class and security -->
   <property name="add_permission">bda.empower.AddContribution</property>
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
   <property name="model_source"></property>
+
   <!-- Enabled behaviors -->
   <property
       name="behaviors"
@@ -38,6 +42,7 @@
     <element value="empower.expertassignment" />
     <element value="collective.immediatecreate" />
   </property>
+
   <!-- View information -->
   <property name="add_view_expr">string:${folder_url}/++addimmediate++Contribution</property>
   <property name="default_view">view</property>
@@ -46,6 +51,7 @@
   <property name="view_methods">
     <element value="view" />
   </property>
+
   <!-- Method aliases -->
   <alias
       from="(Default)"
@@ -63,6 +69,7 @@
       from="view"
       to="(selected layout)"
   />
+
   <!-- Actions -->
   <action
       action_id="view"
@@ -84,4 +91,5 @@
       visible="True">
     <permission value="Modify portal content" />
   </action>
+
 </object>
