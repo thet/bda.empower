@@ -3,6 +3,7 @@ from Acquisition import aq_parent
 from bda.empower.interfaces import IWorkspaceAware
 from bda.empower.workspacedefinition import WORKSPACE_DEFINITION
 from plone import api
+from plone.app.contentlisting.interfaces import IContentListingObject
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 
@@ -178,6 +179,8 @@ def get_current_workspace_tree(current, context_aware=False):
     # of 0, we use depth of 1 and query the parent path
     # and also the whole physical path
     base_node = get_root_of_workspace(current)
+    if not base_node:
+        return []
     current_path = "/".join(get_workspace_path(aq_parent(base_node)))
     cat = api.portal.get_tool("portal_catalog")
     query = dict(workspace_path={})
@@ -217,7 +220,7 @@ def build_tree(brains):
     for brain in brains:
         pathkey = "/".join(brain.getPath().split("/")[:-1])
         if pathkey in ret:
-            ret[pathkey].append(brain.getObject())
+            ret[pathkey].append(IContentListingObject(brain))
         else:
-            ret[pathkey] = [brain.getObject()]
+            ret[pathkey] = [IContentListingObject(brain)]
     return ret
