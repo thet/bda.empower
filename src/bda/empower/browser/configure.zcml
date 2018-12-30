@@ -25,13 +25,13 @@
   <!--
   main workspace view
   -->
-  <browser:page
+  <!--browser:page
       class=".workspace.WorkspaceView"
       for="bda.empower.behaviors.users.IClientAndExpertpoolAssignmentBehavior"
       name="ws"
       permission="zope2.View"
       template="workspace.pt"
-  />
+  /-->
   <!--
   redirector, if someone tries to access the contribution or case directly guide
   to correct place
