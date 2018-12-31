@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+from bda.empower import discourse
 from plone import api
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services import Service
 from zope.component import adapter
-from zope.interface import Interface
 from zope.interface import implementer
+from zope.interface import Interface
 
 
 @implementer(IExpandableElement)
@@ -15,7 +16,33 @@ class Thread(object):
         self.context = context.aq_explicit
         self.request = request
 
+    @property
+    def itemtree(self):
+        items = discourse.get_current_workspace_tree(self.context)
+        tree = discourse.build_tree(items)
+        for key, items in tree.items():
+            tree[key] = map(
+                lambda item: {
+                    "@id": item.getURL(),
+                    "uid": item.uuid(),
+                    "title": item.Title(),
+                    "review_state": item.review_state(),
+                },
+                items,
+            )
+        return tree
+
+    @property
+    def start_path(self):
+        root = discourse.get_root_of_workspace(self.context)
+        start_path = None
+        if root:
+            start_path = "/".join(root.getPhysicalPath()[:-1])  # start a level above the start context. itemtree structure works that way.  # noqa
+        return start_path
+
     def __call__(self, expand=False):
+        """Reply to REST/JSON requests.
+        """
         result = {
             'thread': {
                 '@id': '{}/@thread'.format(
@@ -23,29 +50,14 @@ class Thread(object):
                 ),
             },
         }
-        if not expand:
-            return result
+        #if not expand:
+        #    return result
 
         # === Your custom code comes here ===
 
-        # Example:
-        query = {}
-        query['portal_type'] = "Document"
-        query['Subject'] = {
-            'query': ['Cats', 'Dogs'],
-            'operator': 'or',
-        }
-        brains = api.content.find(**query)
-        items = []
-        for brain in brains:
-            obj = brain.getObject()
-            parent = obj.aq_inner.aq_parent
-            items.append({
-                'title': brain.Title,
-                'description': brain.Description,
-                '@id': brain.getURL(),
-            })
-        result['thread']['items'] = items
+        result['thread']['items'] = self.itemtree
+        result['thread']['start_path'] = self.start_path
+
         return result
 
 
