@@ -101,7 +101,7 @@ def get_root_of_workspace(current):
         if not IWorkspaceAware.providedBy(current):
             current = parent
             continue
-        current_ws = getattr(current, WORKSPACE_ATTRIBUTE)
+        current_ws = getattr(current, WORKSPACE_ATTRIBUTE, None)
         parent_ws = getattr(parent, WORKSPACE_ATTRIBUTE, None)
         if current_ws != parent_ws:
             return current
