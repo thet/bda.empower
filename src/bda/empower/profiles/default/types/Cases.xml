@@ -35,6 +35,7 @@
   <!-- Enabled behaviors -->
   <property name="behaviors">
     <element value="plone.basic" />
+    <element value="plone.ownership" />
     <element value="plone.shortname" />
     <element value="plone.locking" />
     <element value="plone.excludefromnavigation" />
