@@ -30,6 +30,7 @@
   <property name="klass">plone.dexterity.content.Container</property>
   <property name="model_file">plone.app.contenttypes.schema:document.xml</property>
   <property name="model_source"></property>
+  <property name="schema"></property>
 
   <!-- Enabled behaviors -->
   <property
@@ -37,10 +38,11 @@
       purge="false">
     <!-- <element value="plone.namefromtitle"/> -->
     <element value="empower.basic" />
-    <element value="plone.locking" />
+    <element value="plone.ownership" />
     <element value="empower.contribution" />
     <element value="empower.expertassignment" />
     <element value="collective.immediatecreate" />
+    <element value="plone.locking" />
   </property>
 
   <!-- View information -->
