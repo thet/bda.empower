@@ -30,7 +30,6 @@ def create_content():
     cases = []
     for it in range(4):
         cases.append(create_case())
-    __import__('pdb').set_trace()
     return cases
 
 
@@ -52,7 +51,8 @@ def create_case():
         "workspace": workspace,
         "client": safe_unicode(client),
         "coordinators": safe_unicode(coordinator),
-        "expert_pool": u';'.join(users)
+        "expert_pool": u';'.join(users),
+        "creators": safe_unicode(coordinator),
     }
 
     return item
@@ -99,6 +99,7 @@ def create_thread(current_workspace, expert_pool):
                     max_depth
                 ),
                 "workspace": current_workspace,
+                "creators": safe_unicode(random.choice(expert_pool)),
             }
             if experts_assigned:
                 item['experts_assigned'] = u';'.join(experts_assigned)
