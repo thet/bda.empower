@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from bda.empower import discourse
 from plone import api
 from plone.restapi.interfaces import IExpandableElement
@@ -16,20 +17,36 @@ class Thread(object):
         self.context = context.aq_explicit
         self.request = request
 
+    def _make_item(self, item):
+        ob = aq_base(item.getObject())
+        ret = {
+            "@id": item.getURL(),
+            "@type": item.PortalType(),
+            "uid": item.uuid(),
+            "title": item.Title(),
+            "review_state": item.review_state(),
+            "creator": item.Creator(),
+            "created": item.CreationDate(),
+            "modified": item.ModificationDate(),
+            "workspace": getattr(ob, 'workspace', None),
+            "client": getattr(ob, 'client', None),
+            "coordinators": getattr(ob, 'coordinators', None),
+            "expert_pool": getattr(ob, 'expert_pool', None),
+            "experts_assigned": getattr(ob, 'experts_assigned', None),
+        }
+
+        text = getattr(ob, 'text', None)
+        # TODO: check if output_relative_to(workspace) is better..?
+        ret["text"] = text.output_relative_to(ob) if text else None
+
+        return ret
+
     @property
     def itemtree(self):
         items = discourse.get_current_workspace_tree(self.context)
         tree = discourse.build_tree(items)
         for key, items in tree.items():
-            tree[key] = map(
-                lambda item: {
-                    "@id": item.getURL(),
-                    "uid": item.uuid(),
-                    "title": item.Title(),
-                    "review_state": item.review_state(),
-                },
-                items,
-            )
+            tree[key] = map(self._make_item, items)
         return tree
 
     @property
