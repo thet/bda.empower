@@ -28,8 +28,8 @@ def create_text():
 
 def create_content():
     cases = []
-    for it in range(4):
-        cases.append(create_case())
+    #for it in range(4):
+    cases.append(create_case())
     return cases
 
 
@@ -75,10 +75,10 @@ def create_thread(current_workspace, expert_pool):
             if cnt > max_cnt:
                 return thread
 
-            current_workspace = parent_workspace
+            _current_workspace = parent_workspace
             experts_assigned = None
             if random.choice([1, 2, 3]) == 1:
-                current_workspace = random.choice(
+                _current_workspace = random.choice(
                     workspace_definitions[parent_workspace]['next']
                 )
                 experts_assigned = random.sample(
@@ -86,19 +86,20 @@ def create_thread(current_workspace, expert_pool):
                     random.randint(1, 3)
                 )
 
+            print(_current_workspace)
             item = {
                 "@type": "Contribution",
                 "title": loremipsum.get_sentence(),
                 "text": create_text(),
                 "items": _create(
-                    current_workspace,
+                    _current_workspace,
                     expert_pool,
                     cnt,
                     max_cnt,
                     depth,
                     max_depth
                 ),
-                "workspace": current_workspace,
+                "workspace": _current_workspace,
                 "creators": safe_unicode(random.choice(expert_pool)),
             }
             if experts_assigned:
