@@ -28,8 +28,8 @@ def create_text():
 
 def create_content():
     cases = []
-    #for it in range(4):
-    cases.append(create_case())
+    for it in range(4):
+        cases.append(create_case())
     return cases
 
 
@@ -86,7 +86,6 @@ def create_thread(current_workspace, expert_pool):
                     random.randint(1, 3)
                 )
 
-            print(_current_workspace)
             item = {
                 "@type": "Contribution",
                 "title": loremipsum.get_sentence(),
