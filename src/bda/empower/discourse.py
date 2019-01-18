@@ -82,10 +82,7 @@ def get_initial_root(node):
     """get the workspace root"""
     if node.portal_type not in NODE_TYPES:
         return None
-    while True:
-        if is_initial_root(node):
-            return node
-        node = aq_parent(node)
+    return node if is_initial_root(node) else get_initial_root(aq_parent(node))
 
 
 def get_root_of_workspace(current):
@@ -143,7 +140,7 @@ def get_next_workspaces(
     """catalog brains of next nodes in the tree with a different workspace.
 
     - node is the context to work on
-    - root (bool) defined is only workspace roots are to be returned
+    - root (bool): If true, only workspace roots are to be returned
     - context_aware (bool): normal all next workspace of the root of the given
       workspace are returned. filter them to show only under given context
       physical path
@@ -191,6 +188,31 @@ def get_current_workspace_tree(current, context_aware=False):
     else:
         query["path"] = "/".join(base_node.getPhysicalPath())
     query["sort_on"] = "path"
+    brains = cat(**query)
+    return brains
+
+
+def get_workspace_tree(node, workspace=None):
+    """A tree of brains of the current workspace.
+
+    - node: A context to start with.
+    - workspace: optional workspace name. If not given, the node's workspace
+                 name will be used.
+
+    This finds all workspace members of the current case, even if they are not
+    in the current workspace path (e.g. a new strategy after a evaluation).
+    """
+    initial_root = get_initial_root(node)
+    workspace = workspace or getattr(node, 'workspace', None)
+    if not initial_root or not workspace:
+        return []
+
+    cat = api.portal.get_tool("portal_catalog")
+    query = {
+        'path': '/'.join(initial_root.getPhysicalPath()),
+        'workspace': workspace,
+        'sort_on': 'path'
+    }
     brains = cat(**query)
     return brains
 

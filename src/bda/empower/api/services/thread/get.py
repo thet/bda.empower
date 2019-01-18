@@ -33,6 +33,8 @@ class Thread(object):
             "coordinators": getattr(ob, 'coordinators', None),
             "expert_pool": getattr(ob, 'expert_pool', None),
             "experts_assigned": getattr(ob, 'experts_assigned', None),
+            "previous_workspace": None,
+            "next_workspace": None,
         }
 
         text = getattr(ob, 'text', None)
@@ -43,8 +45,25 @@ class Thread(object):
 
     @property
     def itemtree(self):
-        items = discourse.get_current_workspace_tree(self.context)
+        items = discourse.get_workspace_tree(self.context)
         tree = discourse.build_tree(items)
+
+        roots = discourse.get_all_workspace_roots(self.context, getattr(self.context, 'workspace', None)  # TODO: fix. needs other way to get current workspace name - context might be case.  # noqa
+        nexts = []
+        for root in roots:
+            nexts.append(list(
+                discourse.get_next_workspaces(root.getObject())
+            ))
+
+        def _make_roots(item):
+
+            return {
+                'url': None,
+                'title': None
+            }
+
+        roots = map(_make_roots, roots)
+
         for key, items in tree.items():
             tree[key] = map(self._make_item, items)
         return tree
