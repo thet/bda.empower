@@ -48,8 +48,8 @@ class Thread(object):
             "coordinators": getattr(ob_base, 'coordinators', None),
             "expert_pool": getattr(ob_base, 'expert_pool', None),
             "experts_assigned": getattr(ob_base, 'experts_assigned', None),
-            "previous_workspace_item": previous,
-            "next_workspace_items": next,
+            "previous_workspace": previous,
+            "next_workspace": next,
         }
 
         text = getattr(ob_base, 'text', None)
