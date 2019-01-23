@@ -9,4 +9,6 @@
   <index name="workspace_root" meta_type="FieldIndex">
     <indexed_attr value="workspace_root"/>
   </index>
+
+  <column value="workspace" />
 </object>
