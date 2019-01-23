@@ -49,7 +49,7 @@ class Thread(object):
             "expert_pool": getattr(ob_base, 'expert_pool', None),
             "experts_assigned": getattr(ob_base, 'experts_assigned', None),
             "previous_workspace": previous,
-            "next_workspace": next,
+            "next_workspaces": next,
         }
 
         text = getattr(ob_base, 'text', None)
