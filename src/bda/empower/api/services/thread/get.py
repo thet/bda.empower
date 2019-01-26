@@ -26,13 +26,18 @@ class Thread(object):
         parent = aq_parent(ob)
         if parent.portal_type in discourse.NODE_TYPES and\
             aq_base(parent).workspace != ob_base.workspace:
-
-            previous = '/'.join(parent.getPhysicalPath())
+            previous = {
+                'path': '/'.join(parent.getPhysicalPath()),
+                'title': parent.title
+            }
 
         next = []
         for child in ob.contentValues():
             if aq_base(child).workspace != ob_base.workspace:
-                next.append('/'.join(child.getPhysicalPath()))
+                next.append({
+                    'path': '/'.join(child.getPhysicalPath()),
+                    'title': child.title
+                })
 
         ret = {
             "@id": item.getURL(),
@@ -53,7 +58,6 @@ class Thread(object):
         }
 
         text = getattr(ob_base, 'text', None)
-        # TODO: check if output_relative_to(workspace) is better..?
         ret["text"] = text.output_relative_to(ob) if text else None
 
         return ret
@@ -85,8 +89,8 @@ class Thread(object):
                 ),
             },
         }
-        #if not expand:
-        #    return result
+        if not expand:
+            return result
 
         # === Your custom code comes here ===
 
