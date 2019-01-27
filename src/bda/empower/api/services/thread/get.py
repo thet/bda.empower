@@ -97,6 +97,8 @@ class Thread(object):
         result['thread']['items'] = self.itemtree
         result['thread']['start_path'] = self.start_path
 
+        self.request.response.setHeader('Content-Type', 'application/json')
+
         return result
 
 
