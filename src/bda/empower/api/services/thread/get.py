@@ -45,21 +45,10 @@ class Thread(object):
             "uid": item.uuid(),
             "title": item.Title(),
             "review_state": item.review_state(),
-            "creator": item.Creator(),
-            "created": item.CreationDate(),
-            "modified": item.ModificationDate(),
             "workspace": getattr(ob_base, 'workspace', None),
-            "client": getattr(ob_base, 'client', None),
-            "coordinators": getattr(ob_base, 'coordinators', None),
-            "expert_pool": getattr(ob_base, 'expert_pool', None),
-            "experts_assigned": getattr(ob_base, 'experts_assigned', None),
             "previous_workspace": previous,
             "next_workspaces": next,
         }
-
-        text = getattr(ob_base, 'text', None)
-        ret["text"] = text.output_relative_to(ob) if text else None
-
         return ret
 
     @property
