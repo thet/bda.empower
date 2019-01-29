@@ -42,7 +42,7 @@ class Thread(object):
         ret = {
             "@id": item.getURL(),
             "@type": item.PortalType(),
-            "uid": item.uuid(),
+            "UID": item.uuid(),
             "title": item.Title(),
             "review_state": item.review_state(),
             "workspace": getattr(ob_base, 'workspace', None),
