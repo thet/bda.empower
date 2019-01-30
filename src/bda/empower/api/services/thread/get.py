@@ -53,7 +53,8 @@ class Thread(object):
 
     @property
     def itemtree(self):
-        items = discourse.get_workspace_tree(self.context)
+        workspace = self.request.form.get('workspace', None);
+        items = discourse.get_workspace_tree(self.context, workspace)
         tree = discourse.build_tree(items)
 
         for key, items in tree.items():
