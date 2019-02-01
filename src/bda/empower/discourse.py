@@ -49,7 +49,14 @@ def get_allowed_workspaces(node):
     - root item can pnly have initial workspace
     """
     workspace_definitions = get_workspace_definitions()
-    if node.portal_type not in NODE_TYPES:
+    if not node:
+        # Allow node-less access to return all workspaces.
+        # plone.restapi otherwise breaks when validating the schema.
+        for ws, title in workspace_definitions.items():
+            yield ws, title
+            return
+
+    if node and node.portal_type not in NODE_TYPES:
         raise ValueError(
             "workspace_next_vocabulary_factory called in wrong context"
         )
