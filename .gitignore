@@ -15,7 +15,9 @@ include/
 lib/
 local/
 node_modules/
+packages/
 parts/
+share/
 src/*
 test.plone_addon/
 var/
