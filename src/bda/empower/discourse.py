@@ -224,6 +224,19 @@ def get_workspace_tree(node, workspace=None):
     return brains
 
 
+def get_tree(node):
+    """A tree of brains.
+    - node: A context to start with.
+    """
+    cat = api.portal.get_tool("portal_catalog")
+    query = {
+        'path': '/'.join(node.getPhysicalPath()),
+        'sort_on': 'path'
+    }
+    brains = cat(**query)
+    return brains
+
+
 def get_all_workspace_roots(node, workspace):
     """get all workspace root brains
 
@@ -241,15 +254,17 @@ def get_all_workspace_roots(node, workspace):
     return brains
 
 
-def build_tree(brains):
+def build_tree(items):
     """Efficiently build a tree structure.
     Taken from collective.navigation.
     """
     ret = {}
-    for brain in brains:
-        pathkey = "/".join(brain.getPath().split("/")[:-1])
+    items = items or []
+    for item in items:
+        ob = IContentListingObject(item)
+        pathkey = "/".join(ob.getPath().split("/")[:-1])
         if pathkey in ret:
-            ret[pathkey].append(IContentListingObject(brain))
+            ret[pathkey].append(ob)
         else:
-            ret[pathkey] = [IContentListingObject(brain)]
+            ret[pathkey] = [ob]
     return ret

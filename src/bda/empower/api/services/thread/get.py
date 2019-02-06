@@ -54,16 +54,25 @@ class Thread(object):
     @property
     def itemtree(self):
         workspace = self.request.form.get('workspace', None);
-        items = discourse.get_workspace_tree(self.context, workspace)
+        # TODO: re-evaluate.
+        #       Get the tree from the current context on.
+        #       Allows for better navigation while you still get the root
+        #       when traversing into somewhere.
+        # items = discourse.get_workspace_tree(self.context, workspace)
+        items = discourse.get_tree(self.context)
         tree = discourse.build_tree(items)
-
         for key, items in tree.items():
             tree[key] = map(self._make_item, items)
         return tree
 
     @property
     def start_path(self):
-        root = discourse.get_root_of_workspace(self.context)
+        root = self.context
+        # TODO: re-evaluate.
+        #       Get the tree from the current context on.
+        #       Allows for better navigation while you still get the root
+        #       when traversing into somewhere.
+        # root = discourse.get_root_of_workspace(self.context)
         start_path = None
         if root:
             start_path = "/".join(root.getPhysicalPath()[:-1])  # start a level above the start context. itemtree structure works that way.  # noqa
