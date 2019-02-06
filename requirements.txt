@@ -1,2 +1,1 @@
--r http://dist.plone.org/release/5.1.4/requirements.txt
-pdbpp
+-r http://dist.plone.org/release/5.1.5/requirements.txt
