@@ -7,6 +7,6 @@
   -*- extra stuff goes here -*-
 
   <include package=".services" />
-
+  <include package=".serializer" />
 
 </configure>
