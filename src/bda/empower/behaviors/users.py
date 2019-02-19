@@ -42,7 +42,12 @@ def users_from_parent_vocabulary_factory(context):
 @provider(IFormFieldProvider)
 class IClientAndExpertpoolAssignmentBehavior(model.Schema):
 
-    client = schema.TextLine(title=_(u"Client"), required=False)
+    client = schema.Tuple(
+        title=_(u"Client"),
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+)
     widget(
         "client",
         AjaxSelectFieldWidget,
@@ -51,7 +56,12 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
     )
     write_permission(client="bda.empower.ModifyClient")
 
-    coordinators = schema.TextLine(title=_(u"Coordinators"), required=False)
+    coordinators = schema.Tuple(
+        title=_(u"Coordinators"),
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+)
     widget(
         "coordinators",
         AjaxSelectFieldWidget,
@@ -60,7 +70,12 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
     )
     write_permission(expert_pool="bda.empower.ModifyExpertPool")
 
-    expert_pool = schema.TextLine(title=_(u"Expert Pool"), required=False)
+    expert_pool = schema.Tuple(
+        title=_(u"Expert Pool"),
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+)
     widget(
         "expert_pool",
         AjaxSelectFieldWidget,
@@ -73,7 +88,12 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
 @provider(IFormFieldProvider)
 class IExpertAssignmentBehavior(model.Schema):
 
-    experts_assigned = schema.TextLine(title=_(u"Experts"), required=False)
+    experts_assigned = schema.Tuple(
+        title=_(u"Experts"),
+        value_type=schema.TextLine(),
+        required=False,
+        missing_value=(),
+    )
     widget(
         "experts_assigned",
         AjaxSelectFieldWidget,

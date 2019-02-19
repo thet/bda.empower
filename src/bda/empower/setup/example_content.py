@@ -38,10 +38,10 @@ def create_case():
     workspace = wsdefs.keys()[0]
 
     users = plone.api.user.get_users()
-    users = map(lambda it: it.id, users)
+    users = tuple(map(lambda it: it.id, users))
     random.shuffle(users)
-    client = users.pop()
-    coordinator = users.pop()
+    client = tuple(users.pop())
+    coordinator = tuple(users.pop())
 
     item = {
         "@type": "Case",
@@ -49,10 +49,10 @@ def create_case():
         "text": create_text(),
         "items": create_thread(workspace, users),
         "workspace": workspace,
-        "client": safe_unicode(client),
-        "coordinators": safe_unicode(coordinator),
-        "expert_pool": u';'.join(users),
-        "creators": safe_unicode(coordinator),
+        "client": client,
+        "coordinators": coordinator,
+        "expert_pool": users,
+        "creators": coordinator,
     }
 
     return item
@@ -102,7 +102,7 @@ def create_thread(current_workspace, expert_pool):
                 "creators": safe_unicode(random.choice(expert_pool)),
             }
             if experts_assigned:
-                item['experts_assigned'] = u';'.join(experts_assigned)
+                item['experts_assigned'] = tuple(experts_assigned)
 
             thread.append(item)
 
