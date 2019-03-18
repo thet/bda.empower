@@ -38,10 +38,10 @@ def create_case():
     workspace = wsdefs.keys()[0]
 
     users = plone.api.user.get_users()
-    users = tuple(map(lambda it: it.id, users))
+    users = map(lambda it: safe_unicode(it.id), users)
     random.shuffle(users)
-    client = tuple(users.pop())
-    coordinator = tuple(users.pop())
+    client = users.pop()
+    coordinator = users.pop()
 
     item = {
         "@type": "Case",
@@ -49,12 +49,11 @@ def create_case():
         "text": create_text(),
         "items": create_thread(workspace, users),
         "workspace": workspace,
-        "client": client,
-        "coordinators": coordinator,
+        "client": [client, ],
+        "coordinators": [coordinator, ],
         "expert_pool": users,
-        "creators": coordinator,
+        "creators": [coordinator, ],
     }
-
     return item
 
 
@@ -99,10 +98,17 @@ def create_thread(current_workspace, expert_pool):
                     max_depth
                 ),
                 "workspace": _current_workspace,
-                "creators": safe_unicode(random.choice(expert_pool)),
+                "creators": [random.choice(expert_pool), ],
             }
             if experts_assigned:
-                item['experts_assigned'] = tuple(experts_assigned)
+                item['experts_assigned'] = experts_assigned
+            else:
+                # TODO: workaround for:
+                #   Module collective.contentcreator, line 124, in create_item_runner
+                #   Module plone.restapi.deserializer.dxcontent, line 146, in __call__
+                # BadRequest: [{'field': 'experts_assigned', 'message': u'Object is of wrong type.', 'error': WrongType(None, <type 'tuple'>, 'experts_assigned')}]
+                # TODO: needs eventually fix in plone.restapi
+                item['experts_assigned'] = []
 
             thread.append(item)
 

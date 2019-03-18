@@ -12,8 +12,7 @@ def _get_users_from_field(obj, fieldname):
     value = getattr(obj, fieldname, "")
     if not value:
         return []
-    if value:
-        return value.split(";")
+    return value
 
 
 def _revoke_roles(obj, rolename):

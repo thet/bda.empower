@@ -47,7 +47,7 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
         value_type=schema.TextLine(),
         required=False,
         missing_value=(),
-)
+    )
     widget(
         "client",
         AjaxSelectFieldWidget,
@@ -61,7 +61,7 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
         value_type=schema.TextLine(),
         required=False,
         missing_value=(),
-)
+    )
     widget(
         "coordinators",
         AjaxSelectFieldWidget,
@@ -75,7 +75,7 @@ class IClientAndExpertpoolAssignmentBehavior(model.Schema):
         value_type=schema.TextLine(),
         required=False,
         missing_value=(),
-)
+    )
     widget(
         "expert_pool",
         AjaxSelectFieldWidget,
