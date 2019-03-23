@@ -58,8 +58,8 @@ class Thread(object):
         #       Get the tree from the current context on.
         #       Allows for better navigation while you still get the root
         #       when traversing into somewhere.
-        # items = discourse.get_workspace_tree(self.context, workspace)
-        items = discourse.get_tree(self.context)
+        # items = discourse.get_tree(self.context, workspace, initial_root=true)
+        items = discourse.get_tree(self.context, workspace)
         tree = discourse.build_tree(items)
         for key, items in tree.items():
             tree[key] = map(self._make_item, items)

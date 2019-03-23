@@ -199,40 +199,22 @@ def get_current_workspace_tree(current, context_aware=False):
     return brains
 
 
-def get_workspace_tree(node, workspace=None):
-    """A tree of brains of the current workspace.
-
-    - node: A context to start with.
-    - workspace: optional workspace name. If not given, the node's workspace
-                 name will be used.
-
-    This finds all workspace members of the current case, even if they are not
-    in the current workspace path (e.g. a new strategy after a evaluation).
-    """
-    initial_root = get_initial_root(node)
-    workspace = workspace or getattr(node, 'workspace', None)
-    if not initial_root or not workspace:
-        return []
-
-    cat = api.portal.get_tool("portal_catalog")
-    query = {
-        'path': '/'.join(initial_root.getPhysicalPath()),
-        'workspace': workspace,
-        'sort_on': 'path'
-    }
-    brains = cat(**query)
-    return brains
-
-
-def get_tree(node):
+def get_tree(node, workspace=None, initial_root=False):
     """A tree of brains.
     - node: A context to start with.
     """
-    cat = api.portal.get_tool("portal_catalog")
+
     query = {
-        'path': '/'.join(node.getPhysicalPath()),
         'sort_on': 'path'
     }
+
+    root = get_initial_root(node) if initial_root else node
+    query['path'] = '/'.join(root.getPhysicalPath())
+
+    if workspace:
+        query['workspace'] = workspace
+
+    cat = api.portal.get_tool("portal_catalog")
     brains = cat(**query)
     return brains
 

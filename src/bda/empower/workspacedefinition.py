@@ -3,6 +3,13 @@ from bda.empower.i18n import _
 from collections import OrderedDict
 
 
+WORKSPACE_LIST = [
+    'analysis',
+    'strategy',
+    'action',
+    'evaluation'
+]
+
 WORKSPACE_DEFINITION = OrderedDict()
 WORKSPACE_DEFINITION["analysis"] = {
     "title": _("analysis", default=u"Analysis"),
