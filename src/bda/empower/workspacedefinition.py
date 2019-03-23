@@ -4,6 +4,7 @@ from collections import OrderedDict
 
 
 WORKSPACE_LIST = [
+    'case',
     'analysis',
     'strategy',
     'action',
@@ -11,6 +12,13 @@ WORKSPACE_LIST = [
 ]
 
 WORKSPACE_DEFINITION = OrderedDict()
+
+WORKSPACE_DEFINITION["case"] = {
+    "title": _("case", default=u"Case"),
+    "next": ["analysis"],
+    "no-parent": True,
+}
+
 WORKSPACE_DEFINITION["analysis"] = {
     "title": _("analysis", default=u"Analysis"),
     "next": ["strategy"],
