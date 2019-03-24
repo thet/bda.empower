@@ -21,14 +21,11 @@ logger = logging.getLogger(__name__)
 
 @provider(IVocabularyFactory)
 def users_from_parent_vocabulary_factory(context):
+    # Get experts_assigned if defined or fallback to Case' expert_pool.
+    # Acquisition FTW - here.
     parent = aq_parent(context)
-    if IClientAndExpertpoolAssignmentBehavior.providedBy(parent):
-        attribute = "expert_pool"
-    elif IExpertAssignmentBehavior.providedBy(parent):
-        attribute = "experts_assigned"
-    else:
-        raise ValueError("Invalid parent context")
-    values = (getattr(parent, attribute) or "").split(";")
+    values = getattr(parent, 'experts_assigned', [])\
+        or getattr(parent, 'expert_pool', [])
 
     terms = [
         SimpleTerm(
