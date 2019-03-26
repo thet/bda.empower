@@ -46,6 +46,7 @@ class Thread(object):
             "title": item.Title(),
             "review_state": item.review_state(),
             "workspace": getattr(ob_base, 'workspace', None),
+            "is_workspace_root": previous is not None or item.PortalType() == 'Case',
             "previous_workspace": previous,
             "next_workspaces": next,
         }
