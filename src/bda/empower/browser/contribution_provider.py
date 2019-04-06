@@ -42,7 +42,7 @@ class ContributionProvider(ContentProviderBase):
             ),
             "reply_url": addTokenToUrl(
                 self.contribution.absolute_url()
-                + "/++addimmediate++Contribution"
+                + "/++add++Contribution"
             ),
         }
 

@@ -44,12 +44,10 @@ setup(
     zip_safe=False,
     install_requires=[
         "collective.fingerpointing",
-        "collective.immediatecreate",
         "plone.rest>=1.4.0",
         "plone.restapi>=3.5.0",
         "Products.CMFPlone",
         "setuptools",
-        "z3c.jbot",
     ],
     extras_require={
         "test": [

@@ -2,7 +2,6 @@
 <metadata>
   <version>1000</version>
   <dependencies>
-    <dependency>collective.immediatecreate:default</dependency>
     <dependency>collective.fingerpointing:default</dependency>
     <dependency>plone.restapi:default</dependency>
   </dependencies>

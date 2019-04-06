@@ -4,11 +4,6 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:plone="http://namespaces.plone.org/plone">
 
-  <include file="meta.zcml" package="z3c.jbot" />
-  <browser:jbot
-      directory="overrides"
-      layer="bda.empower.interfaces.IBdaEmpowerLayer"
-      />
   <plone:static
       directory="static"
       name="bda.empower"

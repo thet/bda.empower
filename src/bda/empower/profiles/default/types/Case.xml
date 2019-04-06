@@ -40,13 +40,12 @@
     <element value="plone.ownership" />
     <element value="empower.contribution" />
     <element value="empower.clientandexpertpoolassignment" />
-    <element value="collective.immediatecreate" />
     <element value="plone.locking" />
     <element value="plone.excludefromnavigation" />
   </property>
 
   <!-- View information -->
-  <property name="add_view_expr">string:${folder_url}/++addimmediate++Case</property>
+  <property name="add_view_expr">string:${folder_url}/++add++Case</property>
   <property name="default_view">view</property>
   <property name="default_view_fallback">False</property>
   <property name="immediate_view">view</property>
