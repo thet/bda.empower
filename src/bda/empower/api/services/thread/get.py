@@ -27,7 +27,7 @@ class Thread(object):
         if parent.portal_type in discourse.NODE_TYPES and\
             aq_base(parent).workspace != ob_base.workspace:
             previous = {
-                'path': '/'.join(parent.getPhysicalPath()),
+                '@id': parent.absolute_urls(),
                 'title': parent.title
             }
 
@@ -35,7 +35,7 @@ class Thread(object):
         for child in ob.contentValues():
             if aq_base(child).workspace != ob_base.workspace:
                 next.append({
-                    'path': '/'.join(child.getPhysicalPath()),
+                    '@id': child.absolute_url(),
                     'title': child.title
                 })
 
