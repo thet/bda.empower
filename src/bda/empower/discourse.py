@@ -5,6 +5,8 @@ from bda.empower.interfaces import IWorkspaceAware
 from bda.empower.workspacedefinition import WORKSPACE_DEFINITION
 from plone import api
 from plone.app.contentlisting.interfaces import IContentListingObject
+from plone.uuid.interfaces import IUUID
+from plone.app.uuid.utils import uuidToCatalogBrain
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 
 
@@ -254,26 +256,21 @@ def build_tree(items):
     return ret
 
 
-def make_item_overview(item):
+def make_item_overview(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     This one is used for overviews, where we do not want the direct
     next/previous workspace but the next/previous down/up the tree.
     """
-    ob = item.getObject()
 
-    previous = get_initial_root(get_root_of_workspace(aq_parent(ob)))
-    data_previous = None
-    if previous:
-        data_previous = {
-            '@id': previous.absolute_url(),
-            'title': previous.title
-        }
+    if next_prev:
+        ob = item.getObject()
 
-    next = get_next_workspaces(ob, context_aware=True) or []
-    data_next = [{
-        '@id': it.getURL(),
-        'title': it.Title
-    } for it in next]
+        prev = get_initial_root(get_root_of_workspace(aq_parent(ob)))
+        prev = uuidToCatalogBrain(IUUID(prev)) if prev else None
+        data_previous = make_item_overview(prev, next_prev=False) if prev else None
+
+        next = get_next_workspaces(ob, context_aware=True) or []
+        data_next = [make_item_overview(it, next_prev=False) for it in next]
 
     ret = {
         "@id": item.getURL(),
@@ -283,35 +280,37 @@ def make_item_overview(item):
         "review_state": item.review_state,
         "workspace": item.workspace,
         "is_workspace_root": item.workspace_root,
-        "previous_workspace": data_previous,
-        "next_workspaces": data_next,
         "created": item.CreationDate,
         "modified": item.ModificationDate
     }
+    if next_prev:
+        ret["previous_workspace"] = data_previous
+        ret["next_workspaces"] = data_next
+
     return ret
 
 
-def make_item(item):
+def make_item(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     """
-    ob = item.getObject()
 
-    previous = None
-    parent = aq_parent(ob)
-    if parent.portal_type in NODE_TYPES and\
-        aq_base(parent).workspace != item.workspace:
-        previous = {
-            '@id': parent.absolute_url(),
-            'title': parent.title
-        }
+    if next_prev:
+        ob = item.getObject()
 
-    next = []
-    for child in ob.contentValues():
-        if aq_base(child).workspace != item.workspace:
-            next.append({
-                '@id': child.absolute_url(),
-                'title': child.title
-            })
+        data_previous = None
+        parent = aq_parent(ob)
+        if parent.portal_type in NODE_TYPES and\
+            aq_base(parent).workspace != item.workspace:
+            item = uuidToCatalogBrain(IUUID(parent)) if parent else None
+            data_previous = make_item(item, next_prev=False) if item else None
+
+        data_next = []
+        for child in ob.contentValues():
+            if aq_base(child).workspace != item.workspace:
+                item = uuidToCatalogBrain(IUUID(child))
+                data_next.append(
+                    make_item(item, next_prev=False)
+                )
 
     ret = {
         "@id": item.getURL(),
@@ -321,11 +320,13 @@ def make_item(item):
         "review_state": item.review_state(),
         "workspace": item.workspace,
         "is_workspace_root": item.workspace_root,
-        "previous_workspace": previous,
-        "next_workspaces": next,
         "created": item.CreationDate,
         "modified": item.ModificationDate
     }
+    if next_prev:
+        ret["previous_workspace"] = data_previous
+        ret["next_workspaces"] = data_next
+
     return ret
 
 #
