@@ -285,6 +285,8 @@ def make_item_overview(item):
         "is_workspace_root": item.workspace_root,
         "previous_workspace": data_previous,
         "next_workspaces": data_next,
+        "created": item.CreationDate,
+        "modified": item.ModificationDate
     }
     return ret
 
@@ -321,6 +323,8 @@ def make_item(item):
         "is_workspace_root": item.workspace_root,
         "previous_workspace": previous,
         "next_workspaces": next,
+        "created": item.CreationDate,
+        "modified": item.ModificationDate
     }
     return ret
 
