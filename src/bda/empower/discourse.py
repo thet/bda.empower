@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from Acquisition import aq_base
 from Acquisition import aq_parent
 from bda.empower.interfaces import IWorkspaceAware
 from bda.empower.workspacedefinition import WORKSPACE_DEFINITION
@@ -74,20 +75,21 @@ def get_allowed_workspaces(node):
 
 def is_initial_root(node):
     """wether node is the initial root or not"""
-    return node.portal_type in ROOT_TYPES
+    return aq_base(node).portal_type in ROOT_TYPES
 
 
 def is_workspace_root(node):
     """wether node is a workspace root or not"""
+    node_base = aq_base(node)
     return is_initial_root(node) or (
-        node.portal_type in CHILD_TYPES
-        and node.workspace != aq_parent(node).workspace
+        node_base.portal_type in CHILD_TYPES
+        and node_base.workspace != aq_base(aq_parent(node)).workspace
     )
 
 
 def get_initial_root(node):
     """get the workspace root"""
-    if node.portal_type not in NODE_TYPES:
+    if not node or node.portal_type not in NODE_TYPES:
         return None
     return node if is_initial_root(node) else get_initial_root(aq_parent(node))
 
@@ -250,3 +252,76 @@ def build_tree(items):
         else:
             ret[pathkey] = [ob]
     return ret
+
+
+def make_item_overview(item):
+    """Make an item for REST API as expected by the frontend client.
+    This one is used for overviews, where we do not want the direct
+    next/previous workspace but the next/previous down/up the tree.
+    """
+    ob = item.getObject()
+
+    previous = get_initial_root(get_root_of_workspace(aq_parent(ob)))
+    data_previous = None
+    if previous:
+        data_previous = {
+            '@id': previous.absolute_url(),
+            'title': previous.title
+        }
+
+    next = get_next_workspaces(ob, context_aware=True) or []
+    data_next = [{
+        '@id': it.getURL(),
+        'title': it.Title
+    } for it in next]
+
+    ret = {
+        "@id": item.getURL(),
+        "@type": item.portal_type,
+        "UID": item.UID,
+        "title": item.Title,
+        "review_state": item.review_state,
+        "workspace": item.workspace,
+        "is_workspace_root": item.workspace_root,
+        "previous_workspace": data_previous,
+        "next_workspaces": data_next,
+    }
+    return ret
+
+
+def make_item(item):
+    """Make an item for REST API as expected by the frontend client.
+    """
+    ob = item.getObject()
+
+    previous = None
+    parent = aq_parent(ob)
+    if parent.portal_type in NODE_TYPES and\
+        aq_base(parent).workspace != item.workspace:
+        previous = {
+            '@id': parent.absolute_url(),
+            'title': parent.title
+        }
+
+    next = []
+    for child in ob.contentValues():
+        if aq_base(child).workspace != item.workspace:
+            next.append({
+                '@id': child.absolute_url(),
+                'title': child.title
+            })
+
+    ret = {
+        "@id": item.getURL(),
+        "@type": item.PortalType(),
+        "UID": item.uuid(),
+        "title": item.Title(),
+        "review_state": item.review_state(),
+        "workspace": item.workspace,
+        "is_workspace_root": item.workspace_root,
+        "previous_workspace": previous,
+        "next_workspaces": next,
+    }
+    return ret
+
+#

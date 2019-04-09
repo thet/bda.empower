@@ -11,4 +11,5 @@
   </index>
 
   <column value="workspace" />
+  <column value="workspace_root" />
 </object>

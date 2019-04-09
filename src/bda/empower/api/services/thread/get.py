@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_base
-from Acquisition import aq_parent
 from bda.empower import discourse
-from plone import api
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.services import Service
 from zope.component import adapter
@@ -18,40 +15,6 @@ class Thread(object):
         self.context = context.aq_explicit
         self.request = request
 
-    def _make_item(self, item):
-        ob = item.getObject()
-        ob_base = aq_base(ob)
-
-        previous = None
-        parent = aq_parent(ob)
-        if parent.portal_type in discourse.NODE_TYPES and\
-            aq_base(parent).workspace != ob_base.workspace:
-            previous = {
-                '@id': parent.absolute_urls(),
-                'title': parent.title
-            }
-
-        next = []
-        for child in ob.contentValues():
-            if aq_base(child).workspace != ob_base.workspace:
-                next.append({
-                    '@id': child.absolute_url(),
-                    'title': child.title
-                })
-
-        ret = {
-            "@id": item.getURL(),
-            "@type": item.PortalType(),
-            "UID": item.uuid(),
-            "title": item.Title(),
-            "review_state": item.review_state(),
-            "workspace": getattr(ob_base, 'workspace', None),
-            "is_workspace_root": previous is not None or item.PortalType() == 'Case',
-            "previous_workspace": previous,
-            "next_workspaces": next,
-        }
-        return ret
-
     @property
     def itemtree(self):
         workspace = self.request.form.get('workspace', None);
@@ -63,7 +26,7 @@ class Thread(object):
         items = discourse.get_tree(self.context, workspace)
         tree = discourse.build_tree(items)
         for key, items in tree.items():
-            tree[key] = map(self._make_item, items)
+            tree[key] = map(discourse.make_item, items)
         return tree
 
     @property

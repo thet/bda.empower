@@ -6,6 +6,6 @@
 
   -*- extra stuff goes here -*-
 <include package=".thread" />
-
+<include package=".workspace_overview" />
 
 </configure>
