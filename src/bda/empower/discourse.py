@@ -221,6 +221,17 @@ def get_all_workspace_roots(node, workspace):
     return brains
 
 
+def get_cases():
+    """Get all cases.
+    """
+    cat = api.portal.get_tool("portal_catalog")
+    query = dict()
+    query["portal_type"] = ROOT_TYPES
+    query["sort_on"] = "created"
+    brains = cat(**query)
+    return brains
+
+
 def get_tree(node, workspace=None):
     """A tree of brains.
     :paran node: A context to start with.

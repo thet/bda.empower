@@ -1,5 +1,6 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
+  <include package=".cases_overview" />
   <include package=".workspace_overview" />
   <include package=".thread" />
 

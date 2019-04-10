@@ -1,0 +1,15 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone">
+
+  <adapter factory=".get.CasesOverview" name="cases_overview"/>
+
+  <plone:service
+    method="GET"
+    for="zope.interface.Interface"
+    factory=".get.CasesOverviewGet"
+    name="@cases_overview"
+    permission="zope2.View"
+    />
+
+</configure>
