@@ -5,9 +5,10 @@ from bda.empower.interfaces import IWorkspaceAware
 from bda.empower.workspacedefinition import WORKSPACE_DEFINITION
 from plone import api
 from plone.app.contentlisting.interfaces import IContentListingObject
-from plone.uuid.interfaces import IUUID
 from plone.app.uuid.utils import uuidToCatalogBrain
+from plone.uuid.interfaces import IUUID
 from Products.CMFPlone.interfaces import IPloneSiteRoot
+from zope.component.hooks import getSite
 
 
 ROOT_TYPES = ["Case"]
@@ -203,26 +204,6 @@ def get_current_workspace_tree(current, context_aware=False):
     return brains
 
 
-def get_tree(node, workspace=None, initial_root=False):
-    """A tree of brains.
-    - node: A context to start with.
-    """
-
-    query = {
-        'sort_on': 'path'
-    }
-
-    root = get_initial_root(node) if initial_root else node
-    query['path'] = '/'.join(root.getPhysicalPath())
-
-    if workspace:
-        query['workspace'] = workspace
-
-    cat = api.portal.get_tool("portal_catalog")
-    brains = cat(**query)
-    return brains
-
-
 def get_all_workspace_roots(node, workspace):
     """get all workspace root brains
 
@@ -240,23 +221,45 @@ def get_all_workspace_roots(node, workspace):
     return brains
 
 
-def build_tree(items):
-    """Efficiently build a tree structure.
-    Taken from collective.navigation.
+def get_tree(node, workspace=None):
+    """A tree of brains.
+    :paran node: A context to start with.
+    :type node: OFS content object.
+    :param workspace: A workspace to limit search results (Optional).
+    :type workspace: String
+
+    :returns: key/value structure of path/items.
+    :rtype: dict
     """
-    ret = {}
-    items = items or []
-    for item in items:
-        ob = IContentListingObject(item)
-        pathkey = "/".join(ob.getPath().split("/")[:-1])
-        if pathkey in ret:
-            ret[pathkey].append(ob)
-        else:
-            ret[pathkey] = [ob]
+
+    query = {
+        'sort_on': 'path',
+        'path': '/'.join(node.getPhysicalPath())
+    }
+
+    if workspace:
+        query['workspace'] = workspace
+
+    cat = api.portal.get_tool("portal_catalog")
+    brains = cat(**query)
+
+    ret = {
+        make_relative_path(it.getPath()): make_item(it)
+        for it in brains
+    }
     return ret
 
 
-from plone.app.contentlisting.interfaces import IContentListingObject
+def make_relative_path(path):
+    """Return a path relative to the portal object.
+    :param path: The path to convert to a relative path.
+    :type path: String
+    :returns: Converted path, relative to the portal object.
+    :rtype: String
+    """
+    site_path = getSite().getPhysicalPath()
+    relative_path = [''] + path.split('/')[len(site_path):]
+    return '/'.join(relative_path)
 
 
 def make_item_overview(item, next_prev=True):
