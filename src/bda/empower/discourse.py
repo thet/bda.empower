@@ -268,12 +268,12 @@ def make_item_overview(item, next_prev=True):
     if next_prev:
         ob = item.getObject()
 
-        prev = get_root_of_workspace(aq_parent(ob))
-        prev = uuidToCatalogBrain(IUUID(prev)) if prev else None
-        data_previous = make_item_overview(prev, next_prev=False) if prev else None
+        _prev = get_root_of_workspace(aq_parent(ob))
+        _prev = uuidToCatalogBrain(IUUID(_prev)) if _prev else None
+        data_previous = make_item_overview(_prev, next_prev=False) if _prev else None  # noqa
 
-        next = get_next_workspaces(ob, context_aware=True) or []
-        data_next = [make_item_overview(it, next_prev=False) for it in next]
+        _next = get_next_workspaces(ob, context_aware=True) or []
+        data_next = [make_item_overview(it, next_prev=False) for it in _next]
 
     item = IContentListingObject(item)
 
@@ -304,17 +304,19 @@ def make_item(item, next_prev=True):
 
         data_previous = None
         parent = aq_parent(ob)
-        if parent.portal_type in NODE_TYPES and\
-            aq_base(parent).workspace != item.workspace:
-            item = uuidToCatalogBrain(IUUID(parent)) if parent else None
-            data_previous = make_item(item, next_prev=False) if item else None
+        if (
+            parent.portal_type in NODE_TYPES and
+            aq_base(parent).workspace != item.workspace
+        ):
+            _prev = uuidToCatalogBrain(IUUID(parent)) if parent else None
+            data_previous = make_item(_prev, next_prev=False) if _prev else None
 
         data_next = []
         for child in ob.contentValues():
             if aq_base(child).workspace != item.workspace:
-                item = uuidToCatalogBrain(IUUID(child))
+                _next = uuidToCatalogBrain(IUUID(child))
                 data_next.append(
-                    make_item(item, next_prev=False)
+                    make_item(_next, next_prev=False)
                 )
 
     item = IContentListingObject(item)
