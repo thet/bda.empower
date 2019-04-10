@@ -256,6 +256,9 @@ def build_tree(items):
     return ret
 
 
+from plone.app.contentlisting.interfaces import IContentListingObject
+
+
 def make_item_overview(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     This one is used for overviews, where we do not want the direct
@@ -265,23 +268,25 @@ def make_item_overview(item, next_prev=True):
     if next_prev:
         ob = item.getObject()
 
-        prev = get_initial_root(get_root_of_workspace(aq_parent(ob)))
+        prev = get_root_of_workspace(aq_parent(ob))
         prev = uuidToCatalogBrain(IUUID(prev)) if prev else None
         data_previous = make_item_overview(prev, next_prev=False) if prev else None
 
         next = get_next_workspaces(ob, context_aware=True) or []
         data_next = [make_item_overview(it, next_prev=False) for it in next]
 
+    item = IContentListingObject(item)
+
     ret = {
         "@id": item.getURL(),
-        "@type": item.portal_type,
-        "UID": item.UID,
-        "title": item.Title,
-        "review_state": item.review_state,
+        "@type": item.PortalType(),
+        "UID": item.uuid(),
+        "title": item.Title(),
+        "review_state": item.review_state(),
         "workspace": item.workspace,
         "is_workspace_root": item.workspace_root,
-        "created": item.CreationDate,
-        "modified": item.ModificationDate
+        "created": item.CreationDate(),
+        "modified": item.ModificationDate()
     }
     if next_prev:
         ret["previous_workspace"] = data_previous
@@ -312,6 +317,8 @@ def make_item(item, next_prev=True):
                     make_item(item, next_prev=False)
                 )
 
+    item = IContentListingObject(item)
+
     ret = {
         "@id": item.getURL(),
         "@type": item.PortalType(),
@@ -320,8 +327,8 @@ def make_item(item, next_prev=True):
         "review_state": item.review_state(),
         "workspace": item.workspace,
         "is_workspace_root": item.workspace_root,
-        "created": item.CreationDate,
-        "modified": item.ModificationDate
+        "created": item.CreationDate(),
+        "modified": item.ModificationDate()
     }
     if next_prev:
         ret["previous_workspace"] = data_previous
