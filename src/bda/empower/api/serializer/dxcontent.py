@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from bda.empower import discourse
 from bda.empower.interfaces import IBdaEmpowerLayer
 from plone.dexterity.interfaces import IDexterityContainer
 from plone.dexterity.interfaces import IDexterityContent
 from plone.restapi.interfaces import ISerializeToJson
+from plone.restapi.serializer import dxcontent
 from zope.component import adapter
 from zope.interface import implementer
-from plone.restapi.serializer import dxcontent
 
 
 @implementer(ISerializeToJson)
@@ -24,6 +25,10 @@ class SerializeToJson(dxcontent.SerializeToJson):
             'File': self.check_permission('Add portal content', obj),
             'Image': self.check_permission('Add portal content', obj)
         }
+
+        current_case = discourse.get_initial_root(self.context)
+        result['current_case'] = current_case.absolute_url() if current_case else None
+
         return result
 
 
@@ -49,4 +54,8 @@ class SerializeFolderToJson(dxcontent.SerializeFolderToJson):
             'File': self.check_permission('Add portal content', obj),
             'Image': self.check_permission('Add portal content', obj)
         }
+
+        current_case = discourse.get_initial_root(self.context)
+        result['current_case'] = current_case.absolute_url() if current_case else None
+
         return result
