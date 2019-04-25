@@ -6,7 +6,7 @@ from collective.contentcreator import load_json
 from Products.CMFPlone.utils import safe_unicode
 from zope.component.hooks import getSite
 
-import loremipsum
+import lorem
 import plone.api
 import random
 
@@ -16,7 +16,7 @@ def create_text():
     cnt_bold = random.randint(1, 4)
     cnt_italic = random.randint(1, 4)
     for cnt in range(random.randint(1, 4)):
-        txt_ = loremipsum.get_paragraph()
+        txt_ = lorem.paragraph()
         if cnt == cnt_italic:
             txt_ = u"<em>{0}</em>".format(txt_)
         if cnt == cnt_bold:
@@ -45,7 +45,7 @@ def create_case():
 
     item = {
         "@type": "Case",
-        "title": loremipsum.get_sentence(),
+        "title": lorem.sentence(),
         "text": create_text(),
         "items": create_thread(workspace, users),
         "workspace": workspace,
@@ -87,7 +87,7 @@ def create_thread(current_workspace, expert_pool):
 
             item = {
                 "@type": "Contribution",
-                "title": loremipsum.get_sentence(),
+                "title": lorem.sentence(),
                 "text": create_text(),
                 "items": _create(
                     _current_workspace,
