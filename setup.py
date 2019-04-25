@@ -48,6 +48,7 @@ setup(
         "plone.restapi>=3.5.0",
         "Products.CMFPlone",
         "setuptools",
+        "six",
     ],
     extras_require={
         "test": [

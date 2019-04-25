@@ -35,10 +35,10 @@ def create_content():
 
 def create_case():
     wsdefs = discourse.get_workspace_definitions()
-    workspace = wsdefs.keys()[0]
+    workspace = list(wsdefs.keys())[0]
 
     users = plone.api.user.get_users()
-    users = map(lambda it: safe_unicode(it.id), users)
+    users = list(map(lambda it: safe_unicode(it.id), users))
     random.shuffle(users)
     client = users.pop()
     coordinator = users.pop()

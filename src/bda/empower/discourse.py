@@ -65,7 +65,7 @@ def get_allowed_workspaces(node):
             "workspace_next_vocabulary_factory called in wrong context"
         )
     if node.portal_type in ROOT_TYPES:
-        first_id, first_record = workspace_definitions.items()[0]
+        first_id, first_record = list(workspace_definitions.items())[0]
         yield first_id, first_record["title"]
     else:
         parent = aq_parent(node)

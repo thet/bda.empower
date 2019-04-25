@@ -10,7 +10,7 @@ class RedirectCaseToFirstWorkspaceView(BrowserView):
 
     def __call__(self):
         workspace_root = discourse.get_initial_root(self.context)
-        initial_workspace = discourse.get_workspace_definitions().keys()[0]
+        initial_workspace = list(discourse.get_workspace_definitions().keys())[0]  # noqa
         url = "{0}/ws/{1}".format(
             workspace_root.absolute_url(), initial_workspace
         )

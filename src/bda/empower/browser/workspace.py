@@ -22,7 +22,7 @@ class WorkspaceView(BrowserView):
 
     def update(self):
         wdefs = discourse.get_workspace_definitions()
-        first_workspace = wdefs.keys()[0]
+        first_workspace = list(wdefs.keys())[0]
         initial_def = first_workspace, wdefs[first_workspace]
 
         # are we on intital view?
@@ -57,7 +57,7 @@ class WorkspaceView(BrowserView):
             raise Redirect(self.workspace_url())
 
     def workspaces_defs(self):
-        return discourse.get_workspace_definitions().items()
+        return list(discourse.get_workspace_definitions().items())
 
     def workspace_url(self, workspace_def=None, obj=None):
         w_def = workspace_def or self.current_def

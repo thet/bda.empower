@@ -38,7 +38,7 @@ def default_workspace(context):
     workspace = getattr(aq_base(aq_parent(context)), "workspace", None)
     if workspace is None:
         wdefs = discourse.get_workspace_definitions()
-        return wdefs.keys()[0]
+        return list(wdefs.keys())[0]
     return workspace
 
 

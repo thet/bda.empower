@@ -4,9 +4,14 @@ from zope.interface import implementer
 
 import os
 import random
+import six
 
 
-random.seed(int(os.urandom(10).encode("hex"), 16))
+if six.PY2:
+    random.seed(int(os.urandom(10).encode("hex"), 16))
+else:
+    random.seed(int(os.urandom(10).hex(), 16))
+
 
 _REF = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
