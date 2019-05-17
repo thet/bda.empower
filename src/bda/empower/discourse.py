@@ -297,7 +297,7 @@ def make_item_overview(item, next_prev=True):
         "UID": item.uuid(),
         "title": item.Title(),
         "review_state": item.review_state(),
-        "workspace": item.workspace,
+        "workspace": getattr(item, 'workspace', None),
         "is_workspace_root": item.workspace_root,
         "created": item.CreationDate(),
         "modified": item.ModificationDate()
@@ -315,19 +315,20 @@ def make_item(item, next_prev=True):
 
     if next_prev:
         ob = item.getObject()
+        ws = getattr(item, 'workspace', None)
 
         data_previous = None
         parent = aq_parent(ob)
         if (
             parent.portal_type in NODE_TYPES and
-            aq_base(parent).workspace != item.workspace
+            aq_base(parent).workspace != ws
         ):
             _prev = uuidToCatalogBrain(IUUID(parent)) if parent else None
             data_previous = make_item(_prev, next_prev=False) if _prev else None
 
         data_next = []
         for child in ob.contentValues():
-            if aq_base(child).workspace != item.workspace:
+            if aq_base(child).workspace != ws:
                 _next = uuidToCatalogBrain(IUUID(child))
                 data_next.append(
                     make_item(_next, next_prev=False)
@@ -341,7 +342,7 @@ def make_item(item, next_prev=True):
         "UID": item.uuid(),
         "title": item.Title(),
         "review_state": item.review_state(),
-        "workspace": item.workspace,
+        "workspace": ws,
         "is_workspace_root": item.workspace_root,
         "created": item.CreationDate(),
         "modified": item.ModificationDate()
