@@ -313,9 +313,9 @@ def make_item(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     """
 
+    ws = getattr(item, 'workspace', None)
     if next_prev:
         ob = item.getObject()
-        ws = getattr(item, 'workspace', None)
 
         data_previous = None
         parent = aq_parent(ob)
