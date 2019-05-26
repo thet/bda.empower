@@ -6,7 +6,7 @@
 
   <plone:service
     method="GET"
-    for="zope.interface.Interface"
+    for="bda.empower.behaviors.contribution.IContributionBehavior"
     factory=".get.WorkspaceOverviewGet"
     name="@workspace_overview"
     permission="zope2.View"
