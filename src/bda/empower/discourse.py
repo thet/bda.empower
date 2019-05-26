@@ -86,7 +86,10 @@ def is_workspace_root(node):
     node_base = aq_base(node)
     return is_initial_root(node) or (
         node_base.portal_type in CHILD_TYPES
-        and node_base.workspace != aq_base(aq_parent(node)).workspace
+        and (
+            getattr(node_base, WORKSPACE_ATTRIBUTE, None) !=
+            getattr(aq_base(aq_parent(node)), WORKSPACE_ATTRIBUTE, None)
+        )
     )
 
 
@@ -297,7 +300,7 @@ def make_item_overview(item, next_prev=True):
         "UID": item.uuid(),
         "title": item.Title(),
         "review_state": item.review_state(),
-        "workspace": getattr(item, 'workspace', None),
+        "workspace": getattr(item, WORKSPACE_ATTRIBUTE, None),
         "is_workspace_root": item.workspace_root,
         "created": item.CreationDate(),
         "modified": item.ModificationDate()
@@ -313,7 +316,7 @@ def make_item(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     """
 
-    ws = getattr(item, 'workspace', None)
+    ws = getattr(item, WORKSPACE_ATTRIBUTE, None)
     if next_prev:
         ob = item.getObject()
 
@@ -321,14 +324,18 @@ def make_item(item, next_prev=True):
         parent = aq_parent(ob)
         if (
             parent.portal_type in NODE_TYPES and
-            aq_base(parent).workspace != ws
+            getattr(aq_base(parent), WORKSPACE_ATTRIBUTE, ws) != ws
         ):
+            # If the parent's ws != current ws it's OK to not reach this branch because:
+            # 1) not a Contribution or Case.
+            # 2) or hasn't set it's ``workspace`` attribute and not a different ws for sure.
             _prev = uuidToCatalogBrain(IUUID(parent)) if parent else None
             data_previous = make_item(_prev, next_prev=False) if _prev else None
 
         data_next = []
         for child in ob.contentValues():
-            if aq_base(child).workspace != ws:
+            if getattr(aq_base(child), WORKSPACE_ATTRIBUTE, ws) != ws:
+                # If child hasn't set it's ws attribute its not a different WS for sure.
                 _next = uuidToCatalogBrain(IUUID(child))
                 data_next.append(
                     make_item(_next, next_prev=False)
