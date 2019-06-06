@@ -300,7 +300,7 @@ def make_item_overview(item, next_prev=True):
         "UID": item.uuid(),
         "title": item.Title(),
         "review_state": item.review_state(),
-        "workspace": getattr(item, WORKSPACE_ATTRIBUTE, None),
+        "workspace": getattr(item, WORKSPACE_ATTRIBUTE, None) or None,  # at least not Missing.Value  # noqa
         "is_workspace_root": item.workspace_root,
         "created": item.CreationDate(),
         "modified": item.ModificationDate()
@@ -316,7 +316,7 @@ def make_item(item, next_prev=True):
     """Make an item for REST API as expected by the frontend client.
     """
 
-    ws = getattr(item, WORKSPACE_ATTRIBUTE, None)
+    ws = getattr(item, WORKSPACE_ATTRIBUTE, None) or None  # at least not Missing.Value  # noqa
     if next_prev:
         ob = item.getObject()
 
