@@ -4,12 +4,12 @@
 
   <!-- vocabularies -->
   <utility
-      component=".contribution.workspace_next_vocabulary_factory"
-      name="empower.next_workspaces"
+      component=".users.allowed_users_vocabulary_factory"
+      name="empower.allowed_users"
       />
   <utility
-      component=".users.users_from_parent_vocabulary_factory"
-      name="empower.parent_allowed_users"
+      component=".contribution.workspace_next_vocabulary_factory"
+      name="empower.next_workspaces"
       />
 
   <!-- behaviors -->

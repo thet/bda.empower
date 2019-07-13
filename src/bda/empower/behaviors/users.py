@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from Acquisition import aq_parent
 from bda.empower.i18n import _
 from plone import api
 from plone.app.z3cform.widget import AjaxSelectFieldWidget
@@ -20,12 +19,11 @@ logger = logging.getLogger(__name__)
 
 
 @provider(IVocabularyFactory)
-def users_from_parent_vocabulary_factory(context):
+def allowed_users_vocabulary_factory(context):
     # Get experts_assigned if defined or fallback to Case' expert_pool.
     # Acquisition FTW - here.
-    parent = aq_parent(context)
-    values = getattr(parent, 'experts_assigned', [])\
-        or getattr(parent, 'expert_pool', [])
+    values = getattr(context, 'experts_assigned', [])\
+        or getattr(context, 'expert_pool', [])
 
     terms = [
         SimpleTerm(
