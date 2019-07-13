@@ -3,5 +3,6 @@
   <include package=".cases_overview" />
   <include package=".workspace_overview" />
   <include package=".thread" />
+  <include package=".user" />
 
 </configure>

@@ -1,0 +1,21 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone">
+
+  <plone:service
+    method="GET"
+    for="*"
+    factory=".userid.UserId"
+    name="@userid"
+    permission="zope2.View"
+    />
+
+  <plone:service
+    method="GET"
+    for="*"
+    factory=".userinfo.UserInfo"
+    name="@userinfo"
+    permission="zope2.View"
+    />
+
+</configure>
