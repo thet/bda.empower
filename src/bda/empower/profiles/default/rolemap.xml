@@ -28,6 +28,15 @@
       <role name="Manager" />
       <role name="Site Administrator" />
     </permission>
+    <permission
+        acquire="False"
+        name="plone.restapi: Access Plone vocabularies">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Coordinator" />
+      <role name="Client" />
+      <role name="Expert" />
+    </permission>
 
     <!-- New permissions -->
     <permission
