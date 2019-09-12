@@ -29,18 +29,14 @@ class SerializeToJson(dxcontent.SerializeToJson):
         current_case = discourse.get_initial_root(self.context)
         result['current_case'] = current_case.absolute_url() if current_case else None
 
+        result['workspace_root'] = discourse.is_workspace_root(self.context)
+
         return result
 
 
 @implementer(ISerializeToJson)
 @adapter(IDexterityContainer, IBdaEmpowerLayer)
 class SerializeFolderToJson(dxcontent.SerializeFolderToJson):
-
-    def _build_query(self):
-        path = '/'.join(self.context.getPhysicalPath())
-        query = {'path': {'depth': 1, 'query': path},
-                 'sort_on': 'getObjPositionInParent'}
-        return query
 
     def __call__(self, *args, **kwargs):
         result = super(SerializeFolderToJson, self).__call__(*args, **kwargs)
@@ -57,5 +53,7 @@ class SerializeFolderToJson(dxcontent.SerializeFolderToJson):
 
         current_case = discourse.get_initial_root(self.context)
         result['current_case'] = current_case.absolute_url() if current_case else None
+
+        result['workspace_root'] = discourse.is_workspace_root(self.context)
 
         return result
