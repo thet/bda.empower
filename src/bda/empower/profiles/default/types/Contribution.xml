@@ -23,6 +23,7 @@
   <property name="allowed_content_types">
     <element value="Contribution" />
     <element value="File" />
+    <element value="Image" />
   </property>
 
   <!-- Schema, class and security -->
