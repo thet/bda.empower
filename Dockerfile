@@ -1,4 +1,4 @@
-FROM registry.bluedynamics.eu/bda/plone-docker/plonebase:5.1-latest
+FROM registry.bluedynamics.eu/bda/plone-docker/plonebase:5.2-py3-latest
 
 MAINTAINER "BlueDynamics Alliance" http://bluedynamics.com
 
@@ -28,7 +28,7 @@ ADD http://www.random.org/strings/?num=1&len=10&digits=on&upperalpha=on&loweralp
 COPY . /plone/buildout
 RUN  chown -R plone /plone/buildout \
   && sudo -u plone virtualenv --clear /plone/buildout \
-  && sudo -u plone /plone/buildout/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.1/requirements.txt \
+  && sudo -u plone /plone/buildout/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
   && sudo -u plone /plone/buildout/bin/buildout -Nc /plone/buildout/docker.cfg \
   && find /plone/buildout -name .git|xargs rm -rf \
   && find /plone/buildout -name *.pyc|xargs rm -rf \
