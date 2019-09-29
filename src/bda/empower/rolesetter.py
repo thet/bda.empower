@@ -45,9 +45,7 @@ def update_expert_assigned_local_roles(obj, event):
     """ subcriber
     - to be configured to be called on ObjectCreated and ObjectModified
     """
-    _update_role_on_obj_using_users_from_field(
-        obj, "experts_assigned", "Expert"
-    )
+    _update_role_on_obj_using_users_from_field(obj, "experts_assigned", "Expert")  # noqa
 
 
 def update_initial_local_roles(obj, event):
@@ -55,7 +53,5 @@ def update_initial_local_roles(obj, event):
     - to be configured to be called on ObjectCreated and ObjectModified
     """
     _update_role_on_obj_using_users_from_field(obj, "client", "Client")
-    _update_role_on_obj_using_users_from_field(
-        obj, "coordinators", "Coordinator"
-    )
+    _update_role_on_obj_using_users_from_field(obj, "coordinators", "Coordinator")  # noqa
     _update_role_on_obj_using_users_from_field(obj, "expert_pool", "Expert")
