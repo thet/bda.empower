@@ -30,6 +30,15 @@
     </permission>
     <permission
         acquire="False"
+        name="plone.restapi: Access Plone user information">
+      <role name="Manager" />
+      <role name="Coordinator" />
+      <role name="Client" />
+      <role name="Expert" />
+      <role name="Authenticated" />
+    </permission>
+    <permission
+        acquire="False"
         name="plone.restapi: Access Plone vocabularies">
       <role name="Manager"/>
       <role name="Site Administrator"/>
