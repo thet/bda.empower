@@ -60,11 +60,11 @@ def get_allowed_workspaces(node):
             yield ws, title
             return
 
-    if node and node.portal_type not in NODE_TYPES:
+    if node and node.portal_type not in NODE_TYPES + ['Cases']:
         raise ValueError(
             "workspace_next_vocabulary_factory called in wrong context"
         )
-    if node.portal_type in ROOT_TYPES:
+    if node.portal_type in ROOT_TYPES + ['Cases']:
         first_id, first_record = list(workspace_definitions.items())[0]
         yield first_id, first_record["title"]
     else:
@@ -319,9 +319,9 @@ def make_item(item, next_prev=True):
     ws = getattr(item, WORKSPACE_ATTRIBUTE, None) or None  # at least not Missing.Value  # noqa
     if next_prev:
         ob = item.getObject()
+        parent = aq_parent(ob)
 
         data_previous = None
-        parent = aq_parent(ob)
         if (
             parent.portal_type in NODE_TYPES and
             getattr(aq_base(parent), WORKSPACE_ATTRIBUTE, ws) != ws
