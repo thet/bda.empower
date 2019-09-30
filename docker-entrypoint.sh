@@ -3,7 +3,7 @@ set -e
 
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
 START="start restart"
-CMD="su-exec plone /plone/bin/instance"
+CMD="/plone/bin/instance"
 
 echo "Plone Control Script"
 
