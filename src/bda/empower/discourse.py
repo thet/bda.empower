@@ -32,6 +32,7 @@ def get_workspace_definitions():
     return WORKSPACE_DEFINITION
 
 
+# TODO: potential removal canditate
 def get_workspace_definition(identifier):
     """return one workspace defintion by identifier
 
@@ -179,6 +180,7 @@ def get_next_workspaces(
     return brains
 
 
+# TODO: potential removal canditate
 def get_current_workspace_tree(current, context_aware=False):
     """a tree of brains of the current workspace
 
@@ -235,6 +237,7 @@ def get_cases():
     return brains
 
 
+# TODO: potential removal canditate
 def get_tree(node, workspace=None):
     """A tree of brains.
     :paran node: A context to start with.
