@@ -19,7 +19,6 @@ RUN apk add --no-cache --virtual .build-deps \
     libxslt-dev \
     pcre-dev \
     libffi-dev\
-    py-virtualenv\
     openssh-client\
     git
 
@@ -45,6 +44,7 @@ ADD http://www.random.org/strings/?num=1&len=10&digits=on&upperalpha=on&loweralp
 # Install Plone
 RUN mkdir -p /data/filestorage /data/blobstorage
 COPY . /plone
+RUN pip install virtualenv
 RUN virtualenv --clear /plone \
   && /plone/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
   && /plone/bin/buildout -Nc /plone/docker.cfg
