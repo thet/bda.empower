@@ -10,7 +10,6 @@
   <include package="collective.fingerpointing" />
 
   <include package=".behaviors" />
-  <include package=".browser" />
   <include package=".setup" />
   <include package=".api" />
 
