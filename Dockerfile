@@ -18,8 +18,9 @@ RUN apk add --no-cache --virtual .build-deps \
     libxml2-dev \
     libxslt-dev \
     pcre-dev \
-    libffi-dev
-
+    libffi-dev\
+    openssh-client\
+    git
 
 # Add user
 RUN addgroup -g 500 plone \
@@ -66,7 +67,7 @@ RUN apk del .build-deps \
 # Final steps
 RUN  chown -R plone.plone /plone /data
 RUN ln -s /data/filestorage/ /plone/var/filestorage \
-  && ln -s /data/blobstorage /plone/var/blobstorage \
+  && ln -s /data/blobstorage /plone/var/blobstorage
 
 
 VOLUME /data
