@@ -3,7 +3,7 @@ set -e
 
 COMMANDS="debug help logtail show stop adduser fg kill quit run wait console foreground logreopen reload shell status"
 START="start restart"
-CMD="/plone/bin/instance"
+CMD="su-exec plone /plone/bin/instance"
 
 echo "Plone Control Script"
 
@@ -14,8 +14,7 @@ if [[ $START == *"$1"* ]]; then
   }
 
   trap _stop SIGTERM SIGINT
-  $CMD start
-  $CMD logtail &
+  $CMD console &
 
   child=$!
   wait "$child"
