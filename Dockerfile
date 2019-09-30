@@ -1,40 +1,81 @@
-FROM registry.bluedynamics.eu/bda/plone-docker/plonebase:5.2-py3-latest
+FROM python:3.7-alpine3.9
 
 MAINTAINER "BlueDynamics Alliance" http://bluedynamics.com
+LABEL plone="5.2" \
+    os="alpine" \
+    os.version="3.9" \
+    name="Plone 5.2" \
+    description="Plone base image"
 
-# This suppresses a bunch of annoying warnings from debconf
-ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update \
-    && apt-get install -y \
-        traceroute \
-        iputils-ping \
-        net-tools
+# Install OS
+RUN apk add --no-cache --virtual .build-deps \
+    gcc \
+    libc-dev \
+    zlib-dev \
+    libjpeg-turbo-dev \
+    libpng-dev \
+    libxml2-dev \
+    libxslt-dev \
+    pcre-dev \
+    libffi-dev
 
-RUN mkdir -p /plone /home/plone/.ssh
 
+# Add user
+RUN addgroup -g 500 plone \
+ && adduser -S -D -G plone -u 500 plone
+
+
+# Install SSH key for git checkouts
 # this might be solved more elegant
+RUN mkdir -p /home/plone/.ssh
 COPY ./docker_id_rsa /home/plone/.ssh/id_rsa
-
 RUN  ssh-keyscan git.bluedynamics.eu > /home/plone/.ssh/known_hosts
-
 RUN  chown -R plone /home/plone/.ssh \
   && chmod 0600 /home/plone/.ssh/id_rsa \
   && chmod 0600 /home/plone/.ssh/known_hosts
 
-# the "git clone" is cached, we need to invalidate the docker cache here
+
+# "git clone" is cached, we need to invalidate the docker cache here
 ADD http://www.random.org/strings/?num=1&len=10&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new uuid
 
-COPY . /plone/buildout
-RUN  chown -R plone /plone/buildout \
-  && sudo -u plone virtualenv --clear /plone/buildout \
-  && sudo -u plone /plone/buildout/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
-  && sudo -u plone /plone/buildout/bin/buildout -Nc /plone/buildout/docker.cfg \
-  && find /plone/buildout -name .git|xargs rm -rf \
-  && find /plone/buildout -name *.pyc|xargs rm -rf \
-  && find /plone/buildout -name *.pyo|xargs rm -rf
 
+# Install Plone
+RUN mkdir -p /data/filestorage /data/blobstorage
+COPY . /plone
+RUN sudo -u plone virtualenv --clear /plone \
+  && sudo -u plone /plone/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
+  && sudo -u plone /plone/bin/buildout -Nc /plone/docker.cfg
+
+
+# Cleanup
+RUN find /plone -name .git|xargs rm -rf \
+  && find /plone -name *.pyc|xargs rm -rf \
+  && find /plone -name *.pyo|xargs rm -rf
+RUN apk del .build-deps \
+  && apk add --no-cache --virtual .run-deps \
+    su-exec \
+    bash \
+    rsync \
+    libxml2 \
+    libxslt \
+    libjpeg-turbo \
+  && rm -rf /plone/buildout-cache/downloads/*
+
+
+# Final steps
+RUN  chown -R plone.plone /plone /data
+RUN ln -s /data/filestorage/ /plone/var/filestorage \
+  && ln -s /data/blobstorage /plone/var/blobstorage \
+
+
+VOLUME /data
+WORKDIR /plone
 USER plone
+EXPOSE 8080
+
+HEALTHCHECK --interval=1m --timeout=5s --start-period=1m \
+  CMD nc -z -w5 127.0.0.1 8080 || exit 1
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
