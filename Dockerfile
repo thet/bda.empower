@@ -19,6 +19,7 @@ RUN apk add --no-cache --virtual .build-deps \
     libxslt-dev \
     pcre-dev \
     libffi-dev\
+    py-virtualenv\
     openssh-client\
     git
 
