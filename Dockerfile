@@ -44,9 +44,9 @@ ADD http://www.random.org/strings/?num=1&len=10&digits=on&upperalpha=on&loweralp
 # Install Plone
 RUN mkdir -p /data/filestorage /data/blobstorage
 COPY . /plone
-RUN sudo -u plone virtualenv --clear /plone \
-  && sudo -u plone /plone/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
-  && sudo -u plone /plone/bin/buildout -Nc /plone/docker.cfg
+RUN virtualenv --clear /plone \
+  && /plone/bin/pip install -r https://raw.githubusercontent.com/plone/buildout.coredev/5.2/requirements.txt \
+  && /plone/bin/buildout -Nc /plone/docker.cfg
 
 
 # Cleanup
