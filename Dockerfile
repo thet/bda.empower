@@ -41,8 +41,15 @@ RUN  chown -R plone /home/plone/.ssh \
 ADD http://www.random.org/strings/?num=1&len=10&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new uuid
 
 
+# Prepare data directory
+# var/ is excluded from context via .dockerignore
+RUN mkdir -p /data/blobstorage /data/filestorage
+RUN mkdir -p /plone/var
+RUN ln -s /data/blobstorage /plone/var/blobstorage
+RUN ln -s /data/filestorage /plone/var/filestorage
+
+
 # Install Plone
-RUN mkdir -p /data/filestorage /data/blobstorage
 COPY . /plone
 RUN pip install virtualenv
 RUN virtualenv --clear /plone \
@@ -67,9 +74,6 @@ RUN apk del .build-deps \
 
 # Final steps
 RUN  chown -R plone.plone /plone /data
-RUN ln -s /data/filestorage/ /plone/var/filestorage \
-  && ln -s /data/blobstorage /plone/var/blobstorage
-
 
 VOLUME /data
 WORKDIR /plone

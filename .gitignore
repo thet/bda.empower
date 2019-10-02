@@ -17,9 +17,8 @@ local/
 node_modules/
 packages/
 parts/
-share/
 src/*
-test.plone_addon/
+share/
 var/
 # files
 .installed.cfg
@@ -35,9 +34,11 @@ report.html
 .vscode/
 # excludes
 !.coveragerc
+!.dockerignore
 !.editorconfig
 !.gitattributes
 !.gitignore
 !.gitkeep
+!.gitlab-ci.yml
 !.travis.yml
 !src/bda

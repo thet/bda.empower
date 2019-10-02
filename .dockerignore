@@ -1,0 +1,20 @@
+# dirs
+bin/
+develop-eggs/
+devsrc/
+.git/
+include/
+lib/
+packages/
+parts/
+var/
+
+# files
+.installed.cfg
+.mr.developer.cfg
+.coverage
+*.egg-info
+*.log
+*.mo
+*.py?
+*.swp
