@@ -51,10 +51,10 @@ class IContributionBehavior(model.Schema, IWorkspaceAware):
 
     workspace = schema.Choice(
         title=u"Workspace",
-        required=False,
+        required=True,
         vocabulary="empower.next_workspaces",
         #defaultFactory=default_workspace,
-        # default value permits to save if value is same as default.
+        # default value prevents to save if value is same as default.
         #   see: https://github.com/plone/plone.restapi/blob/d8e65b1d2d96c1ea2c79c6a9c0199e290fdb7efe/src/plone/restapi/deserializer/dxcontent.py#L98
         #        https://github.com/plone/plone.restapi/blob/d8e65b1d2d96c1ea2c79c6a9c0199e290fdb7efe/src/plone/restapi/deserializer/dxcontent.py#L98
     )
