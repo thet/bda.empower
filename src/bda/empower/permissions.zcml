@@ -28,10 +28,6 @@
         id="bda.empower.ModifyExpertsAssigned"
         title="bda.empower: Modify Experts Assigned"
         />
-    <permission
-        id="bda.empower.ModifyWorkspaceType"
-        title="bda.empower: Modify Workspace Type"
-        />
   </configure>
 
 </configure>

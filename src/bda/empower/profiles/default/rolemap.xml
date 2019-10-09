@@ -88,13 +88,6 @@
       <role name="Owner" />
       <role name="Manager" />
     </permission>
-    <permission
-        acquire="True"
-        name="bda.empower: Modify Workspace Type">
-      <role name="Coordinator" />
-      <role name="Client" />
-      <role name="Manager" />
-    </permission>
 
   </permissions>
 

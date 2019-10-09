@@ -5,7 +5,6 @@ from bda.empower import discourse
 from bda.empower.i18n import _
 from bda.empower.interfaces import IWorkspaceAware
 from plone.app.textfield import RichText
-from plone.autoform.directives import write_permission
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel import model
 from zope import schema
@@ -58,4 +57,3 @@ class IContributionBehavior(model.Schema, IWorkspaceAware):
         #   see: https://github.com/plone/plone.restapi/blob/d8e65b1d2d96c1ea2c79c6a9c0199e290fdb7efe/src/plone/restapi/deserializer/dxcontent.py#L98
         #        https://github.com/plone/plone.restapi/blob/d8e65b1d2d96c1ea2c79c6a9c0199e290fdb7efe/src/plone/restapi/deserializer/dxcontent.py#L98
     )
-    write_permission(workspace="bda.empower.ModifyWorkspaceType")

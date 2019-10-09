@@ -18,7 +18,6 @@
   <permission>bda.empower: Modify Client</permission>
   <permission>bda.empower: Modify Coordinators</permission>
   <permission>bda.empower: Modify Expert Pool</permission>
-  <permission>bda.empower: Modify Workspace Type</permission>
 
   <!-- States -->
   <state
@@ -84,11 +83,6 @@
         name="bda.empower: Modify Expert Pool">
       <permission-role>Coordinator</permission-role>
       <permission-role>Client</permission-role>
-      <permission-role>Manager</permission-role>
-    </permission-map>
-    <permission-map
-        acquired="False"
-        name="bda.empower: Modify Workspace Type">
       <permission-role>Manager</permission-role>
     </permission-map>
   </state>

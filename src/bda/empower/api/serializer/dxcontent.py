@@ -27,8 +27,6 @@ def filter_permissions(perms):
     #   title="bda.empower: Modify Coordinators"
     #   id="bda.empower.ModifyExpertsAssigned"
     #   title="bda.empower: Modify Experts Assigned"
-    #   id="bda.empower.ModifyWorkspaceType"
-    #   title="bda.empower: Modify Workspace Type"
 
     default_perms = [
         "View",
@@ -41,7 +39,6 @@ def filter_permissions(perms):
         "bda.empower: Modify Expert Pool",
         "bda.empower: Modify Coordinators",
         "bda.empower: Modify Experts Assigned",
-        "bda.empower: Modify Workspace Type",
     ]
     perms = {p: v for p, v in perms.items() if p in default_perms}
     return perms
